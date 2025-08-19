@@ -1,4 +1,4 @@
-# Sets-n-reps
+# Sets-n-Reps
 
 - A workout tracker web app.
 
@@ -29,9 +29,9 @@
 - updated_at: datetime
 - ........................................................
 - belongs_to: workout
-- has_many: sets
+- has_many: exercise_sets
 
-(Table: **sets**)
+(Table: **exercise_sets**)
 - id: integer
 - set_number: integer
 - weight: decimal
