@@ -9,7 +9,7 @@
 - PostgreSQL for the DB
 - VPS for hosting
 
-# Tables
+## Tables
 
 (Table: **workouts**)
 - id: integer
