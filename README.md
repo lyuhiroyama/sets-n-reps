@@ -1,8 +1,9 @@
 # Sets-n-reps
 
 - A workout tracker web app.
-<br>
+
 ## Technologies
+
 - Ruby on Rails for the back-end
 - React & TypeScript for the front-end
 - PostgreSQL for the DB
