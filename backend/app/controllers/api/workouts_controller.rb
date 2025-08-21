@@ -22,11 +22,11 @@ class API::WorkoutsController < ApplicationController
 
   def workout_params
     params.expect(
-      workout: [ :notes, :performed_on, exercises_attributes: [[ 
-        :name, :notes, exercise_sets_attributes: [[
+      workout: [ :notes, :performed_on, exercises_attributes: [ [
+        :name, :notes, exercise_sets_attributes: [ [
           :set_number, :weight, :rir, :rep_count
-          ]] 
-        ]] 
+          ] ]
+        ] ]
       ]
     )
   end
