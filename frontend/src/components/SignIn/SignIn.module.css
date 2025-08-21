@@ -1,0 +1,59 @@
+.component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #191919;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30vw;
+    height: fit-content;
+    background-color: #333333;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+}
+
+.header {
+    color: green;
+}
+
+.sub_header {
+    font-size: 1rem;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form input {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+form input::placeholder {
+    font-size: 1rem;
+}
+
+form .sign_in_button { 
+    padding: 0.3rem 1rem;
+}
+
+hr {
+    border-color: grey;
+    width: 80%;
+}
+
+.invite_code_button {
+    padding: 0.3rem 1rem;
+}
