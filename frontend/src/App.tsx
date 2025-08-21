@@ -1,14 +1,17 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import SignIn from "./components/SignIn/SignIn";
 
-function App() {
+export default function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <SignIn />
-            </header>
-        </div>
+        <Router>
+            <div className="App">
+                <header className="App-header">
+                    <Routes>
+                        <Route path="/" element={<SignIn />} />
+                    </Routes>
+                </header>
+            </div>
+        </Router>
     );
 }
-
-export default App;
