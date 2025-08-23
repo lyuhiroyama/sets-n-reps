@@ -46,7 +46,7 @@ export default function SignIn() {
             <div className={styles.container}>
                 <h2 className={styles.header}>Sets-n-Reps</h2>
                 <p className={styles.sub_header}>Sign in to your account</p>
-                { error && <p>{error}</p>}
+                { error && <p className={styles.error}>{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
