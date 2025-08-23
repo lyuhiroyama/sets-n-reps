@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # CSRF token route:
+  get "/csrf-token", to: "csrf#show"
   devise_for :users,
     controllers: {
       sessions: "users/sessions",
