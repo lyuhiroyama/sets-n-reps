@@ -3,11 +3,15 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
-  private
+  # Disable Devise's flash message feature by overriding it to do nothing
+  def set_flash_message(key, kind, options = {})
+  end
+
+  protected
 
   # Runs after successful sign-in
   def respond_with(resource, _opts = {})
-    render json: { user: resource, message: "signed in successfully"}, status: ok
+    render json: { user: resource, message: "signed in successfully"}, status: :ok
   end
 
   # Runs after sign-out
