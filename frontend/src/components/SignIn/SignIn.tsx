@@ -6,6 +6,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [isSignIn, setIsSignIn] = useState(true);
     const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent) => {
@@ -19,7 +20,10 @@ export default function SignIn() {
             const tokenJSON = await tokenResponse.json();
             const csrfToken = tokenJSON.csrfToken;
 
-            const response = await fetch("http://localhost:3000/users/sign_in", {
+            // (2) Send sign-in request with credentials & CSRF token
+            const baseUrl = process.env.REACT_APP_API_BASE_URL
+            const url = `${baseUrl}${isSignIn ? "/users/sign_in" : "/users"}`
+            const response = await fetch(url, {
                 method: "POST",
                 headers: { 
                     "Content-Type": "application/json",
@@ -33,11 +37,11 @@ export default function SignIn() {
                 navigate("/dashboard"); // Redirect to dashboard
             } else {
                 const errorData = await response.json();
-                setError(errorData.error || "Sign-in failed. Please check your email and password")
+                setError(errorData.error || `${isSignIn  ? "Sign-in" : "Sign-up"} failed. Please check your email and password`)
             }
         } catch (error) {
             console.error(error)
-            setError("Sign-in failed. Please check your email and password.");
+            setError(`${isSignIn  ? "Sign-in" : "Sign-up"} failed. Please check your email and password`);
         }
     };
 
@@ -45,28 +49,36 @@ export default function SignIn() {
         <div className={styles.component}>
             <div className={styles.container}>
                 <h2 className={styles.header}>Sets-n-Reps</h2>
-                <p className={styles.sub_header}>Sign in to your account</p>
+                <p className={styles.sub_header}>
+                    {isSignIn ? "Sign in to your account" : "Sign up with email" }
+                </p>
                 { error && <p className={styles.error}>{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <input
-                        type="text"
+                        type="email"
                         placeholder="Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                     <input
                         type="password"
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required
                     />
                     <button type="submit" className={styles.sign_in_button}>
-                        Sign In
+                        {isSignIn ? "Sign in" : "Create account" }
                     </button>
                 </form>
                 <hr />
-                <button type="button" className={styles.invite_code_button}>
-                    Create account
+                <button 
+                    type="button" 
+                    className={styles.toggle_form_button}
+                    onClick={() => setIsSignIn(!isSignIn)}
+                >
+                    {isSignIn ? "Create account" : "Sign in" }
                 </button>
             </div>
         </div>
