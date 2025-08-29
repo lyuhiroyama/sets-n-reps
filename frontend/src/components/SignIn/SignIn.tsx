@@ -12,16 +12,16 @@ export default function SignIn() {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
+            const baseUrl = process.env.REACT_APP_API_BASE_URL
 
             // (1) Fetch CSRF token from Rails
-            const tokenResponse = await fetch("http://localhost:3000/csrf-token", {
+            const tokenResponse = await fetch(`${baseUrl}/csrf-token`, {
                 credentials: "include" // Ensures httpOnly session cookies are sent/received
             });
             const tokenJSON = await tokenResponse.json();
             const csrfToken = tokenJSON.csrfToken;
 
             // (2) Send sign-in request with credentials & CSRF token
-            const baseUrl = process.env.REACT_APP_API_BASE_URL
             const url = `${baseUrl}${isSignIn ? "/users/sign_in" : "/users"}`
             const response = await fetch(url, {
                 method: "POST",
