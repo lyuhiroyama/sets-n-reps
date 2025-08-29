@@ -7,6 +7,15 @@ class Users::SessionsController < Devise::SessionsController
   def set_flash_message(key, kind, options = {})
   end
 
+  # Checks user authentication status
+  def check_auth
+    if current_user
+      render json: { isAuthenticated: true }, status: :ok
+    else
+      render json: { isAuthenticated: false }, status: :unauthorized
+    end
+  end
+
   protected
 
   # Runs after successful sign-in
