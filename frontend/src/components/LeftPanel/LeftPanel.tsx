@@ -46,7 +46,7 @@ export default function LeftPanel() {
             <ul className={styles.nav_list}>
                 <li>
                     <NavLink 
-                        to="/dashboard"
+                        to="/dashboard/current-workout"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faCalendar} /> Current workout
@@ -54,7 +54,7 @@ export default function LeftPanel() {
                 </li>
                 <li>
                     <NavLink 
-                        to="/mesocycles"
+                        to="/dashboard/mesocycles"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faFolder} /> Mesocycles
@@ -62,7 +62,7 @@ export default function LeftPanel() {
                 </li>
                 <li>
                     <NavLink 
-                        to="/profile"
+                        to="/dashboard/profile"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faUser} /> Profile
