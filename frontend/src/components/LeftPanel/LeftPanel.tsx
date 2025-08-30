@@ -41,7 +41,7 @@ export default function LeftPanel() {
     return (
         <div className={styles.left_panel}>
             <NavLink to="/dashboard">
-                <h4 className={styles.header}>Sets-n-Reps</h4>
+                <h2 className={styles.header}>Sets-n-Reps</h2>
             </NavLink>
             <ul className={styles.nav_list}>
                 <li>

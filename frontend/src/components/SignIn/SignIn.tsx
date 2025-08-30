@@ -41,7 +41,7 @@ export default function SignIn() {
     return (
         <div className={styles.component}>
             <div className={styles.container}>
-                <h3 className={styles.header}>Sets-n-Reps</h3>
+                <h2 className={styles.header}>Sets-n-Reps</h2>
                 <p className={styles.sub_header}>
                     {isSignIn ? "Sign in to your account" : "Sign up with email" }
                 </p>
