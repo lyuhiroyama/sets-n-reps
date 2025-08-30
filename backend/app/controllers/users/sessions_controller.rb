@@ -12,7 +12,10 @@ class Users::SessionsController < Devise::SessionsController
     if current_user_from_token
       render json: { isAuthenticated: true }, status: :ok
     else
-      render json: { isAuthenticated: false }, status: :unauthorized
+      render json: { 
+        isAuthenticated: false,
+        message: "Unauthorized: You are not signed in."
+        }, status: :unauthorized
     end
   end
 

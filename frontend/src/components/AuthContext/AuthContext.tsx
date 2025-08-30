@@ -18,10 +18,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 credentials: "include",
                 headers: { "Accept": "application/json" }
             });
+            const data = await response.json();
+
             if (response.ok) {
-                const data = await response.json();
                 setIsAuthenticated(data.isAuthenticated);
             } else {
+                console.log(data.message)
                 setIsAuthenticated(false);
             }
         };
