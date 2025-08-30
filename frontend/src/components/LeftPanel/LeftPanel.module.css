@@ -45,3 +45,7 @@
     text-align: left;
     padding: 0.5rem;
 }
+
+.active {
+    background-color: #525252;
+}

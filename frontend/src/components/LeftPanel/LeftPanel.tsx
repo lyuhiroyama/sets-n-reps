@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./LeftPanel.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faFolder, faUser } from "@fortawesome/free-regular-svg-icons";
@@ -40,24 +40,33 @@ export default function LeftPanel() {
 
     return (
         <div className={styles.left_panel}>
-            <Link to="/dashboard">
+            <NavLink to="/dashboard">
                 <h4 className={styles.header}>Sets-n-Reps</h4>
-            </Link>
+            </NavLink>
             <ul className={styles.nav_list}>
                 <li>
-                    <Link to="/dashboard">
+                    <NavLink 
+                        to="/dashboard"
+                        className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
+                    >
                         <FontAwesomeIcon icon={faCalendar} /> Current workout
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/mesocycles">
+                    <NavLink 
+                        to="/mesocycles"
+                        className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
+                    >
                         <FontAwesomeIcon icon={faFolder} /> Mesocycles
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/profile">
+                    <NavLink 
+                        to="/profile"
+                        className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
+                    >
                         <FontAwesomeIcon icon={faUser} /> Profile
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
                     <button onClick={handleSignOut}>
