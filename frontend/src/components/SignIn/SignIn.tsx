@@ -14,24 +14,14 @@ export default function SignIn() {
         try {
             const baseUrl = process.env.REACT_APP_API_BASE_URL
 
-            // (1) Fetch CSRF token from Rails
-            const tokenResponse = await fetch(`${baseUrl}/csrf-token`, {
-                credentials: "include" // Ensures httpOnly session cookies are sent/received
-            });
-            const tokenJSON = await tokenResponse.json();
-            const csrfToken = tokenJSON.csrfToken;
-
-            // (2) Send sign-in request with credentials & CSRF token
+            // Send sign-in request with credentials & CSRF token
             const url = `${baseUrl}${isSignIn ? "/users/sign_in" : "/users"}` 
             // /users/sign_in -> Calls devise/sessions#create
             // /users -> Calls devise/registrations#create
 
             const response = await fetch(url, {
                 method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "X-CSRF-Token": csrfToken
-                },
+                headers: { "Content-Type": "application/json" },
                 credentials: "include", // Ensures httpOnly session cookies are sent/received
                 body: JSON.stringify({ user: { email, password } }),
             });
