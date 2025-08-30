@@ -9,7 +9,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # Checks user authentication status
   def check_auth
-    if current_user
+    if current_user_from_token
       render json: { isAuthenticated: true }, status: :ok
     else
       render json: { isAuthenticated: false }, status: :unauthorized
@@ -29,6 +29,15 @@ class Users::SessionsController < Devise::SessionsController
       render json: { message: "signed out successfully"}, status: :ok
     else
       render json: { message: "No active session" }, status: :unauthorized
+    end
+  end
+
+  # Returns currently authenticated user based on httpOnly auth token cookie.
+  # Needed to override Devise's session-based sign-out
+  def current_user_from_token
+    token = cookies[:auth_token]
+    if token.present?
+      User.find_by(auth_token: token)
     end
   end
 
