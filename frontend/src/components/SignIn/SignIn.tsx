@@ -22,7 +22,10 @@ export default function SignIn() {
             const csrfToken = tokenJSON.csrfToken;
 
             // (2) Send sign-in request with credentials & CSRF token
-            const url = `${baseUrl}${isSignIn ? "/users/sign_in" : "/users"}`
+            const url = `${baseUrl}${isSignIn ? "/users/sign_in" : "/users"}` 
+            // /users/sign_in -> Calls devise/sessions#create
+            // /users -> Calls devise/registrations#create
+
             const response = await fetch(url, {
                 method: "POST",
                 headers: { 
@@ -34,7 +37,7 @@ export default function SignIn() {
             });
 
             if (response.ok) {
-                navigate("/dashboard"); // Redirect to dashboard
+                navigate("/dashboard", { replace: true }); // Replace history to prevent back navigation to sign-in page
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || `${isSignIn  ? "Sign-in" : "Sign-up"} failed. Please check your email and password`)
@@ -48,12 +51,12 @@ export default function SignIn() {
     return (
         <div className={styles.component}>
             <div className={styles.container}>
-                <h2 className={styles.header}>Sets-n-Reps</h2>
+                <h3 className={styles.header}>Sets-n-Reps</h3>
                 <p className={styles.sub_header}>
                     {isSignIn ? "Sign in to your account" : "Sign up with email" }
                 </p>
                 { error && <p className={styles.error}>{error}</p>}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className={styles.auth_form}>
                     <input
                         type="email"
                         placeholder="Email"
@@ -72,7 +75,7 @@ export default function SignIn() {
                         {isSignIn ? "Sign in" : "Create account" }
                     </button>
                 </form>
-                <hr />
+                <hr className={styles.signin_divider} />
                 <button 
                     type="button" 
                     className={styles.toggle_form_button}

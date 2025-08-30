@@ -32,7 +32,7 @@
     color: red;
 }
 
-form {
+.auth_form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,21 +40,21 @@ form {
     gap: 1rem;
 }
 
-form input {
+.auth_form input {
     width: 100%;
     font-size: 1rem;
     padding: 0.5rem 1rem;
 }
 
-form input::placeholder {
+.auth_form input::placeholder {
     font-size: 1rem;
 }
 
-form .sign_in_button { 
+.auth_form .sign_in_button { 
     padding: 0.3rem 1rem;
 }
 
-hr {
+.signin_divider {
     border-color: grey;
     width: 80%;
 }
