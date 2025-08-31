@@ -1,4 +1,4 @@
-.dashboard {
+.component {
     display: flex;
     align-items: center;
     width: calc(100vw - 250px); /* To account for left panel width */
@@ -7,3 +7,7 @@
     background-color: #1e1e1e;
 }
 
+.main_content_container {
+    height: inherit;
+    width: inherit;
+}

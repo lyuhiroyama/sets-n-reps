@@ -4,9 +4,9 @@ import styles from "./Dashboard.module.css";
 
 export default function Dashboard() {
     return (
-        <div className={styles.dashboard}>
+        <div className={styles.component}>
             <LeftPanel />
-            <div>
+            <div className={styles.main_content_container} >
                 <Outlet />
             </div>
         </div>

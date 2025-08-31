@@ -1,0 +1,23 @@
+.component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: inherit;
+    width: inherit;
+    color: white;
+}
+
+.component button {
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: red;
+    padding: 1rem;
+}
+
+.component button:hover {
+    filter: hue-rotate(20deg);
+}
