@@ -1,0 +1,36 @@
+.component {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    height: 90%;
+    width: 50%;
+    background-color: #404040;
+}
+
+.header_container {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid grey;
+    color: white;
+    padding: 0 1.5rem;
+}
+
+.header_container button {
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: red;
+    padding: 0.5rem 1rem;
+}
+
+.header_container button:hover {
+    filter: hue-rotate(20deg);
+}
