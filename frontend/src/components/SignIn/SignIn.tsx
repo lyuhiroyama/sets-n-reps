@@ -27,7 +27,7 @@ export default function SignIn() {
             });
 
             if (response.ok) {
-                navigate("/dashboard", { replace: true }); // Replace history to prevent back navigation to sign-in page
+                navigate("/dashboard/current-workout", { replace: true }); // Replace history to prevent back navigation to sign-in page
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || `${isSignIn  ? "Sign-in" : "Sign-up"} failed. Please check your email and password`)
