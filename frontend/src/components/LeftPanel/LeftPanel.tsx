@@ -10,18 +10,8 @@ export default function LeftPanel() {
     const handleSignOut = async () => {
         try {
             const baseUrl = process.env.REACT_APP_API_BASE_URL;
-            const tokenResponse = await fetch(`${baseUrl}/csrf-token`, {
-                credentials: "include" // Ensures httpOnly session cookies are sent/received
-            });
-            const tokenJSON = await tokenResponse.json();
-            const csrfToken = tokenJSON.csrfToken;
-
             const response = await fetch(`${baseUrl}/users/sign_out`, { // Endpoint calls: devise/sessions#destroy
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-Token": csrfToken
-                },
                 credentials: "include"
             });
 
