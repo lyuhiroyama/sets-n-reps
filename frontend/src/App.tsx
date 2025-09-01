@@ -6,6 +6,7 @@ import SignIn from "./components/SignIn/SignIn";
 import Dashboard from "./components/Dashboard/Dashboard"
 import CurrentWorkout from "./components/CurrentWorkout/CurrentWorkout"
 import Mesocycles from "./components/Mesocycles/Mesocycles"
+import PlanAMesocycle from "./components/PlanAMesocycle/PlanAMesocycle"
 import Profile from "./components/Profile/Profile"
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
                     <Route index element={<CurrentWorkout />} />
                     <Route path="current-workout" element={<CurrentWorkout />} />
                     <Route path="mesocycles" element={<Mesocycles />} />
+                    <Route path="plan-a-mesocycle" element={<PlanAMesocycle />}/>
                     <Route path="profile" element={<Profile />} />
                 </Route>
             </Routes>

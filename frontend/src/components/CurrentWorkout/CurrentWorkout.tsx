@@ -4,7 +4,7 @@ import styles from "./CurrentWorkout.module.css";
 export default function CurrentWorkout() {
     const navigate = useNavigate();
     const handlePlanMesoClick = () => {
-        navigate("/dashboard/mesocycles");
+        navigate("/dashboard/plan-a-mesocycle");
     };
 
     return (

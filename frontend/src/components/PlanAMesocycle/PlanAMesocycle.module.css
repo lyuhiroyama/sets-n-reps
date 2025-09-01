@@ -1,0 +1,157 @@
+.component {
+    height: inherit;
+    width: inherit;
+}
+
+.top_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    width: inherit;
+    padding: 0 1rem;
+}
+
+.top_container input {
+    height: 40px;
+    width: 300px;
+    text-align: center;
+    border: none;
+    color: white;
+    background-color: #323232;
+    padding: 0.5rem 1rem;
+}
+
+.top_container button {
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    padding: 0.5rem 1rem;
+}
+
+.top_container button:hover {
+    filter: hue-rotate(20deg);
+}
+
+.main_container {
+    display: flex;
+    gap: 1rem;
+    height: 90%;
+    width: inherit;
+    padding: 1rem;
+}
+
+.main_container .addDay_button {
+    width: 300px;
+    height: 3rem;
+    border: none;
+    color: white;
+    background-color: #323232;
+    font-size: 1rem;
+    transition: background-color 0.1s ease;
+}
+.main_container .addDay_button:hover {
+    background-color: black;
+}
+
+.main_container .day_column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 270px;
+    height: fit-content;
+    background-color: black;
+    padding: 0.5rem;
+}
+
+.day_column .day_header {
+    height: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.day_header .dow_container {
+    width: fit-content;
+    position: relative;
+    display: flex;
+    border: 1px solid grey;
+    cursor: pointer;
+}
+
+.dow_container .dow_dropdown {
+    width: 100%;
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0.3rem 2rem 0.3rem 1rem;
+    cursor: pointer;
+    appearance: none; /* To delete default (poorly positioned) down arrow */
+}
+
+.dow_container .faAngleDown_container { /* faAngleDown to replace default with */
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 2rem;
+    right: 0;
+    color: white;
+    pointer-events: none; /* Needed for custom down arrow replacement */
+}
+
+
+.delete_btn {
+    all: unset;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+.delete_btn:hover {
+    background-color: rgba(80, 80, 80, 0.5);
+}
+
+.faTrash_icon {
+    color: white;
+}
+
+.exercise_div {
+    color: white;
+    background-color: #2d2d2d;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.exercise_toprow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.exercise_toprow label {
+    background-color: rgb(0, 74, 0);
+    padding: 0 0.2rem;
+}
+
+
+
+.exercise_input {
+    width: 100%;
+    border: 1px dashed grey;
+    color: white;
+    background-color: #2d2d2d;
+    padding: 0.5rem;
+}
+
+.add_exercise_btn {
+    border: none;
+    color: white;
+    background-color: #323232;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    transition: background-color 0.1s ease;
+}
+.add_exercise_btn:hover {
+    background-color: black;
+}

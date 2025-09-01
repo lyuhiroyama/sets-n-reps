@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./LeftPanel.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faFolder, faUser } from "@fortawesome/free-regular-svg-icons";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function LeftPanel() {
     const navigate = useNavigate();
@@ -48,6 +48,14 @@ export default function LeftPanel() {
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faFolder} /> Mesocycles
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink 
+                        to="/dashboard/plan-a-mesocycle"
+                        className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
+                    >
+                        <FontAwesomeIcon icon={faPlus} /> Plan a mesocycle 
                     </NavLink>
                 </li>
                 <li>
