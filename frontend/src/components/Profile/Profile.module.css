@@ -3,9 +3,10 @@
     width: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     color: white;
+    padding-top: 2rem;
 }
 
 .component h2 {
