@@ -6,6 +6,7 @@ import { faAngleDown, faTrash } from "@fortawesome/free-solid-svg-icons"
 export default function PlanAMesocycle() {
     const [days, setDays] = useState<number[]>([1, 2]);
     const [exercises, setExercises] = useState<string[][]>(Array(days.length).fill([]));
+    const [showDialog, setShowDialog] = useState(false);
 
     const addDay = () => {
         if (days.length < 6) {
@@ -51,11 +52,19 @@ export default function PlanAMesocycle() {
         );
     };
 
+    const handleCreateMesocycle = () => {
+        setShowDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setShowDialog(false);
+    };
+
     return (
         <div className={styles.component}>
             <div className={styles.top_container}>
-                <input placeholder="Name your mesocycle"></input>
-                <button>Create mesocycle</button>
+                <h2>New meso plan</h2>
+                <button onClick={handleCreateMesocycle}>Create mesocycle</button>
             </div>
             <div className={styles.main_container}>
                 {days.map((_, index) => (
@@ -117,6 +126,34 @@ export default function PlanAMesocycle() {
                 )}
                 
             </div>
+
+            {/* Modal dialog */}
+            {showDialog && (
+                <div className={styles.dialog_background} onClick={handleCloseDialog}>
+                    <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
+                        <h2>Create mesocycle</h2>
+                        <div className={styles.mesoname_div}>
+                            <label>Mesocycle name</label>
+                            <input></input>
+                        </div>
+                        <div className={styles.numweeks_div}>
+                            <label>How many weeks will you train (including deload)?</label>
+                            <div className={styles.numweeks_btn_div}>
+                                <button>4</button>
+                                <button>5</button>
+                                <button>6</button>
+                                <button>7</button>
+                                <button>8</button>
+                            </div>
+                        </div>
+                        <hr className={styles.modal_hr}/>
+                        <div className={styles.dialog_bottom_div}>
+                            <button onClick={handleCloseDialog} className={styles.cancel_btn}>Cancel</button>
+                            <button className={styles.create_btn}>Create</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
