@@ -1,0 +1,36 @@
+.component {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.component h2 {
+    width: 50%;
+    text-align: left;
+    padding: 1rem 0;
+}
+
+.container {
+    height: fit-content;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    background-color: #404040;
+}
+
+.profile_dl {
+    padding: 1rem;
+}
+
+.profile_set {
+    margin-bottom: 1rem;
+}
+
+.profile_set dd {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
