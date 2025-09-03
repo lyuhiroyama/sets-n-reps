@@ -34,5 +34,6 @@ module Backend
       key: "_sets_n_reps_session",
       same_site: :strict,
       secure: Rails.env.production?
+    config.middleware.use ActionDispatch::Flash
   end
 end
