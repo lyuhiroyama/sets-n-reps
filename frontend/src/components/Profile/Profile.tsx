@@ -48,6 +48,7 @@ export default function Profile() {
                         <dd>
                             {user?.created_at
                             ? new Date(user.created_at).toLocaleDateString("en-US", {
+                                timeZone: "Asia/Tokyo",
                                 year: "numeric",
                                 month: "long",
                                 day: "numeric",

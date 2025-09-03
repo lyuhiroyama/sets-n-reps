@@ -4,6 +4,11 @@ class API::MesocyclesController < ApplicationController
 
   before_action :authenticate_user!
 
+  def index
+    mesocycles = current_user.mesocycles.order(created_at: :desc)
+    render json: mesocycles, status: :ok
+  end
+
   def create
     mesocycle = current_user.mesocycles.build(mesocycle_params)
 
