@@ -59,7 +59,9 @@ export default function Mesocycles() {
                             })}</div>
                         </li>
                     ))}
-                    {items.length === 0 && <li>No mesocycles created</li>}
+                    {items.length === 0 && 
+                        <li className={styles.meso_li_na}>No mesocycles created</li>
+                    }
                 </ul>
             </div>
         </div>

@@ -36,6 +36,10 @@
     filter: hue-rotate(20deg);
 }
 
+.component ul {
+    height: 80%;
+}
+
 .meso_li {
     position: relative;
     padding: 0.5rem 1.5rem;
@@ -54,8 +58,15 @@
 .meso_li:hover {
     background-color: #525252;
 }
+.meso_li_na {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    list-style: none;
+}
   
 .li_duration, .li_created {
-font-size: 0.8rem;
-color: rgb(166, 166, 166);
+    font-size: 0.8rem;
+    color: rgb(166, 166, 166);
 }
