@@ -11,6 +11,7 @@ class API::MesocyclesController < ApplicationController
 
   def create
     mesocycle = current_user.mesocycles.build(mesocycle_params)
+    mesocycle.workouts.each { |w| w.user = current_user }
 
     if mesocycle.save
       render json: mesocycle, status: :created
@@ -26,10 +27,10 @@ class API::MesocyclesController < ApplicationController
       mesocycle: [
         :name,
         :duration_weeks,
-        workouts_attributes: [
+        workouts_attributes: [[
           :day_of_week,
-          exercises_attributes: [ :name ]
-        ]
+          exercises_attributes: [[ :name ]]
+        ]]
       ]
     )
   end
