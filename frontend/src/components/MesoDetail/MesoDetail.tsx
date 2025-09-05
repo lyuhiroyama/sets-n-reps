@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import MesoDetailHeader from "../MesoDetailHeader/MesoDetailHeader";
+import MesoDetailHeader from "../MesoHeader/MesoHeader";
 import styles from "./MesoDetail.module.css";
 
 type Mesocycle = {

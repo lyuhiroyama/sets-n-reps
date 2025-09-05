@@ -1,4 +1,4 @@
-import styles from "./MesoDetailHeader.module.css"
+import styles from "./MesoHeader.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +12,7 @@ type WorkoutLite = {
     day_of_week?: string
 }
 
-export default function MesoDetailHeader({ mesocycle }: { mesocycle?: MesocycleLite }) {
+export default function MesoHeader({ mesocycle }: { mesocycle?: MesocycleLite }) {
     const mesoName = mesocycle?.name ?? "Mesocycle";
     const dayOfWeek = mesocycle?.workouts?.[0]?.day_of_week
             ? `Week 1・${mesocycle.workouts[0].day_of_week}`
