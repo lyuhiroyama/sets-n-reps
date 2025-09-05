@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
   namespace :api do
     resources :workouts, only: [ :index, :show, :create ]
-    resources :mesocycles, only: [ :index, :create ]
+    resources :mesocycles, only: [ :index, :show, :create ]
   end
 end

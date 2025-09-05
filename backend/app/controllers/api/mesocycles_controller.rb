@@ -9,6 +9,18 @@ class API::MesocyclesController < ApplicationController
     render json: mesocycles, status: :ok
   end
 
+  def show
+    mesocycle = current_user
+      .mesocycles
+      .includes(workouts: { exercises: :exercise_sets })
+      .find(params[:id])
+
+    render json: 
+      mesocycle,
+      include: { workouts: { include: { exercises: { include: :exercise_sets }}}},
+      status: :ok
+  end
+
   def create
     mesocycle = current_user.mesocycles.build(mesocycle_params)
     mesocycle.workouts.each { |w| w.user = current_user }

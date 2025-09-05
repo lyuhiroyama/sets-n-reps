@@ -10,14 +10,14 @@
 }
 
 .component h2 {
-    width: 50%;
+    width: 60%;
     text-align: left;
     padding: 1rem 0;
 }
 
 .container {
     height: fit-content;
-    width: 50%;
+    width: 60%;
     display: flex;
     align-items: center;
     background-color: #404040;

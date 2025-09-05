@@ -29,14 +29,14 @@ export default function Mesocycles() {
             }
         };
         fetchMesocycles();
-    }, []);
+    }, [navigate]);
 
     const handleNewClick = () => {
         navigate("/dashboard/plan-a-mesocycle");
     }
 
     const handleMesoClick = (mesoObj: Mesocycle) => {
-        navigate(`/dashboard/mesocycles/${mesoObj.id}`);
+        navigate(`/dashboard/mesocycles/${mesoObj.id}`, { state: mesoObj });
     }
     
     return (
