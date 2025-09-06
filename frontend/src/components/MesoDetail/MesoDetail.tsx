@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import MesoDetailHeader from "../MesoHeader/MesoHeader";
+import MesoWorkouts from "../MesoWorkouts/MesoWorkouts"
 import styles from "./MesoDetail.module.css";
 
 type Mesocycle = {
@@ -13,7 +14,7 @@ type Mesocycle = {
 type Workout = {
     id: number;
     day_of_week?: string;
-    exercise_sets?: Exercise[];
+    exercises?: Exercise[];
 }
 
 type Exercise = {
@@ -61,7 +62,8 @@ export default function MesoDetail() {
     return (
         <div className={styles.component}>
             <MesoDetailHeader mesocycle={mesocycle ?? undefined} />
-            {/* <Meso> */}
+            {/* Only pass the first workout of the meso:  */}
+            <MesoWorkouts workout={mesocycle?.workouts?.[0]} /> 
         </div>
     )
 }
