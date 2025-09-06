@@ -1,6 +1,6 @@
 .component {
-    height: inherit;
-    width: inherit;
+    height: 100%;
+    width: 100%;
 }
 
 .top_container {

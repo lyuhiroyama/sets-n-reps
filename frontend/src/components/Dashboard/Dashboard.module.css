@@ -1,13 +1,12 @@
 .component {
     display: flex;
-    align-items: center;
-    width: calc(100vw - 250px); /* To account for left panel width */
-    height: 100vh;
-    margin-left: 250px; /* To account for left panel width */
+    min-height: 100vh;
+    width: 100%;
     background-color: #1e1e1e;
 }
 
 .main_content_container {
-    height: inherit;
-    width: inherit;
+    height: auto;
+    width: calc(100% - 250px);
+    margin-left: 250px;
 }
