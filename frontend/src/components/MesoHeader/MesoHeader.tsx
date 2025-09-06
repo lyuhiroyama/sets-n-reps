@@ -20,15 +20,13 @@ export default function MesoHeader({ mesocycle }: { mesocycle?: MesocycleLite })
 
     return (
         <div className={styles.component}>
-            <div className={styles.container}>
-                <div className={styles.div_texts}>
-                    <span>{mesoName}</span>
-                    <h3>{dayOfWeek}</h3>
-                </div>
-                <div className={styles.div_icons}>
-                    <FontAwesomeIcon icon={faCalendarDays} />
-                    <FontAwesomeIcon icon={faGear} />
-                </div>
+            <div className={styles.div_texts}>
+                <span>{mesoName}</span>
+                <h3>{dayOfWeek}</h3>
+            </div>
+            <div className={styles.div_icons}>
+                <FontAwesomeIcon icon={faCalendarDays} />
+                <FontAwesomeIcon icon={faGear} />
             </div>
         </div>
     )
