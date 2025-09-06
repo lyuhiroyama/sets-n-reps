@@ -75,7 +75,14 @@ export default function PlanAMesocycle() {
     };
 
     const handleCreateMeso = async () => {
-        if (!mesoName || !durationWeeks) return;
+        if (
+            !mesoName ||
+            !durationWeeks ||
+            !exercises.some(exList => exList.some(name => name.trim() !== ""))
+        ) {
+            alert("Please enter a mesocycle name, duration, and at least one exercise.");
+            return;
+        }
 
         const payload = {
             mesocycle: {
