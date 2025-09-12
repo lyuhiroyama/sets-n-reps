@@ -26,7 +26,7 @@ export default function WorkoutPickerDropdown({
     isOpen: boolean;
     onClose: () => void;
     mesocycle?: MesocycleLite;
-    onSelect: (weekIndex: number, dayIndex: number, day: Day) => void;
+    onSelect: (weekIndex: number, day: Day) => void;
 }) {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -67,8 +67,9 @@ export default function WorkoutPickerDropdown({
                                         day.state === "active" ? styles.btn_day_active : "",
                                         day.state === "completed" ? styles.btn_day_completed : ""
                                     ].join(" ")}
+                                    onClick={() => onSelect(weekIdx, day)}
                                 >
-                                {day.label}
+                                    {day.label}
                                 </button>
                             ))}
                         </div>

@@ -39,6 +39,14 @@ export default function MesoDetail() {
     const [mesocycle, setMesocycle] = useState<Mesocycle | null>(initial);
 
     const { id } = useParams();
+
+    // To read query parameters, for when users select a specific workout of a meso:
+    const searchParams = new URLSearchParams(location.search);
+    const workoutId = searchParams.get('workout');
+    // Find the selected workout or default to first one:
+    const selectedWorkout = mesocycle?.workouts?.find(w => w.id === Number(workoutId)) ?? mesocycle?.workouts?.[0];
+
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -61,9 +69,12 @@ export default function MesoDetail() {
 
     return (
         <div className={styles.component}>
-            <MesoDetailHeader mesocycle={mesocycle ?? undefined} />
-            {/* Only pass the first workout of the meso:  */}
-            <MesoWorkouts workout={mesocycle?.workouts?.[0]} /> 
+            <MesoDetailHeader 
+                mesocycle={mesocycle ?? undefined} 
+                selectedWorkout={selectedWorkout}
+            />
+            {/* Pass the selected workout (or default to first)  */}
+            <MesoWorkouts workout={selectedWorkout} /> 
         </div>
     )
 }
