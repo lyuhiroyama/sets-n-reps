@@ -1,0 +1,56 @@
+.component {
+    position: absolute;
+    z-index: 1000;
+    top: 3.2rem;
+    right: -4rem;
+    width: fit-content;
+    background-color: #333333;;
+    border: 1px solid grey;
+    padding: 1rem;
+}
+
+.main_content_div {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 0.2rem;
+}
+
+.week_col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header_cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header_cell div { /* week sublabel */
+    font-size: 1rem;;
+}
+
+.btn_col {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn_day {
+    border: none;
+    border: 1px solid transparent; /* Prevent button hover jitter */
+    background-color: #292929;
+    color: white;
+    padding: 1rem;
+    margin-top: 0.2rem;
+}
+.btn_day:hover {
+    border: 1px solid grey;
+}
+.btn_day_active {
+    background-color: #573331;
+}
+.btn_day_completed {
+    background-color: #21684a;
+}
