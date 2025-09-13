@@ -58,6 +58,8 @@ export default function MesoHeader({
                         );
                         setIsOpen(false);
                     }}
+                    currentlyOpenWorkoutId={selectedWorkout?.id}
+                    currentWeekIdx={Number(weekNumber)}
                 />
                 <FontAwesomeIcon icon={faGear} className={styles.icon} />
             </div>

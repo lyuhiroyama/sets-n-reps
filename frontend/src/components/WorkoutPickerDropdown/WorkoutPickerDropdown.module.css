@@ -54,3 +54,6 @@
 .btn_day_completed {
     background-color: #21684a;
 }
+.btn_day_current {
+    border: 1px solid white;
+}

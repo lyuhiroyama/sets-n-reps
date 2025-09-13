@@ -14,19 +14,34 @@ type Workout = {
     performed_on?: string | null;
 };
 
-type Week = { label: string; sublabel: string; days: Day[] };
-type Day = { label: string; workoutId?: number; state?: "default" | "active" | "completed" };
+type Week = { 
+    label: string; 
+    sublabel: string; 
+    days: Day[] 
+};
+
+type Day = { 
+    label: string; 
+    workoutId?: number;
+    isCompleted?: boolean;
+    isActive?: boolean;
+    isCurrent?: boolean;
+};
 
 export default function WorkoutPickerDropdown({
     isOpen,
     onClose,
     mesocycle,
     onSelect,
+    currentlyOpenWorkoutId,
+    currentWeekIdx
 }: {
     isOpen: boolean;
     onClose: () => void;
     mesocycle?: MesocycleLite;
     onSelect: (weekIndex: number, day: Day) => void;
+    currentlyOpenWorkoutId?: number;
+    currentWeekIdx?: number;
 }) {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +58,7 @@ export default function WorkoutPickerDropdown({
 
     if (!isOpen || !mesocycle ) return null;
 
-    const weeks = buildWeeksFromMesocycle(mesocycle);
+    const weeks = buildWeeksFromMesocycle(mesocycle, currentlyOpenWorkoutId, currentWeekIdx);
     
     return (
         <div 
@@ -64,8 +79,9 @@ export default function WorkoutPickerDropdown({
                                     key={`dayBtn-${dayIdx}`}
                                     className={[
                                         styles.btn_day,
-                                        day.state === "active" ? styles.btn_day_active : "",
-                                        day.state === "completed" ? styles.btn_day_completed : ""
+                                        day.isActive ? styles.btn_day_active : "",
+                                        day.isCompleted ? styles.btn_day_completed : "",
+                                        day.isCurrent ? styles.btn_day_current : ""
                                     ].join(" ")}
                                     onClick={() => onSelect(weekIdx, day)}
                                 >
@@ -81,7 +97,11 @@ export default function WorkoutPickerDropdown({
     )
 }
 
-function buildWeeksFromMesocycle(meso: MesocycleLite): Week[] {
+function buildWeeksFromMesocycle(
+    meso: MesocycleLite, 
+    currentlyOpenWorkoutId?: number,
+    currentWeekIdx?: number
+): Week[] {
     const weekCount = meso.duration_weeks;
     const workouts = meso.workouts ?? [];
 
@@ -89,10 +109,12 @@ function buildWeeksFromMesocycle(meso: MesocycleLite): Week[] {
         label: w.day_of_week || `day ${i + 1}`,
         workoutId: w.id,
         completed: Boolean(w.performed_on),
-        absoluteIndex: i // To track the first uncomplete workout encountered ('active' workout)
+        absoluteIndex: i // To track the first uncompleted workout encountered ('active' workout)
     }));
 
-    let activeSet = false; // A flag to ensure only first uncompleted workout encountered is marked 'active'.
+    // Flag to ensure only first current/uncompleted workout encountered is marked 'current'/'active'.
+    let currentSet = false;
+    let activeSet = false;
 
     function getRir(weekIndex: number, totalWeeks: number): string {
         if (weekIndex === totalWeeks - 1) return "DL";
@@ -106,12 +128,21 @@ function buildWeeksFromMesocycle(meso: MesocycleLite): Week[] {
         label: String(weekIndex + 1),
         sublabel: getRir(weekIndex, weekCount),
         days: dayEntries.map(d => {
-            if (d.completed) return { ...d, state: "completed" };
-            if (!d.completed && !activeSet) {
-                activeSet = true;
-                return { ...d, state: "active" };
+            const isCompleted = d.completed;
+            const isActive = !activeSet && !d.completed
+            const isCurrent = (!currentSet) && 
+                (d.workoutId === currentlyOpenWorkoutId) &&
+                (weekIndex + 1 === currentWeekIdx);
+
+            if (isActive) activeSet = true;
+            if (isCurrent) currentSet = true;
+
+            return {
+                ...d,
+                isCompleted,
+                isActive,
+                isCurrent
             }
-            return { ...d, state: "default" };
         })
     }));
 }
