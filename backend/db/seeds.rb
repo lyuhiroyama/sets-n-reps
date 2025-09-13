@@ -1,5 +1,34 @@
+# Test user
+user = User.create!(
+  email: "lebron@example.com",
+  password: "lebronjames"
+)
 
-workout = Workout.create!(notes: "", performed_on: Date.today)
-exercise = workout.exercises.create!(name: "Assisted Pull-up", notes: "Stretch lats on eccentric")
-exercise.exercise_sets.create!(set_number: 1, weight: 26, rep_count: 10, rir: 0)
-exercise.exercise_sets.create!(set_number: 2, weight: 26, rep_count: 8, rir: 0)
+# Create a meso
+mesocycle = user.mesocycles.create!(
+  name: "Push Pull Legs",
+  duration_weeks: 4
+)
+
+# Create workouts
+workouts = [
+  { name: "Push Day", day_of_week: "Monday" },
+  { name: "Pull Day", day_of_week: "Wednesday" },
+  { name: "Legs Day", day_of_week: "Friday" }
+].map do |workout_data|
+  mesocycle.workouts.create!(
+    day_of_week: workout_data[:day_of_week],
+    user: user
+  )
+end
+
+# Create exercises for each workout
+push_exercises = ["Bench Press", "Overhead Press", "Tricep Extension"]
+pull_exercises = ["Barbell Row", "Pull-ups", "Bicep Curl"]
+leg_exercises = ["Squat", "Romanian Deadlift", "Leg Press"]
+
+workouts[0].exercises.create!(push_exercises.map { |name| { name: name } })
+workouts[1].exercises.create!(pull_exercises.map { |name| { name: name } })
+workouts[2].exercises.create!(leg_exercises.map { |name| { name: name } })
+
+puts "Seed data created successfully"
