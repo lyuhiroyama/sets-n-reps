@@ -1,4 +1,4 @@
 class ExerciseSet < ApplicationRecord
-  validates :set_number, :weight, :rep_count, presence: true
+  validates :set_number, presence: true
   belongs_to :exercise
 end
