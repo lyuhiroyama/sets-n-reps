@@ -70,7 +70,7 @@ export default function MesoDetail() {
             }
         };
         fetchMeso();
-    }, [id, navigate]);
+    }, [id, location.search, navigate]);
 
     return (
         <div className={styles.component}>
