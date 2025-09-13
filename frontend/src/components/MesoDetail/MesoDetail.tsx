@@ -15,6 +15,7 @@ type Workout = {
     id: number;
     mesocycle_id: number;
     day_of_week?: string;
+    week_number: number;
     exercises?: Exercise[];
 };
 

@@ -88,12 +88,15 @@ export default function PlanAMesocycle() {
             mesocycle: {
                 name: mesoName,
                 duration_weeks: durationWeeks,
-                workouts_attributes: days.map((_, idx) => ({
-                    day_of_week: daysOfWeek[idx] || null,
-                    exercises_attributes: (exercises[idx] || [])
-                        .filter(name => name.trim().length > 0)
-                        .map(name => { return { name: name }})
-                }))
+                workouts_attributes: Array.from({ length: durationWeeks }, (_, weekIndex) =>
+                    days.map((_, dayIndex) => ({
+                        day_of_week: daysOfWeek[dayIndex] || null,
+                        week_number: weekIndex + 1,
+                        exercises_attributes: (exercises[dayIndex] || [])
+                            .filter(name => name.trim().length > 0)
+                            .map(name => { return { name: name }})
+                    }))
+                ).flat()
             }
         };
         const baseUrl = process.env.REACT_APP_API_BASE_URL;

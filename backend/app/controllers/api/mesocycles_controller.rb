@@ -41,6 +41,7 @@ class API::MesocyclesController < ApplicationController
         :duration_weeks,
         workouts_attributes: [[
           :day_of_week,
+          :week_number,
           exercises_attributes: [[ :name ]]
         ]]
       ]
