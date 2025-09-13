@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_12_182415) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_13_175330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -64,6 +64,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_182415) do
     t.bigint "mesocycle_id", null: false
     t.bigint "user_id", null: false
     t.string "day_of_week"
+    t.integer "week_number"
     t.index ["mesocycle_id"], name: "index_workouts_on_mesocycle_id"
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end
