@@ -84,6 +84,17 @@ export default function PlanAMesocycle() {
             return;
         }
 
+        // To determine rir with. Used in payload:
+        function findRir(week: number, total: number) {
+            if (week === total) return -1; // Store 'DL' as '-1' (rir col is integer)
+            const startRir = Math.max(0, total - 2); // (e.g.) 4w meso -> start @2RIR
+            
+            // Decrement RIR by 1 each week, but never below 0:
+            const decrementedRir = startRir - (week - 1);
+            const rir = Math.max(0, decrementedRir);
+            return rir;
+        }
+
         const payload = {
             mesocycle: {
                 name: mesoName,
@@ -94,7 +105,13 @@ export default function PlanAMesocycle() {
                         week_number: weekIndex + 1,
                         exercises_attributes: (exercises[dayIndex] || [])
                             .filter(name => name.trim().length > 0)
-                            .map(name => { return { name: name }})
+                            .map(name => ({
+                                name,
+                                exercise_sets_attributes: Array.from({ length: 5 }, (_, setIndex) => ({
+                                    set_number: setIndex + 1,
+                                    rir: findRir(weekIndex + 1, durationWeeks)
+                                }))
+                            }))
                     }))
                 ).flat()
             }

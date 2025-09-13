@@ -132,7 +132,8 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                         <tr key={setKey}>
                                             <td>
                                                 <input 
-                                                    type="number" 
+                                                    type="number"
+                                                    placeholder="kg"
                                                     value={setData.weight || ""}
                                                     onChange={(e) => handleSetChange(
                                                         exr.id,
@@ -145,6 +146,11 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                             <td>
                                                 <input 
                                                     type="number"
+                                                    placeholder={
+                                                        setData.rir === -1
+                                                        ? "DL"
+                                                        : (setData.rir != null ? `${setData.rir} RIR` : "N/A")
+                                                    }
                                                     value={setData.rep_count || ""}
                                                     onChange={(e) => handleSetChange(
                                                         exr.id,

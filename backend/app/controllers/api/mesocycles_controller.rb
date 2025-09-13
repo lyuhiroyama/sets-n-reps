@@ -42,7 +42,10 @@ class API::MesocyclesController < ApplicationController
         workouts_attributes: [[
           :day_of_week,
           :week_number,
-          exercises_attributes: [[ :name ]]
+          exercises_attributes: [[ 
+            :name,
+            exercise_sets_attributes: [[ :set_number, :rir ]]
+          ]]
         ]]
       ]
     )
