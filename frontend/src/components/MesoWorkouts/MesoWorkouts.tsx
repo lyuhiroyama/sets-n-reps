@@ -29,6 +29,21 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     const [exerciseSets, setExerciseSets] = useState<Record<string, ExerciseSet>>({});
     // -> (e.g.) {"1-1": { weight: 50, rep_count: 10 }}
 
+    // Load existing workout data
+    useEffect(() => {
+        if (workout?.exercises) {
+            const initialSets: Record<string, ExerciseSet> = {};
+            workout.exercises.forEach(exercise => {
+                exercise.exercise_sets?.forEach(set => {
+                    const setKey = `${exercise.id}-${set.set_number}`;
+                    initialSets[setKey] = set;
+                });
+            });
+            console.log(initialSets)
+            setExerciseSets(initialSets);
+        }
+    }, [workout]);
+
     // Memo:
     // You're using useCallback to ensure the debounced function keeps the same reference across renders, so that the debounce timer works correctly.
     // Intentionally ignoring warning for debounced function (exhaustive-deps) because ESLint can't track dependencies through debounce.

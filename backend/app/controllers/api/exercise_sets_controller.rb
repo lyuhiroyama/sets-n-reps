@@ -6,7 +6,10 @@ class API::ExerciseSetsController < ApplicationController
 
   def update
     exercise = Exercise.find(params[:exercise_id])
-    set = exercise.exercise_sets.find_or_initialize_by(set_number: params[:set_number])
+    set = exercise.exercise_sets.find_or_initialize_by(
+      exercise_id: params[:exercise_id],
+        set_number: params[:id]
+      )
 
     if set.update(exercise_set_params)
       head :ok
