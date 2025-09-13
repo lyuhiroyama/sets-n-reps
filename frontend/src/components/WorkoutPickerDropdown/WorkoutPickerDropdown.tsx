@@ -53,7 +53,7 @@ export default function WorkoutPickerDropdown({
 
             <div className={styles.main_content_div}>
                 {weeks.map((week, weekIdx) => (
-                    <div className={styles.week_col}>
+                    <div className={styles.week_col} key={`week-${weekIdx}`}>
                         <div className={styles.header_cell} key={`headerCell-${weekIdx}`}>
                             <h3 className={styles.week_label}>{week.label}</h3>
                             <div >{week.sublabel}</div>
