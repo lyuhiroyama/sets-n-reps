@@ -36,7 +36,11 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
             workout.exercises.forEach(exercise => {
                 exercise.exercise_sets?.forEach(set => {
                     const setKey = `${exercise.id}-${set.set_number}`;
-                    initialSets[setKey] = set;
+                    const normalizedSet : ExerciseSet = {
+                        ...set,
+                        weight: set.weight == null ? null : Number(set.weight)
+                    }
+                    initialSets[setKey] = normalizedSet;
                 });
             });
             console.log(initialSets)
