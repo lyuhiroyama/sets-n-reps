@@ -3,6 +3,7 @@
     justify-content: center;
     height: fit-content;
     width: 60%;
+    max-width: 730px;
     background-color: #333333;
     color: white;
     padding: 1rem;
@@ -32,6 +33,7 @@
 
 .exercise_name {
     font-weight: bold;
+    margin-left: 1rem;
     margin-bottom: 1rem;
 }
 

@@ -4,6 +4,7 @@
     align-items: center;
     height: fit-content;
     width: 60%;
+    max-width: 730px;
     background-color: #333333;
     color: white;
     padding: 1rem 2rem;
