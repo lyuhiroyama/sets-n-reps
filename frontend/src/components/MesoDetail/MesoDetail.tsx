@@ -72,6 +72,18 @@ export default function MesoDetail() {
         fetchMeso();
     }, [id, location.search, navigate]);
 
+    // Anytime a mesocycle is opened, active_meso_id gets set (This is for 'Current workout' page)
+    useEffect(() => {
+        if (!mesocycle?.id) return;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        fetch(`${baseUrl}/api/user_preferences`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ user_preferences: { active_meso_id: mesocycle.id } })
+        });
+    }, [mesocycle?.id]);
+
     return (
         <div className={styles.component}>
             <MesoDetailHeader
