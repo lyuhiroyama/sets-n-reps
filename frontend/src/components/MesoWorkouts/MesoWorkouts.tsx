@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import debounce from "lodash/debounce";
 import styles from "./MesoWorkouts.module.css";
 
@@ -29,6 +29,11 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     const [exerciseSets, setExerciseSets] = useState<Record<string, ExerciseSet>>({});
     // -> (e.g.) {"1-1": { weight: 50, rep_count: 10 }}
 
+    // Feature to save in sets. Prevents dropped updates when user rapidly inputs
+    // Replaced previous setup: Single shared debounced (which caused "last call wins" situations)
+    const pendingRef = useRef<Record<string, Partial<ExerciseSet>>>({});
+    const debouncersRef = useRef<Record<string, ReturnType<typeof debounce>>>({});
+
     // Load existing workout data
     useEffect(() => {
         if (workout?.exercises) {
@@ -43,7 +48,6 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                     initialSets[setKey] = normalizedSet;
                 });
             });
-            console.log(initialSets)
             setExerciseSets(initialSets);
         }
     }, [workout]);
@@ -51,39 +55,56 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     // Memo:
     // You're using useCallback to ensure the debounced function keeps the same reference across renders, so that the debounce timer works correctly.
     // Intentionally ignoring warning for debounced function (exhaustive-deps) because ESLint can't track dependencies through debounce.
-    const debouncedSave = useCallback(
-        debounce(async (exerciseId: number, setNumber: number, data: Partial<ExerciseSet>) => {
-            try {
-                const baseUrl = process.env.REACT_APP_API_BASE_URL;
-                const response = await fetch(
-                        `${baseUrl}/api/mesocycles/${workout?.mesocycle_id}/workouts/${workout?.id}/exercises/${exerciseId}/exercise_sets/${setNumber}`
-                    , {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ 
-                        exercise_set: {
-                            ...data,
-                            set_number: setNumber 
-                        }
-                    }),
-                });
+    const saveSetData = useCallback(
+        (exerciseId: number, setNumber: number, data: Partial<ExerciseSet>) => {
+            const setKey = `${exerciseId}-${setNumber}`;
 
-                if (!response.ok) {
-                    console.error("Failed to save workout set data");
-                }
-            } catch (error) {
-                console.error("Error saving workout set data: ", error);
+            // merge pending changes
+            pendingRef.current[setKey] = {
+                ...pendingRef.current[setKey],
+                ...data
+            };
+
+            if (!debouncersRef.current[setKey]) {
+                debouncersRef.current[setKey] = debounce(async () => {
+                    const payload = pendingRef.current[setKey];
+                    delete pendingRef.current[setKey];
+
+                    try {
+                        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+                        const response = await fetch(
+                        `${baseUrl}/api/mesocycles/${workout?.mesocycle_id}/workouts/${workout?.id}/exercises/${exerciseId}/exercise_sets/${setNumber}`
+                        , {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            credentials: "include",
+                            body: JSON.stringify({ 
+                                exercise_set: {
+                                    ...payload,
+                                    set_number: setNumber 
+                                }
+                            })
+                        });
+                        if (!response.ok) { console.error("Failed to save workout data") }
+                    } catch (error) {
+                        console.error("Error saving workout data: ", error);
+                    }
+                }, 500) // 500ms debounce
             }
-        }, 500),
-        [workout?.mesocycle_id, workout?.id]
+            debouncersRef.current[setKey]();
+        }, [workout?.mesocycle_id, workout?.id]
     );
 
-    const saveSetData = (exerciseId: number, setNumber: number, data: Partial<ExerciseSet>) => {
-        debouncedSave(exerciseId, setNumber, data);
-    };
+    // Cleanup debouncers & Clear pending's when workout changes/unmounts
+    useEffect(() => {
+        return () => {
+            Object.values(debouncersRef.current).forEach(d => d.cancel());
+            debouncersRef.current = {};
+            pendingRef.current = {};
+        };
+    }, [workout?.mesocycle_id, workout?.id]);
 
     // Handle input & checkbox changes
     const handleSetChange = (
@@ -138,7 +159,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                 <input 
                                                     type="number"
                                                     placeholder="kg"
-                                                    value={setData.weight || ""}
+                                                    value={setData.weight ?? ""}
                                                     onChange={(e) => handleSetChange(
                                                         exr.id,
                                                         setNumber,
@@ -155,7 +176,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                         ? "DL"
                                                         : (setData.rir != null ? `${setData.rir} RIR` : "N/A")
                                                     }
-                                                    value={setData.rep_count || ""}
+                                                    value={setData.rep_count ?? ""}
                                                     onChange={(e) => handleSetChange(
                                                         exr.id,
                                                         setNumber,
