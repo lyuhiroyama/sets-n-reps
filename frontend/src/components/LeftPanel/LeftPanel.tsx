@@ -39,7 +39,9 @@ export default function LeftPanel() {
                         to="/dashboard/current-workout"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
-                        <FontAwesomeIcon icon={faCalendar} /> Current workout
+                        <FontAwesomeIcon icon={faCalendar} /> 
+                        <div className={styles.text_desktop}>Current workout</div>
+                        <div className={styles.text_mobile}>Current</div>
                     </NavLink>
                 </li>
                 <li>
@@ -47,7 +49,9 @@ export default function LeftPanel() {
                         to="/dashboard/mesocycles"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
-                        <FontAwesomeIcon icon={faFolder} /> Mesocycles
+                        <FontAwesomeIcon icon={faFolder} /> 
+                        <div className={styles.text_desktop}>Mesocycles</div>
+                        <div className={styles.text_mobile}>Mesos</div>
                     </NavLink>
                 </li>
                 <li>
@@ -55,7 +59,9 @@ export default function LeftPanel() {
                         to="/dashboard/plan-a-mesocycle"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
-                        <FontAwesomeIcon icon={faPlus} /> Plan a mesocycle 
+                        <FontAwesomeIcon icon={faPlus} /> 
+                        <div className={styles.text_desktop}>Plan a mesocycle</div>
+                        <div className={styles.text_mobile}>Plan meso</div>
                     </NavLink>
                 </li>
                 <li>
@@ -63,12 +69,13 @@ export default function LeftPanel() {
                         to="/dashboard/profile"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
-                        <FontAwesomeIcon icon={faUser} /> Profile
+                        <FontAwesomeIcon icon={faUser} /> <div>Profile</div>
                     </NavLink>
                 </li>
                 <li>
                     <button onClick={handleSignOut}>
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} /> Sign out
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} /> 
+                        <div>Sign out</div>
                     </button>
                 </li>
             </ul>
