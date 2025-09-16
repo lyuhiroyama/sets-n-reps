@@ -28,6 +28,8 @@ export default function MesoHeader({
     mesocycle?: MesocycleLite;
     selectedWorkout?: WorkoutLite;
  }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -37,12 +39,12 @@ export default function MesoHeader({
     const dayOfWeek = (selectedWorkout?.day_of_week) 
             ? (`Week ${weekNumber}・${selectedWorkout.day_of_week}`) 
             : (`Week ${weekNumber}・Day ${(mesocycle?.workouts?.findIndex(w => w.id === selectedWorkout?.id) ?? -1) + 1}`);
-    
-    const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
 
     return (
-        <div className={styles.component}>
+        <div className={`
+            ${styles.component}
+            ${selectedWorkout?.performed_on ? styles.status_complete : ""}
+        `}>
             <div className={styles.div_texts}>
                 <span>{mesoName}</span>
                 <h3>{dayOfWeek}</h3>

@@ -10,8 +10,8 @@
     padding: 1rem 2rem;
 }
 
-.container span {
-    color: rgb(166, 166, 166);
+.status_complete {
+    border-bottom: 4px solid green;
 }
 
 .div_icons {
