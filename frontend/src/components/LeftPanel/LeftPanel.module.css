@@ -1,4 +1,5 @@
 .left_panel {
+    z-index: 1000;
     position: fixed;
     left: 0;
     width: 250px;
@@ -62,7 +63,6 @@
 
 @media (max-width: 850px) {
     .left_panel {
-        z-index: 1000;
         display: flex;
         bottom: 0;
         height: 57px;
