@@ -77,3 +77,13 @@
     font-size: 0.8rem;
     color: rgb(166, 166, 166);
 }
+
+@media (max-width: 850px) {
+    .component {
+        padding: unset;
+    }
+
+    .container {
+        width: 100%;
+    }
+}

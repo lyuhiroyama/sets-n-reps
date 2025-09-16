@@ -43,7 +43,7 @@ export default function Mesocycles() {
         <div className={styles.component}>
             <div className={styles.container}>
                 <div className={styles.header_container}>
-                    <h1>Mesocycles</h1>
+                    <h2>Mesocycles</h2>
                     <button onClick={handleNewClick}>+ New</button>
                 </div>
                 <ul>
