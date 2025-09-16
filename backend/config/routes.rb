@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get "users/check-auth", to: "users/sessions#check_auth"
   end
   namespace :api do
-    resources :workouts, only: [ :index, :show, :create ]
+    resources :workouts, only: [ :index, :show, :create, :update ]
 
     resources :mesocycles, only: [ :index, :show, :create ] do
       resources :workouts, only: [ :index, :show ] do

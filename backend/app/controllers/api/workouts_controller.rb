@@ -18,6 +18,15 @@ class API::WorkoutsController < ApplicationController
     end
   end
 
+  def update
+    workout = Workout.find(params[:id])
+    if workout.update(workout_params)
+      head :ok
+    else
+      render json: { errors: workout.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def workout_params

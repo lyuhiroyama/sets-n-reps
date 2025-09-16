@@ -1,0 +1,28 @@
+.component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 60%;
+    max-width: 730px;
+    background-color: transparent;
+    color: white;
+    margin-top: -1rem;
+}
+
+.finish_button {
+    height: 3rem;
+    width: 90%;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    color: white;
+    background-color: red;
+    transition: 0.1s ease;
+}
+.finish_button:hover {
+    filter: hue-rotate(20deg);
+}
+.finish_button:disabled {
+    display: none;
+}

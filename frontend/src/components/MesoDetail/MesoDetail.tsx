@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import MesoDetailHeader from "../MesoHeader/MesoHeader";
 import MesoWorkouts from "../MesoWorkouts/MesoWorkouts";
+import MesoFooter from "../MesoFooter/MesoFooter";
 import styles from "./MesoDetail.module.css";
 
 type Mesocycle = {
@@ -92,6 +93,7 @@ export default function MesoDetail() {
             />
             {/* Pass the selected workout (or default to first)  */}
             <MesoWorkouts workout={selectedWorkout} />
+            <MesoFooter workout={selectedWorkout}/>
         </div>
     );
 }
