@@ -4,6 +4,7 @@
     align-items: center;
     height: fit-content;
     width: 60%;
+    min-width: 500px;
     max-width: 730px;
     background-color: transparent;
     color: white;
@@ -25,4 +26,10 @@
 }
 .finish_button:disabled {
     display: none;
+}
+
+@media (max-width: 480px) {
+    .component {
+        min-width: 100vw;
+    }
 }
