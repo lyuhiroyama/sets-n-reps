@@ -51,7 +51,9 @@ export default function MesoHeader({
             </div>
             <div className={styles.div_icons}>
                 <FontAwesomeIcon icon={faCalendarDays} className={styles.icon} onClick={() => setIsOpen(o => !o)} />
-                <WorkoutPickerDropdown 
+                <FontAwesomeIcon icon={faGear} className={styles.icon} />
+            </div>
+            <WorkoutPickerDropdown 
                     isOpen={isOpen}
                     onClose={() => setIsOpen(false)}
                     mesocycle={mesocycle}
@@ -64,8 +66,6 @@ export default function MesoHeader({
                     currentlyOpenWorkoutId={selectedWorkout?.id}
                     currentWeekIdx={Number(weekNumber)}
                 />
-                <FontAwesomeIcon icon={faGear} className={styles.icon} />
-            </div>
         </div>
     )
 }

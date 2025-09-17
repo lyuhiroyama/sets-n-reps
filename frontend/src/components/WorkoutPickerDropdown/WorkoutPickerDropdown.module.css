@@ -1,24 +1,32 @@
 .component {
     position: absolute;
     z-index: 1000;
-    top: 3.2rem;
-    right: -4rem;
-    width: fit-content;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    min-width: 500px;
+    max-width: 730px;
     background-color: #333333;;
     border: 1px solid grey;
-    padding: 1rem;
+    padding: 0.3rem;
 }
 
 .main_content_div {
+    width: auto;
+    max-width: 100%;
     display: flex;
     justify-content: space-evenly;
-    gap: 0.2rem;
+    gap: 0 0.3rem;
 }
 
 .week_col {
+    flex: 1 1 0; /* each column shrinks/grows evenly */
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 }
 
 .header_cell {
@@ -29,7 +37,7 @@
 }
 
 .header_cell div { /* week sublabel */
-    font-size: 1rem;;
+    font-size: 1rem;
 }
 
 .btn_col {
@@ -38,12 +46,15 @@
 }
 
 .btn_day {
-    border: none;
-    border: 1px solid transparent; /* Prevent button hover jitter */
+    width: auto;
+    max-width: 100%;
+    border: 1px solid transparent; /* Prevents button hover jitter */
+    font-size: 0.8rem;
     background-color: #292929;
     color: white;
-    padding: 1rem;
     margin-top: 0.2rem;
+    padding: 0.4rem;
+    container-type: inline-size; /* Enables @container queries on each .btn_day */
 }
 .btn_day:hover {
     border: 1px solid grey;
@@ -57,3 +68,19 @@
 .btn_day_current {
     border: 1px solid white;
 }
+
+@container (max-width: 80px) {
+    
+}
+
+@media (max-width: 480px) {
+    .component {
+        width: 100vw;
+        min-width: 0;
+    }
+
+    .btn_day {
+        padding: 1rem 0;
+    }
+}
+
