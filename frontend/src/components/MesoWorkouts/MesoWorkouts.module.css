@@ -3,6 +3,7 @@
     justify-content: center;
     height: fit-content;
     width: 60%;
+    min-width: 500px;;
     max-width: 730px;
     background-color: #333333;
     color: white;
@@ -20,8 +21,8 @@
     list-style: none;
     margin-bottom: 1rem;
 }
-/* For bottom border that starts slightly away from the left edge */
-.exercises_li:not(:last-child)::after { 
+
+.exercises_li:not(:last-child)::after { /* Grey bottom border at the bottom of each exercises, excluding the last. */
     content: "";
     position: absolute;
     bottom: 0;
@@ -40,6 +41,7 @@
 .sets_table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed; /* Default is 'table-layout: auto' which sizes cols based on content (and not your CSS widths) */
 }
 
 .sets_table th, .sets_table td {
@@ -48,12 +50,24 @@
     padding-bottom: 1rem;
 }
 
+.th_input, .td_input {
+    width: 40%;
+}
+.th_checkbox, .td_checkbox {
+    width: 20%;
+}
+
 .sets_table input {
     border: none;
     color: white;
     background-color: #262626;
     padding: 0.4rem 1rem;
     text-align: center;
+}
+
+.checkbox_wrapper {
+    display: flex;
+    justify-content: center;
 }
 
 /* Rid default arrow buttons */
@@ -67,5 +81,14 @@ input[type="checkbox"] {
     width: 1.6rem;
     height: 1.6rem;
     accent-color: green;
-  }
-  
+}
+
+@media (max-width: 480px) {
+    .component {
+        min-width: 100vw;
+    }
+
+    .sets_table input {
+        width: 6rem;
+    }
+}

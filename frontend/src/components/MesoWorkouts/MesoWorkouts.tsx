@@ -137,9 +137,9 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                         <table className={styles.sets_table}>
                             <thead>
                                 <tr>
-                                    <th>Weight</th>
-                                    <th>Reps</th>
-                                    <th>Log</th>
+                                    <th className={styles.th_input}>Weight</th>
+                                    <th className={styles.th_input}>Reps</th>
+                                    <th className={styles.th_checkbox}>Log</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,7 +155,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                     
                                     return (
                                         <tr key={setKey}>
-                                            <td>
+                                            <td className={styles.td_input}>
                                                 <input 
                                                     type="number"
                                                     placeholder="kg"
@@ -168,7 +168,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                     )}
                                                 />
                                             </td>
-                                            <td>
+                                            <td className={styles.td_input}>
                                                 <input 
                                                     type="number"
                                                     placeholder={
@@ -185,17 +185,19 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                     )}
                                                 />
                                             </td>
-                                            <td>
-                                                <input 
-                                                    type="checkbox" 
-                                                    checked={setData.completed ?? false}
-                                                    onChange={(e) => handleSetChange(
-                                                        exr.id,
-                                                        setNumber,
-                                                        "completed",
-                                                        e.target.checked
-                                                    )}
-                                                />
+                                            <td className={styles.td_checkbox}>
+                                                <div className={styles.checkbox_wrapper}>
+                                                    <input 
+                                                        type="checkbox" 
+                                                        checked={setData.completed ?? false}
+                                                        onChange={(e) => handleSetChange(
+                                                            exr.id,
+                                                            setNumber,
+                                                            "completed",
+                                                            e.target.checked
+                                                        )}
+                                                    />
+                                                </div>
                                             </td>
                                         </tr>
                                 )})}
