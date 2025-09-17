@@ -18,6 +18,7 @@ workouts = [
 ].map do |workout_data|
   mesocycle.workouts.create!(
     day_of_week: workout_data[:day_of_week],
+    week_number: 1,
     user: user
   )
 end
