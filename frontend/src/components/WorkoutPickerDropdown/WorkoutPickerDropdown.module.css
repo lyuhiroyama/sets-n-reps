@@ -49,7 +49,7 @@
     width: auto;
     max-width: 100%;
     border: 1px solid transparent; /* Prevents button hover jitter */
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     background-color: #292929;
     color: white;
     margin-top: 0.2rem;
@@ -69,10 +69,6 @@
     border: 1px solid white;
 }
 
-@container (max-width: 80px) {
-    
-}
-
 @media (max-width: 480px) {
     .component {
         width: 100vw;
@@ -84,3 +80,12 @@
     }
 }
 
+/* Display differnt labels depending on button width ('Monday' or 'Mo') */
+
+.btn_long_label { display: inline; }
+.btn_short_label { display: none; }
+
+@container (max-width: 70px) {
+    .btn_long_label { display: none; }
+    .btn_short_label { display: inline; }
+}

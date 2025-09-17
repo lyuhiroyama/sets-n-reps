@@ -23,6 +23,7 @@ type Week = {
 
 type Day = {
     label: string;
+    shortLabel: string;
     workoutId?: number;
     isCompleted?: boolean;
     isActive?: boolean;
@@ -99,7 +100,8 @@ export default function WorkoutPickerDropdown({
                                     ].join(" ")}
                                     onClick={() => onSelect(weekIdx, day)}
                                 >
-                                    {day.label}
+                                    <span className={styles.btn_long_label}>{day.label}</span>
+                                    <span className={styles.btn_short_label}>{day.shortLabel}</span>
                                 </button>
                             ))}
                         </div>
@@ -110,6 +112,7 @@ export default function WorkoutPickerDropdown({
     );
 }
 
+// Helper: Builds week objects from a mesocycle (Maps workouts to days with labels/shortLabels/RIR/status flags
 function buildWeeksFromMesocycle(
     meso: MesocycleLite,
     currentlyOpenWorkoutId?: number,
@@ -131,11 +134,15 @@ function buildWeeksFromMesocycle(
     return Array.from({ length: weekCount }, (_, weekIndex) => {
         const weekDayEntries = workouts
             .filter(w => w.week_number === weekIndex + 1)
-            .map((w, i) => ({
-                label: w.day_of_week || `day ${i + 1}`,
-                workoutId: w.id,
-                completed: Boolean(w.performed_on)
-            }));
+            .map((w, i) => {
+                const label = w.day_of_week || `Day ${i + 1}`
+                return {
+                    label,
+                    shortLabel: toShortLabel(label),
+                    workoutId: w.id,
+                    completed: Boolean(w.performed_on)
+                };
+            });
 
         return {
             label: String(weekIndex + 1),
@@ -155,4 +162,24 @@ function buildWeeksFromMesocycle(
             }),
         }; 
     });
+}
+
+
+// Helper: Convert day_of_week ('Monday' / 'Day 1') -> ('Mo' / 'D1')
+function toShortLabel(s: string): string {
+    const t = s.trim();
+    const map: Record<string, string> = {
+        Monday: "Mo",
+        Tuesday: "Tu",
+        Wednesday: "We",
+        Thursday: "Th",
+        Friday: "Fr",
+        Saturday: "Sa",
+        Sunday: "Su"
+    };
+    if (map[t]) return map[t];
+    const regexMatch = t.match(/^Day\s*(\d+)$/);
+    if (regexMatch) return `D${regexMatch[1]}`;
+    // Fallback:
+    return t.slice(0, 2);
 }
