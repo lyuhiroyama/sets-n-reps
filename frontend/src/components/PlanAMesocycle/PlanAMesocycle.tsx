@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./PlanAMesocycle.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons"
 
 export default function PlanAMesocycle() {
     const [days, setDays] = useState<number[]>([1, 2]);
@@ -138,7 +138,7 @@ export default function PlanAMesocycle() {
         <div className={styles.component}>
             <div className={styles.top_container}>
                 <h2>New meso plan</h2>
-                <button onClick={handleOpenDialog}>Create mesocycle</button>
+                <button onClick={handleOpenDialog}>+ Create mesocycle</button>
             </div>
             <div className={styles.main_container}>
                 {days.map((_, index) => (
@@ -210,6 +210,12 @@ export default function PlanAMesocycle() {
             {showDialog && (
                 <div className={styles.dialog_background} onClick={handleCloseDialog}>
                     <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
+                        <button 
+                            className={styles.close_dialog_btn}
+                            onClick={handleCloseDialog}
+                        >
+                            <FontAwesomeIcon icon={faXmark} />
+                        </button>
                         <h2>Create mesocycle</h2>
                         <div className={styles.mesoname_div}>
                             <label>Mesocycle name</label>
@@ -220,7 +226,7 @@ export default function PlanAMesocycle() {
                             />
                         </div>
                         <div className={styles.numweeks_div}>
-                            <label>How many weeks will you train (including deload)?</label>
+                            <label>How many weeks will you train (including deload) ?</label>
                             <div className={styles.numweeks_btn_div}>
                                 {[4,5,6,7,8].map(w => (
                                     <button

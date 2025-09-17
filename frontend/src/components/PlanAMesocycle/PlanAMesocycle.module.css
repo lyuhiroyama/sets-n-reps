@@ -1,16 +1,24 @@
 .component {
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
+    overflow: auto;
 }
 
 .top_container {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 250px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10%;
-    width: inherit;
+    height: 70px;
+    width: calc(100% - 250px);
     padding: 0 1rem;
-    color:white
+    color:white;
+    background-color: #1e1e1e;
 }
 
 .top_container button {
@@ -27,15 +35,18 @@
 }
 
 .main_container {
+    flex: 1 1 auto; /* grows to fill space / shrinks if needed / starts with content size */
     display: flex;
     gap: 1rem;
-    height: 90%;
-    width: inherit;
+    width: 100%;
     padding: 1rem;
+    overflow-x: auto;
+    margin-top: 70px; /* Matches .top_container  */;
 }
 
 .main_container .addDay_button {
-    width: 300px;
+    width: 270px;
+    min-width: 270px;
     height: 3rem;
     border: none;
     color: white;
@@ -52,6 +63,7 @@
     flex-direction: column;
     gap: 0.5rem;
     width: 270px;
+    min-width: 270px;
     height: fit-content;
     background-color: black;
     padding: 0.5rem;
@@ -166,11 +178,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    width: 30%;
+    position: relative;
+    width: 500px;
     height: 50%;
     color: white;
     background-color: #333333;
     padding: 1rem;
+}
+
+.close_dialog_btn {
+    all: unset;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
 }
 
 .mesoname_div {
@@ -243,4 +264,33 @@
 }
 .create_btn:hover {
     filter: hue-rotate(20deg);
+}
+
+@media (max-width: 850px) {
+    .top_container {
+        left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .dialog_background {
+        align-items: end;
+    }
+
+    .top_container {
+        border-bottom: 0.5px solid grey;
+    }
+    .top_container h2 {
+        font-size: 1.3rem;
+    }
+    .top_container button {
+        width: 150px;
+        height: 30px;
+        font-size: 0.7rem;
+    }
+
+    .mesoname_div label, .numweeks_div label {
+        font-size: 0.8rem;
+    }
 }
