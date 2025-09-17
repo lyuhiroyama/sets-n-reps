@@ -6,3 +6,9 @@
     min-height: 100%;
     padding: 1rem 0;
 }
+
+@media (max-width: 480px) {
+    .component {
+        padding-top: 0
+    }
+}
