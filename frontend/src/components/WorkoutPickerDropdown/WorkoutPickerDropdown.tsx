@@ -56,10 +56,10 @@ export default function WorkoutPickerDropdown({
             )
                 onClose();
         };
-        document.addEventListener("mousedown", handleClickOutsideDropdown);
+        document.addEventListener("click", handleClickOutsideDropdown);
         return () => {
             document.removeEventListener(
-                "mousedown",
+                "click",
                 handleClickOutsideDropdown
             );
         };
