@@ -1,4 +1,5 @@
 class API::WorkoutsController < ApplicationController
+  skip_before_action :verify_authenticity_token # For development environment. Remove in production.
   before_action :authenticate_user!
 
   def index
