@@ -1,16 +1,18 @@
 class API::WorkoutsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    workouts = Workout.includes(exercises: :exercise_sets).all
+    workouts = current_user.workouts.includes(exercises: :exercise_sets)
     render json: workouts, include: { exercises: { include: :exercise_sets } }
   end
 
   def show
-    workout = Workout.find(params[:id])
+    workout = current_user.workouts.find(params[:id])
     render json: workout, include: { exercises: { include: :exercise_sets } }
   end
 
   def create
-    workout = Workout.new(workout_params)
+    workout = current_user.workouts.new(workout_params)
     if workout.save
       render json: workout
     else
@@ -19,7 +21,7 @@ class API::WorkoutsController < ApplicationController
   end
 
   def update
-    workout = Workout.find(params[:id])
+    workout = current_user.workouts.find(params[:id])
     if workout.update(workout_params)
       head :ok
     else
