@@ -1,15 +1,10 @@
 class API::ExerciseSetsController < ApplicationController
-  # For development env. Remove in production:
-  skip_before_action :verify_authenticity_token 
-
+  skip_before_action :verify_authenticity_token # For development environment. Remove in production.
   before_action :authenticate_user!
+  before_action :set_exercise
 
   def update
-    exercise = Exercise.find(params[:exercise_id])
-    set = exercise.exercise_sets.find_or_initialize_by(
-      exercise_id: params[:exercise_id],
-        set_number: params[:id]
-      )
+    set = @exercise.exercise_sets.find_or_initialize_by(set_number: params[:id])
 
     if set.update(exercise_set_params)
       head :ok
@@ -20,6 +15,17 @@ class API::ExerciseSetsController < ApplicationController
   end
 
   private
+
+  def set_exercise
+    workout = current_user.workouts.find_by(
+      id: params[:workout_id],
+      mesocycle_id: params[:mesocycle_id]
+    )
+    return head :forbidden unless workout
+
+    @exercise = workout.exercises.find_by(id: params[:exercise_id])
+    return head :forbidden unless @exercise
+  end
   
   def exercise_set_params
     params.expect(
