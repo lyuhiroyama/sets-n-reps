@@ -7,7 +7,7 @@ type UserType = {
 }
 
 export default function Profile() {
-    const [user, setUser] = useState<UserType | null>(null);
+    const [user, setUser] = useState<UserType | null | undefined>(undefined);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -33,6 +33,15 @@ export default function Profile() {
 
         fetchUser();
     }, []);
+
+    // Display loading page while fetching user details:
+    if (user === undefined) {
+        return (
+            <div className={styles.spinner_container}>
+                <div className={styles.spinner}/>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.component}>
