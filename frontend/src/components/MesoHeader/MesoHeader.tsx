@@ -58,10 +58,10 @@ export default function MesoHeader({
                         setIsOpen(o => !o)
                     }}
                 />
-                <FontAwesomeIcon 
+                {/* <FontAwesomeIcon 
                     icon={faGear} 
                     className={styles.icon} 
-                />
+                /> */}
             </div>
             <WorkoutPickerDropdown 
                     isOpen={isOpen}
