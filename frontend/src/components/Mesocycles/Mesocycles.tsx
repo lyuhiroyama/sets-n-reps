@@ -10,7 +10,7 @@ type Mesocycle = {
 }
 
 export default function Mesocycles() {
-    const [items, setItems] = useState<Mesocycle[]>([]);
+    const [items, setItems] = useState<Mesocycle[] | undefined>(undefined);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -37,6 +37,15 @@ export default function Mesocycles() {
 
     const handleMesoClick = (mesoObj: Mesocycle) => {
         navigate(`/dashboard/mesocycles/${mesoObj.id}`, { state: mesoObj });
+    }
+
+    // Display loading page while determining if user has any mesocycles or not:
+    if (items === undefined) {
+        return (
+            <div className={styles.spinner_container}>
+                <div className={styles.spinner}/>
+            </div>
+        );
     }
     
     return (
