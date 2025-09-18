@@ -124,6 +124,13 @@ function buildWeeksFromMesocycle(
     let isCurrentSet = false;
     let isActiveSet = false;
 
+    // (Helper) Ensures button day-of-week chronology
+    const dowOrder = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+    const dowOrderHelper = (d?: string) => {
+        const i = dowOrder.indexOf((d || "").toLowerCase());
+        return i === -1 ? 7 : i;
+    };
+
     function getRir(weekIndex: number, totalWeeks: number): string {
         if (weekIndex === totalWeeks - 1) return "DL";
         const startingRir = totalWeeks - 2; // Because: 4 weeks->2RIR, 5weeks->3RIR, and so on.
@@ -134,6 +141,10 @@ function buildWeeksFromMesocycle(
     return Array.from({ length: weekCount }, (_, weekIndex) => {
         const weekDayEntries = workouts
             .filter(w => w.week_number === weekIndex + 1)
+            .sort((a, b) =>
+                dowOrderHelper(a.day_of_week) - dowOrderHelper(b.day_of_week) ||
+                a.id - b.id
+            )
             .map((w, i) => {
                 const label = w.day_of_week 
                 return {
