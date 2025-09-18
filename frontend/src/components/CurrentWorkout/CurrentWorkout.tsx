@@ -4,7 +4,7 @@ import styles from "./CurrentWorkout.module.css";
 
 export default function CurrentWorkout() {
     const navigate = useNavigate();
-    const [activeMesoId, setActiveMesoId] = useState<number | null>(null);
+    const [activeMesoId, setActiveMesoId] = useState<number | null | undefined>(undefined);
 
     useEffect(() => {
         const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -68,6 +68,15 @@ export default function CurrentWorkout() {
     const handlePlanMesoClick = () => {
         navigate("/dashboard/plan-a-mesocycle");
     };
+
+    // Display loading page while determining if user has a current meso or not:
+    if (activeMesoId === undefined) {
+        return (
+            <div className={styles.component}>
+                <div className={styles.spinner}/>
+            </div>
+        );
+    }
 
     return activeMesoId ? (
         <div className={styles.component}>
