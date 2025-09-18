@@ -78,9 +78,10 @@ export default function PlanAMesocycle() {
         if (
             !mesoName ||
             !durationWeeks ||
-            !exercises.some(exList => exList.some(name => name.trim() !== ""))
+            !exercises.some(exList => exList.some(name => name.trim() !== "")) ||
+            !daysOfWeek.every(d => d.trim() !== "")
         ) {
-            alert("Please enter a mesocycle name, duration, and at least one exercise.");
+            alert("Please enter a mesocycle name, duration, at least one exercise, and a day of week for every day.");
             return;
         }
 
@@ -150,7 +151,7 @@ export default function PlanAMesocycle() {
                                     value={daysOfWeek[index] || ""}
                                     onChange={(e) => handleDayOfWeekChange(index, e.target.value)}
                                 >
-                                    <option value="">Day of week (optional)</option>
+                                    <option value="" disabled selected>Day of week</option>
                                     <option value="Monday">Monday</option>
                                     <option value="Tuesday">Tuesday</option>
                                     <option value="Wednesday">Wednesday</option>

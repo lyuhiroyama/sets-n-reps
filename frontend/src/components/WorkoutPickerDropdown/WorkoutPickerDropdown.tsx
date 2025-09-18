@@ -10,7 +10,7 @@ type MesocycleLite = {
 
 type Workout = {
     id: number;
-    day_of_week?: string;
+    day_of_week: string;
     performed_on?: string | null;
     week_number: number;
 };
@@ -112,7 +112,7 @@ export default function WorkoutPickerDropdown({
     );
 }
 
-// Helper: Builds week objects from a mesocycle (Maps workouts to days with labels/shortLabels/RIR/status flags
+// (Helper) Builds week objects from a mesocycle (Maps workouts to days with labels/shortLabels/RIR/status flags)
 function buildWeeksFromMesocycle(
     meso: MesocycleLite,
     currentlyOpenWorkoutId?: number,
@@ -135,7 +135,7 @@ function buildWeeksFromMesocycle(
         const weekDayEntries = workouts
             .filter(w => w.week_number === weekIndex + 1)
             .map((w, i) => {
-                const label = w.day_of_week || `Day ${i + 1}`
+                const label = w.day_of_week 
                 return {
                     label,
                     shortLabel: toShortLabel(label),
@@ -165,7 +165,7 @@ function buildWeeksFromMesocycle(
 }
 
 
-// Helper: Convert day_of_week ('Monday' / 'Day 1') -> ('Mo' / 'D1')
+// (Helper) Convert day_of_week ('Monday' -> 'Mo')
 function toShortLabel(s: string): string {
     const t = s.trim();
     const map: Record<string, string> = {
@@ -178,8 +178,5 @@ function toShortLabel(s: string): string {
         Sunday: "Su"
     };
     if (map[t]) return map[t];
-    const regexMatch = t.match(/^Day\s*(\d+)$/);
-    if (regexMatch) return `D${regexMatch[1]}`;
-    // Fallback:
-    return t.slice(0, 2);
+    return t.slice(0, 2); // Fallback.
 }

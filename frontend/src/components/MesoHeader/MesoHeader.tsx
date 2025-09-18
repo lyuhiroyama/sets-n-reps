@@ -16,7 +16,7 @@ type MesocycleLite = {
 
 type WorkoutLite = {
     id: number;
-    day_of_week?: string
+    day_of_week: string
     performed_on?: string | null;
     week_number: number;
 }
