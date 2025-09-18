@@ -1,35 +1,44 @@
 # Test user
 user = User.create!(
-  email: "lebron@example.com",
-  password: "lebronjames"
+  email: "lyu@gmail.com",
+  password: "gohornets"
 )
 
 # Create a meso
 mesocycle = user.mesocycles.create!(
-  name: "Push Pull Legs",
+  name: "Actual Workout",
   duration_weeks: 4
 )
 
-# Create workouts
-workouts = [
-  { name: "Push Day", day_of_week: "Monday" },
-  { name: "Pull Day", day_of_week: "Wednesday" },
-  { name: "Legs Day", day_of_week: "Friday" }
-].map do |workout_data|
-  mesocycle.workouts.create!(
-    day_of_week: workout_data[:day_of_week],
-    week_number: 1,
-    user: user
-  )
+# Days we train each week
+workout_dows = %w[Monday Tuesday Wednesday Thursday Friday Saturday]
+
+# Create workouts for every week, assigning each to the user
+workouts = []
+(1..mesocycle.duration_weeks).each do |wk|
+  workout_dows.each do |dow|
+    workouts << mesocycle.workouts.create!(
+      day_of_week: dow,
+      week_number: wk,
+      user: user
+    )
+  end
 end
 
-# Create exercises for each workout
-push_exercises = ["Bench Press", "Overhead Press", "Tricep Extension"]
-pull_exercises = ["Barbell Row", "Pull-ups", "Bicep Curl"]
-leg_exercises = ["Squat", "Romanian Deadlift", "Leg Press"]
+# Create exercises for each workout based on day-of-week
+push_exercises = ["Seated Chest Press Machine", "Seated Shoulder Press Machine"]
+pull_exercises = ["Assisted Pull-ups", "Seated Hammer Row Machine"]
+leg_exercises  = ["Barbell Deadlift", "Cable Tricep Pushdowns (Bar)"]
 
-workouts[0].exercises.create!(push_exercises.map { |name| { name: name } })
-workouts[1].exercises.create!(pull_exercises.map { |name| { name: name } })
-workouts[2].exercises.create!(leg_exercises.map { |name| { name: name } })
+workouts.each do |w|
+  case w.day_of_week
+  when "Monday", "Thursday"
+    w.exercises.create!(push_exercises.map { |name| { name: name } })
+  when "Tuesday", "Friday"
+    w.exercises.create!(pull_exercises.map { |name| { name: name } })
+  when "Wednesday", "Saturday"
+    w.exercises.create!(leg_exercises.map  { |name| { name: name } })
+  end
+end
 
 puts "Seed data created successfully"
