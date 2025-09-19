@@ -18,7 +18,10 @@ class Users::SessionsController < Devise::SessionsController
   # Checks user authentication status
   def check_auth
     if current_user
-      render json: { isAuthenticated: true, user: current_user }
+      render json: {
+         isAuthenticated: true, 
+         user: current_user.slice(:id, :email, :created_at, :active_meso_id)
+      }
     else
       render json: { isAuthenticated: false }
     end
