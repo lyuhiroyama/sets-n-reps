@@ -1,5 +1,7 @@
 class API::WorkoutsController < ApplicationController
-  skip_before_action :verify_authenticity_token # For development environment. Remove in production.
+  # Memo: App doesn't send CSRF tokens from the frontend. When this changes, delete this line:
+  skip_before_action :verify_authenticity_token
+  
   before_action :authenticate_user!
 
   def index

@@ -2,7 +2,10 @@
 
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
+  
+  # Memo: App doesn't send CSRF tokens from the frontend. When this changes, delete this line:
   skip_before_action :verify_authenticity_token
+  
 
   def respond_with(resource, _opts = {})
     render json: { id: resource.id, email: resource.email }, status: :ok

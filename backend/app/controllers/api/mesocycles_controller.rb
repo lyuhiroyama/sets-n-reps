@@ -1,7 +1,7 @@
 class API::MesocyclesController < ApplicationController
-  # For development env. Remove in production:
-  skip_before_action :verify_authenticity_token 
-
+  # Memo: App doesn't send CSRF tokens from the frontend. When this changes, delete this line:
+  skip_before_action :verify_authenticity_token
+  
   before_action :authenticate_user!
 
   def index
