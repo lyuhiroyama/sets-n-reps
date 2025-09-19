@@ -9,6 +9,12 @@
     background-color: #333333;;
     border: 1px solid grey;
     padding: 0.3rem;
+    /* Dropdown transition animation: */
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    animation: dropdown-animation 150ms ease-out forwards;
+    will-change: transform, opacity;
 }
 
 .main_content_div {
@@ -88,4 +94,12 @@
 @container (max-width: 70px) {
     .btn_long_label { display: none; }
     .btn_short_label { display: inline; }
+}
+
+/* Dropdown ransition animation: */
+@keyframes dropdown-animation {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
