@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_14_114109) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_19_182817) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -53,9 +53,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_14_114109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "active_meso_id"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.index ["active_meso_id"], name: "index_users_on_active_meso_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   create_table "workouts", force: :cascade do |t|
