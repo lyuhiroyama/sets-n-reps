@@ -9,9 +9,18 @@ export default function SignIn() {
     const [isSignIn, setIsSignIn] = useState(true);
     const navigate = useNavigate();
 
+    const allowSignups = process.env.REACT_APP_ALLOW_SIGNUPS === "true";
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
+            // Disable sign-ups in production environment:
+            if (!isSignIn && !allowSignups) {
+                setError("Sign-ups are disabled.");
+                alert("Developer has chosen to disable sign-ups. If you would like to demo this app, please feel free to reach out!");
+                return;
+            }
+
             const baseUrl = process.env.REACT_APP_API_BASE_URL
 
             // Send sign-in request with credentials & CSRF token
