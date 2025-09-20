@@ -7,6 +7,14 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html, body {
+  overscroll-behavior: none; 
+}
+
+#root, #app-container {
+  height: 100vh;
+}
+
 button {
   cursor: pointer;
 }
