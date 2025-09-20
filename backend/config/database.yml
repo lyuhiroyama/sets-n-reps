@@ -81,7 +81,16 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
+production: &production
   primary: &primary_production
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
+    
+queue:
+  <<: *production
+
+cable:
+  <<: *production
+
+cache:
+  <<: *production
