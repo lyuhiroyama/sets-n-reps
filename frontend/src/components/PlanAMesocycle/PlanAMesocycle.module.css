@@ -294,6 +294,9 @@
         width: 150px;
         height: 30px;
         font-size: 0.7rem;
+        /* To fix mobile browser quirk: slightly offsets button text to bottom */
+        display: flex;
+        align-items: center;
     }
 
     .mesoname_div label, .numweeks_div label {
