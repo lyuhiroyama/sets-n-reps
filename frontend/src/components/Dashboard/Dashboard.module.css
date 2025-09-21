@@ -1,6 +1,6 @@
 .component {
     display: flex;
-    min-height: 100vh;
+    min-height: 100dvh;
     width: 100%;
     background-color: #1e1e1e;
 }
@@ -15,6 +15,7 @@
     .main_content_container {
       width: 100%;
       margin-left: 0;
-      padding-bottom: 57px; /* nav panel height */
+      padding-bottom: calc(57px - constant(safe-area-inset-bottom)); /* nav panel hight - old iOS safe area */
+      padding-bottom: calc(57px - env(safe-area-inset-bottom)); /* nav panel hight - modern iOS safe area */
     }
   }

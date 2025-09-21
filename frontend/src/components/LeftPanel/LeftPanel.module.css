@@ -65,9 +65,14 @@
     .left_panel {
         display: flex;
         bottom: 0;
-        height: 57px;
+        padding-top: 0.5rem;
+        padding-bottom: constant(safe-area-inset-bottom); /* For old iOS */
+        padding-bottom: env(safe-area-inset-bottom); /* For modern iOS */
+        height: fit-content;
+        min-height: 57px;
         width: 100%;
         border-top: 0.5px solid grey;
+	background-color: #404040;
     }
 
     .header {
@@ -82,7 +87,11 @@
 
     .nav_list li {
         height: 100%;
+        color: grey;
         font-size: 0.8rem;
+    }
+    .nav_list li:hover {
+	    background-color: transparent;
     }
 
     .left_panel a, .left_panel button {
@@ -90,6 +99,7 @@
         justify-content: center;
         height: 100%;;
         padding: unset;
+        -webkit-tap-highlight-color: transparent; /* Disable default grey highlighting when active */
     }
 
     .text_desktop {
@@ -98,6 +108,11 @@
     
     .text_mobile {
         display: unset;
+    }
+
+    .nav_list li .active {
+        background-color: transparent;
+        color: white;
     }
 
 }
