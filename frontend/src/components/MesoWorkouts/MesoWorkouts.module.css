@@ -88,7 +88,10 @@ input[type="checkbox"] {
         min-width: 100vw;
     }
 
-    .sets_table input {
+    .sets_table input[type="number"] {
         width: 6rem;
+    }
+    .sets_table input[type="checkbox"] {
+        width: auto;
     }
 }
