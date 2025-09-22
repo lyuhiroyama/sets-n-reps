@@ -36,9 +36,7 @@ export default function MesoHeader({
     const weekNumber = searchParams.get('week') ?? "1";
 
     const mesoName = mesocycle?.name ?? "Mesocycle";
-    const dayOfWeek = (selectedWorkout?.day_of_week) 
-            ? (`Week ${weekNumber}・${selectedWorkout.day_of_week}`) 
-            : (`Week ${weekNumber}・Day ${(mesocycle?.workouts?.findIndex(w => w.id === selectedWorkout?.id) ?? -1) + 1}`);
+    const dayOfWeek = (selectedWorkout?.day_of_week) ? (`Week ${weekNumber}・${selectedWorkout.day_of_week}`) : ("");
 
     return (
         <div className={`
