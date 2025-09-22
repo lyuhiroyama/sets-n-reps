@@ -126,7 +126,13 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
         saveSetData(exerciseId, setNumber, { [field]: value });
     };
 
-    if (!workout) return null;
+    if (!workout) {
+        return (
+            <div className={styles.spinner_container}>
+                <div className={styles.spinner}/>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.component}>
