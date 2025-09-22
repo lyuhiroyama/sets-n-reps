@@ -10,6 +10,7 @@
 html, body, #root {
   height: 100dvh;
   margin: 0;
+  background-color: #1e1e1e;
   padding: 0;
 }
 
