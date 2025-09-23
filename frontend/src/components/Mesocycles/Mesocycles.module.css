@@ -88,6 +88,13 @@
     }
 }
 
+@media (max-height: 480px) and (orientation: landscape) {
+    .container {
+        padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
+    }
+}
+
 /* Loading page spinning circle: */
 .spinner_container {
     width: 100%;
