@@ -33,7 +33,8 @@ module Backend
     config.middleware.use ActionDispatch::Session::CookieStore,
       key: "_sets_n_reps_session",
       same_site: :strict,
-      secure: Rails.env.production?
+      secure: Rails.env.production?,
+      expire_after: 7.days
     config.middleware.use ActionDispatch::Flash
   end
 end
