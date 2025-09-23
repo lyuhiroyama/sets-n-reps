@@ -304,6 +304,15 @@
     }
 }
 
+@media (max-height: 480px) and (orientation: landscape) {
+    .main_container > :first-child {
+	margin-left: env(safe-area-inset-left); 
+    }
+    .main_container > :last-child {
+	margin-right: env(safe-area-inset-right);
+    }
+}
+
 /* Dialog display transition animation: */
 @keyframes dialog-animation {
     to {
