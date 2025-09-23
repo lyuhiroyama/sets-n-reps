@@ -35,9 +35,41 @@ export default function Mesocycles() {
         navigate("/dashboard/plan-a-mesocycle");
     }
 
-    const handleMesoClick = (mesoObj: Mesocycle) => {
-        navigate(`/dashboard/mesocycles/${mesoObj.id}`, { state: mesoObj });
-    }
+const handleMesoClick = async (mesoObj: Mesocycle) => {
+        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const mesoRes = await fetch(`${baseUrl}/api/mesocycles/${mesoObj.id}`, {
+            credentials: "include",
+            headers: { Accept: "application/json" }
+        });
+        if (!mesoRes.ok) {
+            if (mesoRes.status === 401) navigate("/");
+            return;
+        }
+
+        const meso = await mesoRes.json();
+        const workouts = meso.workouts ?? [];
+        if (!workouts.length) {
+            navigate(`/dashboard/mesocycles/${mesoObj.id}`, { state: mesoObj });
+            return;
+        }
+
+        const dayOrder = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+        const orderHelper = (day?: string) => {
+            const i = dayOrder.indexOf((day || "").toLowerCase());
+            return i === -1 ? 7 : i;
+        };
+
+        const current = [...workouts]
+            .filter((w: any) => !w.performed_on)
+            .sort((a: any, b: any) =>
+                (a.week_number || 0) - (b.week_number || 0) ||
+                orderHelper(a.day_of_week) - orderHelper(b.day_of_week) ||
+                a.id - b.id
+            )[0] || workouts[workouts.length - 1];
+
+        const week = current.week_number ?? 1;
+        navigate(`/dashboard/mesocycles/${mesoObj.id}?workout=${current.id}&week=${week}`, { state: mesoObj });
+    };
 
     // Display loading page while determining if user has any mesocycles or not:
     if (items === undefined) {
