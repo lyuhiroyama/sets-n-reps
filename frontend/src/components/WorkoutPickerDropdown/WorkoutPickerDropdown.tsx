@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./WorkoutPickerDropdown.module.css";
 
 type MesocycleLite = {
@@ -47,8 +47,25 @@ export default function WorkoutPickerDropdown({
 }) {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    // Mainly for closing animation: apply closing class and delay DOM unmount so animation can run
+    const [render, setRender] = useState(isOpen);
+
     useEffect(() => {
-        if (!isOpen) return;
+        if (isOpen) {
+            setRender(true);
+            return;
+        }    
+        if (render) {
+            const t = window.setTimeout(() => {
+                setRender(false);
+            }, 150); // match CSS opening&closing animation
+            return () => window.clearTimeout(t);
+        }   
+    }, [isOpen, render]);
+
+
+    useEffect(() => {
+        if (!render) return;
         const handleClickOutsideDropdown = (e: MouseEvent) => {
             if (
                 dropdownRef.current &&
@@ -63,9 +80,9 @@ export default function WorkoutPickerDropdown({
                 handleClickOutsideDropdown
             );
         };
-    }, [isOpen, onClose]);
+    }, [render, onClose]);
 
-    if (!isOpen || !mesocycle) return null;
+    if (!render || !mesocycle) return null;
 
     const weeks = buildWeeksFromMesocycle(
         mesocycle,
@@ -74,7 +91,13 @@ export default function WorkoutPickerDropdown({
     );
 
     return (
-        <div className={styles.component} ref={dropdownRef}>
+        <div 
+            className={[
+                styles.component,
+                isOpen ? styles.open_animation : styles.close_animation
+            ].join(" ")} 
+            ref={dropdownRef}
+        >
             <div className={styles.main_content_div}>
                 {weeks.map((week, weekIdx) => (
                     <div className={styles.week_col} key={`week-${weekIdx}`}>
