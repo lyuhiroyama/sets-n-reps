@@ -73,16 +73,37 @@
 /* Rid default arrow buttons */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type="checkbox"] {
+    /* remove native checkbox styling to fix horizontal offset issue: */
+    -webkit-appearance: none;
+    appearance: none;
+    /* And now you had essentially had to re-design the checkbox yourself from scratch */
     width: 1.6rem;
     height: 1.6rem;
-    accent-color: green;
+    border: none;
+    background-color: #262626;
+    position: relative; /* needed for ::after positioning */
+    cursor: pointer;
 }
 
+/* Same story here: Had to design the check-mark (post-check) because you removed native styling earlier: */
+input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 9%;
+    left: 15%;
+    width: 60%;
+    height: 40%;
+    border: solid green;
+    border-width: 0 0 3px 3px;
+    transform: rotate(-45deg);
+}
+
+/* mobile portrait screens */
 @media (max-width: 480px) {
     .component {
         min-width: 100vw;
@@ -93,6 +114,13 @@ input[type="checkbox"] {
     }
     .sets_table input[type="checkbox"] {
         width: auto;
+    }
+}
+
+/* mobile landscape screens */
+@media (max-height: 480px) {
+    .sets_table input[type="number"] {
+        width: 6rem;
     }
 }
 
