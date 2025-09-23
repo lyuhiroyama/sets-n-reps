@@ -38,10 +38,31 @@ export default function MesoHeader({
     const mesoName = mesocycle?.name ?? "Mesocycle";
     const dayOfWeek = (selectedWorkout?.day_of_week) ? (`Week ${weekNumber}・${selectedWorkout.day_of_week}`) : ("");
 
+    // To apply red bottom-border to 'current' workout: Determine if opened workout is the first 'uncompleted' within meso
+    const dayOrder = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+    const orderHelper = (day?: string) => {
+      const i = dayOrder.indexOf((day || "").toLowerCase());
+      return i === -1 ? 7 : i;
+    };
+
+    const firstUncompletedWorkoutId = (mesocycle?.workouts
+      ? [...mesocycle.workouts]
+           .sort((a, b) =>
+            (a.week_number || 0) - (b.week_number || 0) ||
+            orderHelper(a.day_of_week) - orderHelper(b.day_of_week) ||
+            a.id - b.id
+      )
+      .find(w => !w.performed_on)?.id
+      : undefined
+    );
+
+    const isFirstUncompletedWorkoutOpen = (selectedWorkout?.id === firstUncompletedWorkoutId) && !selectedWorkout?.performed_on;
+
     return (
         <div className={`
             ${styles.component}
             ${selectedWorkout?.performed_on ? styles.status_complete : ""}
+	    ${isFirstUncompletedWorkoutOpen ? styles.status_current : ""}
         `}>
             <div className={styles.div_texts}>
                 <span>{mesoName}</span>

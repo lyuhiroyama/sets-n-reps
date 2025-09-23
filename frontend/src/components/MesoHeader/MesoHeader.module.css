@@ -16,6 +16,10 @@
     border-bottom: 4px solid green;
 }
 
+.status_current {
+    border-bottom: 4px solid red;
+}
+
 .div_icons {
     position: relative; /* For child div (.component in WorkoutPickerDropdown.tsx) to use 'position: absoute' */
     display: flex;
