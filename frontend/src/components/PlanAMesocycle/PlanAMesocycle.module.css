@@ -172,6 +172,11 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.5);
+    /* Dialog background transition animaiton */
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    will-change: transform, opacity;
 }
 
 .dialog {
@@ -185,11 +190,10 @@
     color: white;
     background-color: #333333;
     padding: 1rem;
-    /* Dialog display transition animation: */
+    /* Dialog transition animaiton */
     opacity: 0;
     transform: translateY(-6px) scale(0.98);
     transform-origin: top center;
-    animation: dialog-animation 150ms ease-out forwards;
     will-change: transform, opacity;
 }
 
@@ -313,10 +317,36 @@
     }
 }
 
-/* Dialog display transition animation: */
-@keyframes dialog-animation {
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+/* Background & Dialog transition animation: */
+.background_darkHue_animation, .dialog_open_animation {
+    animation: dialog-open 150ms ease-out forwards;
+}
+.background_noHue_animation, .dialog_close_animation {
+    animation: dialog-close 150ms ease-in forwards;
+}
+@keyframes dialog-open {
+    from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes dialog-close {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-6px) scale(0.98); }
+}
+
+/* Background & Dialog transition animation (For Mobile): */
+@media (max-width: 480px) and (orientation: portrait) {
+    .dialog_open_animation {
+        animation: dialog-slide-up 150ms ease-out both;
     }
+    .dialog_close_animation {
+        animation: dialog-slide-down 150ms ease-in both;
+    }
+}
+@keyframes dialog-slide-up {
+    0%   { transform: translateY(100%); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes dialog-slide-down {
+    0%   { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100%); opacity: 1; }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./PlanAMesocycle.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,7 @@ export default function PlanAMesocycle() {
     const [durationWeeks, setDurationWeeks] = useState<number | null>(null);
     const [daysOfWeek, setDaysOfWeek] = useState<string[]>(Array(days.length).fill(""));
     const navigate = useNavigate();
+    const [render, setRender] = useState(showDialog);
     
 
     const addDay = () => {
@@ -135,6 +136,17 @@ export default function PlanAMesocycle() {
 
     };
 
+    useEffect(() => {
+        if (showDialog) {
+            setRender(true);
+            return;
+        }    
+        if (render) {
+            const t = window.setTimeout(() => { setRender(false) }, 150); // match CSS opening&closing animation
+            return () => window.clearTimeout(t);
+        }   
+    }, [showDialog, render]);
+
     return (
         <div className={styles.component}>
             <div className={styles.top_container}>
@@ -208,9 +220,21 @@ export default function PlanAMesocycle() {
             </div>
 
             {/* Modal dialog */}
-            {showDialog && (
-                <div className={styles.dialog_background} onClick={handleCloseDialog}>
-                    <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
+            {render && (
+                <div 
+                    className={[
+                        styles.dialog_background,
+                        showDialog ? styles.background_darkHue_animation : styles.background_noHue_animation
+                    ].join(" ")} 
+                    onClick={handleCloseDialog}
+                >
+                    <div 
+                        className={[
+                            styles.dialog,
+                            showDialog ? styles.dialog_open_animation : styles.dialog_close_animation
+                        ].join(" ")} 
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <button 
                             className={styles.close_dialog_btn}
                             onClick={handleCloseDialog}
