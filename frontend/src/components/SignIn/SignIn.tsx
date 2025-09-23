@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 
@@ -10,6 +10,22 @@ export default function SignIn() {
     const navigate = useNavigate();
 
     const allowSignups = process.env.REACT_APP_ALLOW_SIGNUPS === "true";
+
+    // Check auth status via cookies. Redirect user to dashboard if session cookie still valid:
+    useEffect(() => {
+        const check = async () => {
+          const baseUrl = process.env.REACT_APP_API_BASE_URL;
+          const res = await fetch(`${baseUrl}/users/check-auth`, {
+            credentials: "include",
+            headers: { Accept: "application/json" }
+          });
+          const data = await res.json();
+          if (res.ok && data.isAuthenticated) {
+            navigate("/dashboard/current-workout");
+          }
+        };
+        check();
+      }, [navigate]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
