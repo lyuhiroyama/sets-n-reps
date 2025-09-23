@@ -5,7 +5,7 @@ import WorkoutPickerDropdown from "../WorkoutPickerDropdown/WorkoutPickerDropdow
 import styles from "./MesoHeader.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
-import { faGear } from "@fortawesome/free-solid-svg-icons";
+// import { faGear } from "@fortawesome/free-solid-svg-icons";
 
 type MesocycleLite = {
     id: number;
@@ -35,7 +35,7 @@ export default function MesoHeader({
     const searchParams = new URLSearchParams(location.search);
     const weekNumber = searchParams.get('week') ?? "1";
 
-    const mesoName = mesocycle?.name ?? "Mesocycle";
+    const mesoName = mesocycle?.name;
     const dayOfWeek = (selectedWorkout?.day_of_week) ? (`Week ${weekNumber}・${selectedWorkout.day_of_week}`) : ("");
 
     // To apply red bottom-border to 'current' workout: Determine if opened workout is the first 'uncompleted' within meso
@@ -57,6 +57,13 @@ export default function MesoHeader({
     );
 
     const isFirstUncompletedWorkoutOpen = (selectedWorkout?.id === firstUncompletedWorkoutId) && !selectedWorkout?.performed_on;
+
+    // Don't display MesoHeader component until mesocycle name is retrieved
+    if (!mesocycle) {
+        return (
+            <div></div>
+        );
+    }
 
     return (
         <div className={`
