@@ -1,4 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./LeftPanel.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faFolder, faUser } from "@fortawesome/free-regular-svg-icons";
@@ -6,6 +7,7 @@ import { faPlus, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-ico
 
 export default function LeftPanel() {
     const navigate = useNavigate();
+    const { setIsAuthenticated } = useAuth();
 
     const handleSignOut = async () => {
         try {
@@ -16,10 +18,11 @@ export default function LeftPanel() {
             });
 
             if (response.ok) {
-                navigate("/");
+                setIsAuthenticated(false);
+                // No navigate(): ProtectedRoute sees auth=false and redirects to "/"
             } else {
                 console.error("Sign out failed");
-                navigate("/");
+                setIsAuthenticated(false);
             }
         } catch (error) {
             console.error(`Sign out failed: ${error}`);
