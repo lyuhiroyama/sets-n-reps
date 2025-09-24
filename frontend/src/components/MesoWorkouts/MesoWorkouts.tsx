@@ -25,7 +25,6 @@ type ExerciseSet = {
 };
 
 export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
-    const [sets, setSets] = useState<number>(5);
     const [exerciseSets, setExerciseSets] = useState<Record<string, ExerciseSet>>({});
     // -> (e.g.) {"1-1": { weight: 50, rep_count: 10 }}
 
@@ -149,7 +148,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {Array.from({ length: sets }, (_, si) => {
+                                {Array.from({ length: 5 }, (_, si) => {
                                     const setNumber = si + 1;
                                     const setKey = `${exr.id}-${setNumber}`;
                                     const setData = exerciseSets[setKey] || {
@@ -184,7 +183,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                     placeholder={
                                                         setData.rir === -1
                                                         ? "DL"
-                                                        : (setData.rir != null ? `${setData.rir} RIR` : "N/A")
+                                                        : (setData.rir != null ? `${setData.rir} RIR` : "")
                                                     }
                                                     value={setData.rep_count ?? ""}
                                                     onChange={(e) => handleSetChange(
