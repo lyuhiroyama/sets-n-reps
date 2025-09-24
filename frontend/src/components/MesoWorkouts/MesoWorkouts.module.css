@@ -65,6 +65,11 @@
     text-align: center;
 }
 
+.td_input input {
+    font-size: 1rem;
+    max-width: 150px;
+}
+
 .checkbox_wrapper {
     display: flex;
     justify-content: center;

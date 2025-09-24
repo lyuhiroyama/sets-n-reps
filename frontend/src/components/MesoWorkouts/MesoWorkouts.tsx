@@ -165,7 +165,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                 <input 
                                                     type="number"
                                                     inputMode="decimal"
-						    step="0.1"
+						                            step="0.1"
                                                     placeholder="kg"
                                                     value={setData.weight ?? ""}
                                                     onChange={(e) => handleSetChange(
@@ -180,7 +180,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                 <input 
                                                     type="number"
                                                     inputMode="decimal"
-						    step="0.1"
+						                            step="0.1"
                                                     placeholder={
                                                         setData.rir === -1
                                                         ? "DL"
