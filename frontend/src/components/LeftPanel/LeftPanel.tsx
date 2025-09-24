@@ -98,7 +98,7 @@ export default function LeftPanel() {
                 <div
                     className={[
                         styles.signout_dialog_background,
-                        showSignOutDialog ? styles.background_darkHue_animation : styles.background_noHue_animation
+                        showSignOutDialog ? styles.signoutDialog_open_animation : styles.signoutDialog_close_animation
                     ].join(" ")}
                     onClick={() => setShowSignOutDialog(false)}
                 >

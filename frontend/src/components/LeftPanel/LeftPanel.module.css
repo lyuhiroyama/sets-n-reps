@@ -173,7 +173,7 @@
 .signout_buttons_container .dialog_cancel_btn {
     display: flex;
     justify-content: center;
-    width: 20%;
+    width: 30%;
     border: none;
     font-weight: bold;
     color: white;
@@ -189,7 +189,7 @@
 .signout_buttons_container .dialog_signout_btn {
     display: flex;
     justify-content: center;
-    width: 20%;
+    width: 30%;
     border: none;
     font-weight: bold;
     color: white;
@@ -203,8 +203,9 @@
 }
 
 @media (max-width: 480px) {
-    .signout_dialog_background {
-        align-items: end;
+    .signout_dialog {
+        min-height: 100px;
+        width: 80%;
     }
 
     .signout_buttons_container button {
@@ -214,10 +215,10 @@
 }
 
 /* Background & Dialog transition animation: */
-.background_darkHue_animation, .signoutDialog_open_animation {
+.signoutDialog_open_animation {
     animation: dialog-open 150ms ease-out forwards;
 }
-.background_noHue_animation, .signoutDialog_close_animation {
+.signoutDialog_close_animation {
     animation: dialog-close 150ms ease-in forwards;
 }
 @keyframes dialog-open {
@@ -227,22 +228,4 @@
 @keyframes dialog-close {
     from { opacity: 1; transform: translateY(0) scale(1); }
     to { opacity: 0; transform: translateY(-6px) scale(0.98); }
-}
-
-/* Background & Dialog transition animation (For Mobile): */
-@media (max-width: 480px) and (orientation: portrait) {
-    .signoutDialog_open_animation {
-        animation: dialog-slide-up 150ms ease-out both;
-    }
-    .signoutDialog_close_animation {
-        animation: dialog-slide-down 150ms ease-in both;
-    }
-}
-@keyframes dialog-slide-up {
-    0%   { transform: translateY(100%); opacity: 1; }
-    100% { transform: translateY(0); opacity: 1; }
-}
-@keyframes dialog-slide-down {
-    0%   { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(100%); opacity: 1; }
 }
