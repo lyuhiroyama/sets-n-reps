@@ -83,7 +83,7 @@ export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
                         >
                             <FontAwesomeIcon icon={faXmark} />
                         </button>
-                        <h3>Finish this workout?</h3>
+                        <h2>Finish this workout?</h2>
                         <div className={styles.dialog_buttons_container}>
                             <button 
                                 onClick={() => setShowConfirm(false)} 

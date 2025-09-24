@@ -93,6 +93,7 @@
     width: 30%;
     border: none;
     font-weight: bold;
+    font-size: 1rem;
     color: white;
     background-color: transparent;
     margin-right: 1rem;
@@ -109,6 +110,7 @@
     width: 30%;
     border: none;
     font-weight: bold;
+    font-size: 1rem;
     color: white;
     background-color: red;
     padding: 0.5rem;
