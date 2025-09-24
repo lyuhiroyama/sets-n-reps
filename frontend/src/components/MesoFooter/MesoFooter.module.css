@@ -33,3 +33,111 @@
         min-width: 100vw;
     }
 }
+
+/* Sign-out Dialog */
+.dialog_background {
+    z-index: 1003;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Dialog background transition animaiton */
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    will-change: transform, opacity;
+}
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20%;
+    position: relative;
+    width: 400px;
+    height: 25%;
+    min-height: 200px;
+    color: white;
+    background-color: #333333;
+    padding: 1rem;
+    /* Dialog transition animaiton */
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    will-change: transform, opacity;
+}
+
+.close_dialog_btn {
+    all: unset;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+}
+
+.dialog_buttons_container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.dialog_cancel_btn {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: transparent;
+    margin-right: 1rem;
+    padding: 0.5rem 0;
+    transition: 0.1s ease;
+}
+.dialog_cancel_btn:hover {
+    background-color: #4f4f4f;
+}
+
+.dialog_confirm_btn {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    transition: 0.1s ease;
+}
+.dialog_confirm_btn:hover {
+    filter: hue-rotate(20deg);
+}
+
+@media (max-width: 480px) {
+    .dialog {
+        min-height: 100px;
+        width: 80%;
+    }
+}
+
+/* Background & Dialog transition animation: */
+.dialog_open_animation {
+    animation: dialog-open 150ms ease-out forwards;
+}
+.dialog_close_animation {
+    animation: dialog-close 150ms ease-in forwards;
+}
+@keyframes dialog-open {
+    from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes dialog-close {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-6px) scale(0.98); }
+}

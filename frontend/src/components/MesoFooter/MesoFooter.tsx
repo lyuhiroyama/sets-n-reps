@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import styles from "./MesoFooter.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 type WorkoutLite = {
     id: number;
@@ -6,6 +9,22 @@ type WorkoutLite = {
 }
 
 export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [render, setRender] = useState(false);
+
+    useEffect(() => {
+        if (showConfirm) { setRender(true); return; }
+        if (render) {
+            const t = window.setTimeout(() => setRender(false), 150); // 150ms
+            return () => window.clearTimeout(t);
+        }
+    }, [showConfirm, render]);
+
+    const openConfirm = () => {
+        if (!workout || workout.performed_on) return;
+        setShowConfirm(true);
+    };
+
     const handleFinish = async () => {
         if (!workout) return;
         try {
@@ -37,11 +56,51 @@ export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
         <div className={styles.component}>
             <button 
                 className={styles.finish_button}
-                onClick={handleFinish}
+                onClick={openConfirm}
                 disabled={!!workout?.performed_on || !workout}
             >
                 Finish Workout
             </button>
+
+            {render && (
+                <div
+                    className={[
+                        styles.dialog_background,
+                        showConfirm ? styles.dialog_open_animation : styles.dialog_close_animation
+                    ].join(" ")}
+                    onClick={() => setShowConfirm(false)}
+                >
+                    <div
+                        className={[
+                            styles.dialog,
+                            showConfirm ? styles.dialog_open_animation : styles.dialog_close_animation
+                        ].join(" ")}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button 
+                            className={styles.close_dialog_btn}
+                            onClick={() => setShowConfirm(false)}
+                        >
+                            <FontAwesomeIcon icon={faXmark} />
+                        </button>
+                        <h3>Finish this workout?</h3>
+                        <div className={styles.dialog_buttons_container}>
+                            <button 
+                                onClick={() => setShowConfirm(false)} 
+                                className={styles.dialog_cancel_btn}
+                            >
+                                Cancel
+                            </button>
+                            <button 
+                                onClick={handleFinish} 
+                                className={styles.dialog_confirm_btn}
+                            >
+                                Finish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
