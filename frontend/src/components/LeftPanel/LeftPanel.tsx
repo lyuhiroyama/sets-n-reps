@@ -1,13 +1,24 @@
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./LeftPanel.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faFolder, faUser } from "@fortawesome/free-regular-svg-icons";
-import { faPlus, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faArrowRightFromBracket, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function LeftPanel() {
     const navigate = useNavigate();
     const { setIsAuthenticated } = useAuth();
+    const [showSignOutDialog, setShowSignOutDialog] = useState(false);
+    const [render, setRender] = useState(false);
+    
+    useEffect(() => {
+        if (showSignOutDialog) { setRender(true); return; }
+        if (render) {
+            const t = window.setTimeout(() => setRender(false), 150);
+            return () => window.clearTimeout(t);
+        }
+    }, [showSignOutDialog, render]);
 
     const handleSignOut = async () => {
         try {
@@ -76,12 +87,42 @@ export default function LeftPanel() {
                     </NavLink>
                 </li>
                 <li>
-                    <button onClick={handleSignOut}>
+                    <button onClick={() => setShowSignOutDialog(true)}>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} /> 
                         <div>Sign out</div>
                     </button>
                 </li>
             </ul>
+            
+            {render && (
+                <div
+                    className={[
+                        styles.signout_dialog_background,
+                        showSignOutDialog ? styles.background_darkHue_animation : styles.background_noHue_animation
+                    ].join(" ")}
+                    onClick={() => setShowSignOutDialog(false)}
+                >
+                    <div
+                        className={[
+                            styles.signout_dialog,
+                            showSignOutDialog ? styles.signoutDialog_open_animation : styles.signoutDialog_close_animation
+                        ].join(" ")}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button 
+                            className={styles.close_dialog_btn}
+                            onClick={() => setShowSignOutDialog(false)}
+                        >
+                            <FontAwesomeIcon icon={faXmark} />
+                        </button>
+                        <h2>Sign out?</h2>
+                        <div className={styles.signout_buttons_container}>
+                            <button className={styles.dialog_cancel_btn} onClick={() => setShowSignOutDialog(false)}>Cancel</button>
+                            <button className={styles.dialog_signout_btn} onClick={handleSignOut}>Sign out</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
