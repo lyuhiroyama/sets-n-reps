@@ -73,6 +73,8 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
 
                     // For input loading spinner:
                     setSavingSetKeys(prev => new Set(prev).add(setKey));
+                    // To ensure minimum spinning time (500ms)
+                    const spinnerStart = Date.now();
 
                     try {
                         const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -95,12 +97,19 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                     } catch (error) {
                         console.error("Error saving workout data: ", error);
                     } finally {
+                        // Ensure spinner display for at least 500ms
+                        const elapsed = Date.now() - spinnerStart;
+                        const remainingTime = Math.max(0, 500 - elapsed);
+
                         // Remmove loading spinner after save attempt
-                        setSavingSetKeys(prev => {
-                            const next = new Set(prev);
-                            next.delete(setKey);
-                            return next;
-                        });
+                        setTimeout(() => {
+                            setSavingSetKeys(prev => {
+                                const next = new Set(prev);
+                                next.delete(setKey);
+                                return next;
+                            });
+                        }, remainingTime);
+                        
                     }
                 }, 500) // 500ms debounce
             }
