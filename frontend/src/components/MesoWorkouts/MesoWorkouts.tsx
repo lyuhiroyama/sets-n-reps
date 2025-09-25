@@ -126,8 +126,8 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                         weight: value as number
                     }
                 }));
+                saveSetData(exerciseId, subsequentSetNum, { weight: value as number });
             });
-            saveSetData(exerciseId, setNumber, { weight: value as number });
         }
         // For reps/checkbox updates: 
         else { 
