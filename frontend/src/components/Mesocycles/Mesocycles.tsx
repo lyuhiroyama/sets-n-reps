@@ -31,11 +31,25 @@ export default function Mesocycles() {
         fetchMesocycles();
     }, [navigate]);
 
+    // Just to alter the top safe area on mobile portrait screens
+    useEffect(() => {
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        const originalColor = themeColorMeta?.getAttribute('content');
+        
+        themeColorMeta?.setAttribute('content', '#404040');  // Match .header_container background
+
+        return () => {
+            if (originalColor) {
+                themeColorMeta?.setAttribute('content', originalColor);
+            }
+        };
+    }, []);
+
     const handleNewClick = () => {
         navigate("/dashboard/plan-a-mesocycle");
     }
 
-const handleMesoClick = async (mesoObj: Mesocycle) => {
+    const handleMesoClick = async (mesoObj: Mesocycle) => {
         const baseUrl = process.env.REACT_APP_API_BASE_URL;
         const mesoRes = await fetch(`${baseUrl}/api/mesocycles/${mesoObj.id}`, {
             credentials: "include",
