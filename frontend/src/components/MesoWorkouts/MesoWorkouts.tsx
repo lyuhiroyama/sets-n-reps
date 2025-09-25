@@ -105,24 +105,44 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
         };
     }, [workout?.mesocycle_id, workout?.id]);
 
-    // Handle input & checkbox changes
+    // Handle input & checkbox updates
     const handleSetChange = (
         exerciseId: number,
         setNumber: number,
         field: keyof ExerciseSet,
         value: number | boolean | null
     ) => {
-        const setKey = `${exerciseId}-${setNumber}`;
-        const updatedSet = {
-            // Overwrite sets data (updatedSet) with 'property overwrite' (look it up)
-            ...exerciseSets[setKey],
-            [field]: value,
-        };
-        setExerciseSets(prev => ({
-            ...prev,
-            [setKey]: updatedSet
-        }));
-        saveSetData(exerciseId, setNumber, { [field]: value });
+        // For weight updates (Overwrite subsequent sets' numbers):
+        if (field === "weight" && value != null) {
+            const subsequentSets = Array.from({ length: 5 - setNumber + 1},(_, i) => setNumber + i);
+
+            subsequentSets.forEach(subsequentSetNum => {
+                const subsequentSetKey = `${exerciseId}-${subsequentSetNum}`;
+
+                setExerciseSets(prev => ({
+                    ...prev,
+                    [subsequentSetKey]: {
+                        ...prev[subsequentSetKey],
+                        weight: value as number
+                    }
+                }));
+            });
+            saveSetData(exerciseId, setNumber, { weight: value as number });
+        }
+        // For reps/checkbox updates: 
+        else { 
+            const setKey = `${exerciseId}-${setNumber}`;
+            const updatedSet = {
+                // Overwrite sets data (updatedSet) with 'property overwrite' (look it up)
+                ...exerciseSets[setKey],
+                [field]: value,
+            };
+            setExerciseSets(prev => ({
+                ...prev,
+                [setKey]: updatedSet
+            }));
+            saveSetData(exerciseId, setNumber, { [field]: value });
+        }
     };
 
     if (!workout) {
