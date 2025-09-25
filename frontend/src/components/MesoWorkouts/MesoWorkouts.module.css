@@ -108,6 +108,20 @@ input[type="checkbox"]:checked::after {
     transform: rotate(-45deg);
 }
 
+.td_checkbox {
+    position: relative; /* For .spinner_small */
+}
+
+.spinner_small {
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 2px solid white;
+    border-top-color: #333333;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
 /* mobile portrait screens */
 @media (max-width: 480px) {
     .component {
@@ -119,6 +133,10 @@ input[type="checkbox"]:checked::after {
     }
     .sets_table input[type="checkbox"] {
         width: auto;
+    }
+
+    .spinner_small {
+        left: -0.7rem;
     }
 }
 

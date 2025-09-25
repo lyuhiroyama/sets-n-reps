@@ -27,6 +27,8 @@ type ExerciseSet = {
 export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     const [exerciseSets, setExerciseSets] = useState<Record<string, ExerciseSet>>({});
     // -> (e.g.) {"1-1": { weight: 50, rep_count: 10 }}
+    const [savingSetKeys, setSavingSetKeys] = useState<Set<string>>(new Set());
+    // -> For loading spinner after user inputs
 
     // Feature to save in sets. Prevents dropped updates when user rapidly inputs
     // Replaced previous setup: Single shared debounced (which caused "last call wins" situations)
@@ -58,7 +60,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
         (exerciseId: number, setNumber: number, data: Partial<ExerciseSet>) => {
             const setKey = `${exerciseId}-${setNumber}`;
 
-            // merge pending changes
+            // Merge pending changes:
             pendingRef.current[setKey] = {
                 ...pendingRef.current[setKey],
                 ...data
@@ -68,6 +70,9 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                 debouncersRef.current[setKey] = debounce(async () => {
                     const payload = pendingRef.current[setKey];
                     delete pendingRef.current[setKey];
+
+                    // For input loading spinner:
+                    setSavingSetKeys(prev => new Set(prev).add(setKey));
 
                     try {
                         const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -89,6 +94,13 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                         if (!response.ok) { console.error("Failed to save workout data") }
                     } catch (error) {
                         console.error("Error saving workout data: ", error);
+                    } finally {
+                        // Remmove loading spinner after save attempt
+                        setSavingSetKeys(prev => {
+                            const next = new Set(prev);
+                            next.delete(setKey);
+                            return next;
+                        });
                     }
                 }, 500) // 500ms debounce
             }
@@ -215,6 +227,9 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                 />
                                             </td>
                                             <td className={styles.td_checkbox}>
+                                                {savingSetKeys.has(setKey) && (
+                                                    <div className={styles.spinner_small}></div>
+                                                )}
                                                 <div className={styles.checkbox_wrapper}>
                                                     <input 
                                                         type="checkbox" 
