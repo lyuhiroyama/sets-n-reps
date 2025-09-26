@@ -85,6 +85,21 @@ export default function MesoDetail() {
         });
     }, [mesocycle?.id]);
 
+    // Just to alter the top safe area on mobile portrait screens
+    useEffect(() => {
+        const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        const originalColor = themeColorMeta?.getAttribute('content');
+        
+        themeColorMeta?.setAttribute('content', '#333333');  // Match MesoHeader .component background
+
+        return () => {
+            if (originalColor) {
+                themeColorMeta?.setAttribute('content', originalColor);
+            }
+        };
+    }, []);
+    
+
     return (
         <div className={styles.component}>
             <MesoDetailHeader
