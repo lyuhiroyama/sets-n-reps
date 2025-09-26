@@ -1,5 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
-import debounce from "lodash/debounce";
+import { useState, useEffect, useCallback } from "react";
 import styles from "./MesoWorkouts.module.css";
 
 type WorkoutLite = {
@@ -30,11 +29,6 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     const [savingSetKeys, setSavingSetKeys] = useState<Set<string>>(new Set());
     // -> For loading spinner after user inputs
 
-    // Feature to save in sets. Prevents dropped updates when user rapidly inputs
-    // Replaced previous setup: Single shared debounced (which caused "last call wins" situations)
-    const pendingRef = useRef<Record<string, Partial<ExerciseSet>>>({});
-    const debouncersRef = useRef<Record<string, ReturnType<typeof debounce>>>({});
-
     // Load existing workout data
     useEffect(() => {
         if (workout?.exercises) {
@@ -53,78 +47,52 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
         }
     }, [workout]);
 
-    // Memo:
-    // You're using useCallback to ensure the debounced function keeps the same reference across renders, so that the debounce timer works correctly.
-    // Intentionally ignoring warning for debounced function (exhaustive-deps) because ESLint can't track dependencies through debounce.
     const saveSetData = useCallback(
-        (exerciseId: number, setNumber: number, data: Partial<ExerciseSet>) => {
+        async (exerciseId: number, setNumber: number, data: Partial<ExerciseSet>) => {
             const setKey = `${exerciseId}-${setNumber}`;
 
-            // Merge pending changes:
-            pendingRef.current[setKey] = {
-                ...pendingRef.current[setKey],
-                ...data
-            };
+                // For input loading spinner:
+                setSavingSetKeys(prev => new Set(prev).add(setKey));
+                // To ensure minimum spinning time (500ms)
+                const spinnerStart = Date.now();
 
-            if (!debouncersRef.current[setKey]) {
-                debouncersRef.current[setKey] = debounce(async () => {
-                    const payload = pendingRef.current[setKey];
-                    delete pendingRef.current[setKey];
+                try {
+                    const baseUrl = process.env.REACT_APP_API_BASE_URL;
+                    const response = await fetch(
+                    `${baseUrl}/api/mesocycles/${workout?.mesocycle_id}/workouts/${workout?.id}/exercises/${exerciseId}/exercise_sets/${setNumber}`
+                    , {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        credentials: "include",
+                        body: JSON.stringify({ 
+                            exercise_set: {
+                                ...data,
+                                set_number: setNumber 
+                            }
+                        })
+                    });
+                    if (!response.ok) { console.error("Failed to save workout data") }
+                } catch (error) {
+                    console.error("Error saving workout data: ", error);
+                } finally {
+                    // Ensure spinner display for at least 500ms
+                    const elapsed = Date.now() - spinnerStart;
+                    const remainingTime = Math.max(0, 500 - elapsed);
 
-                    // For input loading spinner:
-                    setSavingSetKeys(prev => new Set(prev).add(setKey));
-                    // To ensure minimum spinning time (500ms)
-                    const spinnerStart = Date.now();
-
-                    try {
-                        const baseUrl = process.env.REACT_APP_API_BASE_URL;
-                        const response = await fetch(
-                        `${baseUrl}/api/mesocycles/${workout?.mesocycle_id}/workouts/${workout?.id}/exercises/${exerciseId}/exercise_sets/${setNumber}`
-                        , {
-                            method: "PATCH",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            credentials: "include",
-                            body: JSON.stringify({ 
-                                exercise_set: {
-                                    ...payload,
-                                    set_number: setNumber 
-                                }
-                            })
+                    // Remmove loading spinner after save attempt
+                    setTimeout(() => {
+                        setSavingSetKeys(prev => {
+                            const next = new Set(prev);
+                            next.delete(setKey);
+                            return next;
                         });
-                        if (!response.ok) { console.error("Failed to save workout data") }
-                    } catch (error) {
-                        console.error("Error saving workout data: ", error);
-                    } finally {
-                        // Ensure spinner display for at least 500ms
-                        const elapsed = Date.now() - spinnerStart;
-                        const remainingTime = Math.max(0, 500 - elapsed);
-
-                        // Remmove loading spinner after save attempt
-                        setTimeout(() => {
-                            setSavingSetKeys(prev => {
-                                const next = new Set(prev);
-                                next.delete(setKey);
-                                return next;
-                            });
-                        }, remainingTime);
-                        
-                    }
-                }, 500) // 500ms debounce
-            }
-            debouncersRef.current[setKey]();
+                    }, remainingTime);
+                    
+                }
         }, [workout?.mesocycle_id, workout?.id]
     );
-
-    // Cleanup debouncers & Clear pending's when workout changes/unmounts
-    useEffect(() => {
-        return () => {
-            Object.values(debouncersRef.current).forEach(d => d.cancel());
-            debouncersRef.current = {};
-            pendingRef.current = {};
-        };
-    }, [workout?.mesocycle_id, workout?.id]);
 
     // Handle input & checkbox updates
     const handleSetChange = (
@@ -208,12 +176,23 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
 						                            step="0.1"
                                                     placeholder="kg"
                                                     value={setData.weight ?? ""}
-                                                    onChange={(e) => handleSetChange(
-                                                        exr.id,
-                                                        setNumber,
-                                                        "weight",
-                                                        e.target.value ? Number(e.target.value) : null
-                                                    )}
+                                                    // To update input visual display:
+                                                    onChange={(e) => {
+                                                        const value = e.target.value ? Number(e.target.value) : null;
+                                                        const setKey = `${exr.id}-${setNumber}`;
+                                                        setExerciseSets(prev => ({
+                                                            ...prev,
+                                                            [setKey]: {
+                                                                ...prev[setKey],
+                                                                weight: value
+                                                            }
+                                                        }));
+                                                    }} 
+                                                    // Save updates when input loses focus:
+                                                    onBlur={(e)=> { 
+                                                        const value = e.target.value ? Number(e.target.value) : null;
+                                                        handleSetChange(exr.id, setNumber, "weight", value);
+                                                    }}
                                                 />
                                             </td>
                                             <td className={styles.td_input}>
@@ -227,12 +206,23 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                                                         : (setData.rir != null ? `${setData.rir} RIR` : "")
                                                     }
                                                     value={setData.rep_count ?? ""}
-                                                    onChange={(e) => handleSetChange(
-                                                        exr.id,
-                                                        setNumber,
-                                                        "rep_count",
-                                                        e.target.value ? Number(e.target.value) : null
-                                                    )}
+                                                    // To update input visual display:
+                                                    onChange={(e) => {
+                                                        const value = e.target.value ? Number(e.target.value) : null;
+                                                        const setKey = `${exr.id}-${setNumber}`;
+                                                        setExerciseSets(prev => ({
+                                                            ...prev,
+                                                            [setKey]: {
+                                                                ...prev[setKey],
+                                                                rep_count: value
+                                                            }
+                                                        }));
+                                                    }} 
+                                                    // Save updates when input loses focus:
+                                                    onBlur={(e)=> { 
+                                                        const value = e.target.value ? Number(e.target.value) : null;
+                                                        handleSetChange(exr.id, setNumber, "rep_count", value);
+                                                    }}
                                                 />
                                             </td>
                                             <td className={styles.td_checkbox}>
