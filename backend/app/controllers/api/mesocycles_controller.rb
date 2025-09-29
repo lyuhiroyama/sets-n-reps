@@ -10,6 +10,7 @@ class API::MesocyclesController < ApplicationController
     if params[:exercise].present?
       mesocycles = mesocycles
         .joins(workouts: :exercises) # Join by associations: mesocycles → workouts → exercises
+        .includes(workouts: { exercises: :exercise_sets }) # Include exercise_sets data
         .where(exercises: {name: params[:exercise]}) 
         .distinct # Ensure each mesocycle appears only once, even if multiple workouts/exercises match the filter
         .order(created_at: :desc)
@@ -17,7 +18,9 @@ class API::MesocyclesController < ApplicationController
       mesocycles = current_user.mesocycles.order(created_at: :desc)
     end
     
-    render json: mesocycles, status: :ok
+    render json: mesocycles,
+    include: { workouts: { include: { exercises: { include: :exercise_sets }}}},
+    status: :ok
   end
 
   def show
