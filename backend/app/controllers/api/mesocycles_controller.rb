@@ -5,7 +5,18 @@ class API::MesocyclesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    mesocycles = current_user.mesocycles.order(created_at: :desc)
+    mesocycles = current_user.mesocycles
+
+    if params[:exercise].present?
+      mesocycles = mesocycles
+        .joins(workouts: :exercises) # Join by associations: mesocycles → workouts → exercises
+        .where(exercises: {name: params[:exercise]}) 
+        .distinct # Ensure each mesocycle appears only once, even if multiple workouts/exercises match the filter
+        .order(created_at: :desc)
+    else
+      mesocycles = current_user.mesocycles.order(created_at: :desc)
+    end
+    
     render json: mesocycles, status: :ok
   end
 
