@@ -82,7 +82,7 @@ export default function PlanAMesocycle() {
             !exercises.some(exList => exList.some(name => name.trim() !== "")) ||
             !daysOfWeek.every(d => d.trim() !== "")
         ) {
-            alert("Please enter a mesocycle name, duration, at least two workouts with an exercise, and a day of week for every day.");
+            alert("Please enter a mesocycle name, duration, at least one exercise, and a day of week for every day.");
             return;
         }
 
