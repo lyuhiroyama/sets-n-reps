@@ -222,7 +222,7 @@
     transition: 0.1s ease;
 }
 .dialog_confirm_btn:hover {
-    filter: hue-rotate(20deg);
+    filter: brightness(1.2);
 }
 
 @media (max-width: 480px) {

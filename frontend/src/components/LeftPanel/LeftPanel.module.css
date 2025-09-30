@@ -199,7 +199,7 @@
     transition: 0.1s ease;
 }
 .signout_buttons_container .dialog_signout_btn:hover {
-    filter: hue-rotate(20deg);
+    filter: brightness(1.2);
 }
 
 @media (max-width: 480px) {
