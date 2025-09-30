@@ -148,6 +148,7 @@ export default function ExerciseHistory({
                                 <ul>{mesoObj.name}</ul>
                                 {mesoObj.workouts
                                     .filter(workout => workout.performed_on !== null)
+                                    .sort((a, b) => a.week_number - b.week_number)
                                     .map(workout => {
                                         // Find target exercise within workout
                                         const validExercise = workout.exercises.find(e => e.name === exerciseName);
