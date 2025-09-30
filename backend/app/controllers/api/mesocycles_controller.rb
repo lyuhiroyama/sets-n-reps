@@ -42,7 +42,17 @@ class API::MesocyclesController < ApplicationController
     if mesocycle.save
       render json: mesocycle, status: :created
     else
-      render json: { errors: mesocycle.errors.full_messages }, status: :unprocessable_content
+      render json: { errors: mesocycle.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    mesocycle = current_user.mesocycles.find(params[:id])
+  
+    if mesocycle.destroy
+      head :no_content  # Returns 204 No Content status
+    else
+      render json: { errors: mesocycle.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
