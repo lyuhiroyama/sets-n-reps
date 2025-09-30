@@ -9,7 +9,12 @@ type Mesocycle = {
     name: string;
     duration_weeks: number;
     created_at: string;
+    workouts: Workout[]
 };
+
+type Workout = {
+    performed_on: string | null;
+}
 
 export default function Mesocycles() {
     const [items, setItems] = useState<Mesocycle[] | undefined>(undefined);
@@ -179,17 +184,25 @@ export default function Mesocycles() {
                                 </div>
                                 <div className={styles.li_created}>
                                     Created{" "}
-                                    {new Date(mesoObj.created_at).toLocaleString(
-                                        "en-US",
-                                        {
-                                            timeZone: "Asia/Tokyo",
-                                            year: "numeric",
-                                            month: "numeric",
-                                            day: "numeric",
-                                        }
-                                    )}
+                                    {new Date(
+                                        mesoObj.created_at
+                                    ).toLocaleString("en-US", {
+                                        timeZone: "Asia/Tokyo",
+                                        year: "numeric",
+                                        month: "numeric",
+                                        day: "numeric",
+                                    })}
                                 </div>
                             </div>
+                            {mesoObj.workouts &&
+                                mesoObj.workouts.length > 0 &&
+                                mesoObj.workouts.every(
+                                    (w) => w.performed_on !== null
+                                ) && (
+                                    <div className={styles.completed_indicator}>
+                                        COMPLETED
+                                    </div>
+                                )}
                             <button
                                 className={styles.delete_button}
                                 onClick={(e) => handleDeleteClick(e, mesoObj)}
@@ -232,7 +245,9 @@ export default function Mesocycles() {
                         >
                             <FontAwesomeIcon icon={faXmark} />
                         </button>
-                        <h3>Delete meso <br/>"{mesoToDelete?.name}"?</h3>
+                        <h3>
+                            Delete meso <br />"{mesoToDelete?.name}"?
+                        </h3>
                         <div className={styles.dialog_buttons_container}>
                             <button
                                 onClick={() => setShowDeleteConfirm(false)}
