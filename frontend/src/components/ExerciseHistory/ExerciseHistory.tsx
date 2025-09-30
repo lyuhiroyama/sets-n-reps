@@ -176,24 +176,26 @@ export default function ExerciseHistory({
                                             exercise_setsByWeight[weight].push(exercise_set);
                                         })
 
-                                        // Create <li> to render:
-                                        const displayText = Object.entries(exercise_setsByWeight)
-                                            .map(([weight, exercise_sets]) => {
-                                                const displayReps = exercise_sets
-                                                    .sort((a, b) => a.set_number - b.set_number)
-                                                    .map(exercise_set => exercise_set.rep_count)
-                                                    .join(", ");
+                                        return (
+                                            <li key={workout.id}>
+                                                <span>
+                                                    {Object.entries(exercise_setsByWeight).map(([weight, exercise_sets]) => {
+                                                        const displayReps = exercise_sets
+                                                        .sort((a, b) => a.set_number - b.set_number)
+                                                        .map(exercise_set => exercise_set.rep_count)
+                                                        .join(', ');
 
-                                                // Remove .0 if whole number. Keep one decimal if otherwise.
-                                                const formattedWeight = (() => {
-                                                    const num = parseFloat(weight);
-                                                    return num % 1 === 0 ? Math.floor(num) : num.toFixed(1);
-                                                })();
+                                                        const formattedWeight = (() => {
+                                                        const num = parseFloat(weight);
+                                                        return num % 1 === 0 ? Math.floor(num) : num.toFixed(1);
+                                                        })();
 
-                                                return `${formattedWeight} ᵏᵍ × ${displayReps}`;
-                                            })
-                                                .join(" / ");
-                                            return <li key ={workout.id}>{displayText}</li>
+                                                        return `${formattedWeight} ᵏᵍ × ${displayReps}`;
+                                                    }).join(' / ')}
+                                                </span>
+                                                <span className={styles.week_number}>Week {workout.week_number}</span>
+                                            </li>
+                                        )
                                     })
                                 }
                             </div>
