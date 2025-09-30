@@ -79,6 +79,23 @@
     }
 }
 
+.no_history_message {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    padding: 7rem 1rem 1rem;
+}
+
+.no_history_message .span1 {
+    color: green;
+    font-weight: bold;
+}
+.no_history_message .span2 {
+    color: red;
+    font-weight: bold;
+}
+
 .mesos_container .ul_container {
     position: relative;  
     padding: 1rem 0 1rem 1rem; 
@@ -125,6 +142,12 @@
     height: 150%;
     font-size: 0.8rem;
     padding: 0 1rem;
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+    .no_history_message {
+        padding: 7rem 0.5rem 1rem;
+    }
 }
 
 /* Animations */

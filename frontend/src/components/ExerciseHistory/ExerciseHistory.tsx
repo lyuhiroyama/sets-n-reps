@@ -67,6 +67,23 @@ export default function ExerciseHistory({
         fetchMesos();
     }, [navigate, exerciseName]);
 
+    // Check if user has any exercise history to display
+    const hasExerciseHistory = (mesos: Mesocycle[] | undefined, exerciseName: string): boolean => {
+        if (!mesos) return false;
+
+        return mesos.some(meso =>
+            meso.workouts
+                .filter(workout => workout.performed_on !== null)
+                .some(workout => {
+                    const validExercise = workout.exercises.find(e => e.name === exerciseName)
+                    if (!validExercise?.exercise_sets?.length) return false;
+                    return validExercise.exercise_sets.some(set =>
+                        set.weight !== null && set.rep_count !== null && set.completed === true
+                    );
+                })
+        );
+    }
+
     // Handle dialog mount/unmount timing for animations
     useEffect(() => {
         if (isHistoryOpen) {
@@ -129,79 +146,87 @@ export default function ExerciseHistory({
                     <h3>{exerciseName}</h3>
                 </div>
                 <div className={styles.mesos_container}>
-                    {mesos?.map((mesoObj) => {
+                    {!hasExerciseHistory(mesos, exerciseName) 
+                    ? (
+                        <div className={styles.no_history_message}>
+                            <p>Looks like you haven't recorded any completed sets for this exercise yet. </p>
+                            <p>Mark the sets you finished with the <span className={styles.span1}>checkbox</span> <br/>and select '<span className={styles.span2}>Finish Workout</span>'.</p>
+                        </div>
+                    ) : (
+                        mesos?.map((mesoObj) => {
 
-                        // Check if iterator meso has any data to display. Skip otherwise.
-                        const hasValidData = mesoObj.workouts
-                            .filter(workout => workout.performed_on !== null)
-                            .some(workout => {
-                                const validExercise = workout.exercises.find(e => e.name === exerciseName)
-                                if (!validExercise?.exercise_sets?.length) return false;
-                                return validExercise.exercise_sets.some(set =>
-                                    set.weight !== null && set.rep_count !== null && set.completed === true
-                                );
-                            });
-                        if (!hasValidData) return null;
+                            // Check if iterator meso has any data to display. Skip otherwise.
+                            const hasValidData = mesoObj.workouts
+                                .filter(workout => workout.performed_on !== null)
+                                .some(workout => {
+                                    const validExercise = workout.exercises.find(e => e.name === exerciseName)
+                                    if (!validExercise?.exercise_sets?.length) return false;
+                                    return validExercise.exercise_sets.some(set =>
+                                        set.weight !== null && set.rep_count !== null && set.completed === true
+                                    );
+                                });
+                            if (!hasValidData) return null;
 
-                        return (
-                            <div key={mesoObj.id} className={styles.ul_container}>
-                                <ul>{mesoObj.name}</ul>
-                                {mesoObj.workouts
-                                    .filter(workout => workout.performed_on !== null)
-                                    .sort((a, b) => b.week_number - a.week_number)
-                                    .map(workout => {
-                                        // Find target exercise within workout
-                                        const validExercise = workout.exercises.find(e => e.name === exerciseName);
-                                        if (!validExercise?.exercise_sets?.length) return null;
+                            return (
+                                <div key={mesoObj.id} className={styles.ul_container}>
+                                    <ul>{mesoObj.name}</ul>
+                                    {mesoObj.workouts
+                                        .filter(workout => workout.performed_on !== null)
+                                        .sort((a, b) => b.week_number - a.week_number)
+                                        .map(workout => {
+                                            // Find target exercise within workout
+                                            const validExercise = workout.exercises.find(e => e.name === exerciseName);
+                                            if (!validExercise?.exercise_sets?.length) return null;
 
-                                        // Filter Exercises with invalid sets
-                                        const validSets = validExercise.exercise_sets.filter(set =>
-                                            set.weight !== null && set.rep_count !== null && set.completed === true
-                                        );
-                                        if (!validSets.length) return null;
-                                    
+                                            // Filter Exercises with invalid sets
+                                            const validSets = validExercise.exercise_sets.filter(set =>
+                                                set.weight !== null && set.rep_count !== null && set.completed === true
+                                            );
+                                            if (!validSets.length) return null;
+                                        
 
 
-                                        /* Group sets by weight: 
-                                        {
-                                            "27.5": [exercise_set, exercise_set, exercise_set],
-                                            "25" : [exercise_set, exercise_set]
-                                        }
-                                        */
-                                        const exercise_setsByWeight: Record<string, ExerciseSet[]> = {};
-                                        validSets.forEach(exercise_set => {
-                                            const weight = exercise_set.weight?.toString() || "null";
-                                            if (!exercise_setsByWeight[weight]) {
-                                                exercise_setsByWeight[weight] = [];
+                                            /* Group sets by weight: 
+                                            {
+                                                "27.5": [exercise_set, exercise_set, exercise_set],
+                                                "25" : [exercise_set, exercise_set]
                                             }
-                                            exercise_setsByWeight[weight].push(exercise_set);
+                                            */
+                                            const exercise_setsByWeight: Record<string, ExerciseSet[]> = {};
+                                            validSets.forEach(exercise_set => {
+                                                const weight = exercise_set.weight?.toString() || "null";
+                                                if (!exercise_setsByWeight[weight]) {
+                                                    exercise_setsByWeight[weight] = [];
+                                                }
+                                                exercise_setsByWeight[weight].push(exercise_set);
+                                            })
+
+                                            return (
+                                                <li key={workout.id}>
+                                                    <span>
+                                                        {Object.entries(exercise_setsByWeight).map(([weight, exercise_sets]) => {
+                                                            const displayReps = exercise_sets
+                                                            .sort((a, b) => a.set_number - b.set_number)
+                                                            .map(exercise_set => exercise_set.rep_count)
+                                                            .join(', ');
+
+                                                            const formattedWeight = (() => {
+                                                            const num = parseFloat(weight);
+                                                            return num % 1 === 0 ? Math.floor(num) : num.toFixed(1);
+                                                            })();
+
+                                                            return `${formattedWeight} ᵏᵍ × ${displayReps}`;
+                                                        }).join(' / ')}
+                                                    </span>
+                                                    <span className={styles.week_number}>Week {workout.week_number}</span>
+                                                </li>
+                                            )
                                         })
-
-                                        return (
-                                            <li key={workout.id}>
-                                                <span>
-                                                    {Object.entries(exercise_setsByWeight).map(([weight, exercise_sets]) => {
-                                                        const displayReps = exercise_sets
-                                                        .sort((a, b) => a.set_number - b.set_number)
-                                                        .map(exercise_set => exercise_set.rep_count)
-                                                        .join(', ');
-
-                                                        const formattedWeight = (() => {
-                                                        const num = parseFloat(weight);
-                                                        return num % 1 === 0 ? Math.floor(num) : num.toFixed(1);
-                                                        })();
-
-                                                        return `${formattedWeight} ᵏᵍ × ${displayReps}`;
-                                                    }).join(' / ')}
-                                                </span>
-                                                <span className={styles.week_number}>Week {workout.week_number}</span>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </div>
-                        )
-                    })}
+                                    }
+                                </div>
+                            )
+                        })
+                    )}
                 </div>
             </div>
         </div>
