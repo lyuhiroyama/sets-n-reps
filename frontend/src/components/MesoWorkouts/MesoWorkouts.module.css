@@ -22,6 +22,10 @@
     margin-bottom: 1rem;
 }
 
+.mesos_container > .ul_container {
+    position: relative;
+}
+
 .exercises_li:not(:last-child)::after { /* Grey bottom border at the bottom of each exercises, excluding the last. */
     content: "";
     position: absolute;
@@ -32,10 +36,20 @@
     background-color: grey;
 }
 
+.exercises_header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem 1rem;
+}
+
 .exercise_name {
     font-weight: bold;
-    margin-left: 1rem;
-    margin-bottom: 1rem;
+}
+
+.history_icon {
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
 .sets_table {

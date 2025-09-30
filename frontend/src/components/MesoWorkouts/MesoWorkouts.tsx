@@ -1,5 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
+import ExerciseHistory from "../ExerciseHistory/ExerciseHistory";
 import styles from "./MesoWorkouts.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 type WorkoutLite = {
     id: number;
@@ -26,8 +29,14 @@ type ExerciseSet = {
 export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     const [exerciseSets, setExerciseSets] = useState<Record<string, ExerciseSet>>({});
     // -> (e.g.) {"1-1": { weight: 50, rep_count: 10 }}
+
+    // For loading spinner after user inputs:
     const [savingSetKeys, setSavingSetKeys] = useState<Set<string>>(new Set());
-    // -> For loading spinner after user inputs
+    // For exercise history dialog:
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    // To pass to ExerciseHistory.tsx
+    const [exerciseName, setExerciseName] = useState<string>("");
+
 
     // Load existing workout data
     useEffect(() => {
@@ -134,6 +143,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
         }
     };
 
+    // Loading spinner
     if (!workout) {
         return (
             <div className={styles.spinner_container}>
@@ -147,7 +157,17 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
             <ul className={styles.exercises_ul}>
                 {workout.exercises?.map((exr) => (
                     <li className={styles.exercises_li} key={exr.id}>
-                        <div className={styles.exercise_name}>{exr.name}</div>
+                        <div className={styles.exercises_header_container}>
+                            <div className={styles.exercise_name}>{exr.name}</div>
+                            <FontAwesomeIcon 
+                                icon={faCircleInfo}
+                                className={styles.history_icon} 
+                                onClick={() => {
+                                    setExerciseName(exr.name)
+                                    setIsHistoryOpen(o => !o)
+                                }}
+                            />
+                        </div>
                         <table className={styles.sets_table}>
                             <thead>
                                 <tr>
@@ -249,6 +269,13 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                     </li>
                 ))}
             </ul>
+
+            {/* Exercise history dialog */}
+            <ExerciseHistory 
+                isHistoryOpen={isHistoryOpen}
+                onHistoryClose={() => setIsHistoryOpen(false)}
+                exerciseName={exerciseName}
+            />
         </div>
     );
 }

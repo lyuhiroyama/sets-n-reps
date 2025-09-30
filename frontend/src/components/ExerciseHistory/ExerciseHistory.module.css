@@ -1,0 +1,159 @@
+/* Exercise history dialog & animation */
+
+.dialog_background {
+    z-index: 1003;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Dialog background transition animaiton */
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    will-change: transform, opacity;
+}
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+    width: 500px;
+    height: 100%;
+    min-height: 300px;
+    color: white;
+    background-color: #333333;
+    padding: 1rem 0;
+    /* Dialog transition animaiton */
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top center;
+    will-change: transform, opacity;
+}
+
+.close_dialog_btn {
+    all: unset;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+}
+
+.header_section{
+    flex: 1 1 0;
+    text-align: center;
+    border-bottom: 3px solid #1e1e1e;
+    padding-bottom: 0.5rem;
+}
+
+.header_section h5 {
+    font-weight: lighter;
+    color: grey;
+}
+
+.mesos_container {
+    flex: 13 1 0;
+    position: relative;
+    overflow-y: auto;    
+    overflow-x: hidden;
+
+    /* Scrollbar styling: */
+    &::-webkit-scrollbar {
+        width: 8px;  /* Width of scrollbar */
+    }
+    &::-webkit-scrollbar-track {
+        background: #262626;  /* Track color */
+        border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #404040;  /* Thumb color */
+        border-radius: 4px; 
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #4a4a4a;  /* Slightly lighter on hover */
+    }
+}
+
+.mesos_container .ul_container {
+    position: relative;  
+    padding: 1rem 0 1rem 1rem; 
+}
+.mesos_container .ul_container:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -1rem;
+    right: -1rem;
+    height: 3px;
+    background-color: #1e1e1e;
+}
+
+.ul_container ul {
+    position: relative;
+    font-size: 0.9rem;
+    color: grey;
+}
+
+
+.ul_container li {
+    position: relative;
+    list-style: none;
+    font-size: 1.1rem;
+    padding: 1rem 0;
+}
+.ul_container li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0rem;
+    right: 0;
+    height: 0.5px;
+    background-color: grey;
+}
+
+/* Animations */
+
+.background_darkHue_animation, .dialog_open_animation {
+    animation: dialog-open 150ms ease-out forwards;
+}
+.background_noHue_animation, .dialog_close_animation {
+    animation: dialog-close 150ms ease-in forwards;
+}
+@keyframes dialog-open {
+    from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes dialog-close {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-6px) scale(0.98); }
+}
+
+/* Background & Dialog transition animation (For Mobile): */
+@media (max-width: 850px) and (orientation: portrait) {
+    .dialog_background {
+        align-items: flex-end;
+    }
+    .dialog {
+        height: 75%;
+    }
+    
+    .dialog_open_animation {
+        animation: dialog-slide-up 150ms ease-out both;
+    }
+    .dialog_close_animation {
+        animation: dialog-slide-down 150ms ease-in both;
+    }
+}
+@keyframes dialog-slide-up {
+    0%   { transform: translateY(100%); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes dialog-slide-down {
+    0%   { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100%); opacity: 1; }
+}
