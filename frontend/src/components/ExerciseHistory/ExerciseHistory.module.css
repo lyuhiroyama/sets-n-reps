@@ -121,43 +121,61 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    height: auto;
+    height: 3.5rem;
     list-style: none;
     font-size: 1.1rem;
     padding: 1rem 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    
+    /* Scrollbar styling: */
+    &::-webkit-scrollbar {
+        height: 8px;  /* Height of scrollbar */
+    }
+    &::-webkit-scrollbar-track {
+        background: #262626;  /* Track color */
+        border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #404040;  /* Thumb color */
+        border-radius: 4px; 
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: #4a4a4a;  /* Slightly lighter on hover */
+    }
 }
-.ul_container li:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0rem;
-    right: 0;
-    height: 0.5px;
-    background-color: grey;
+
+/* Horizontal grey lines except for the last */
+.ul_container li:not(:last-child) {
+    border-bottom: 0.5px solid grey;  
 }
 
 .history {
-    width: 88%;
+    white-space: nowrap;
 }
 
 .week_number {
     display: flex;
     align-items: flex-end;
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    height: 150%;
     font-size: 0.8rem;
     white-space: nowrap;
     padding: 0 1rem;
 }
 
 @media (max-width: 480px) and (orientation: portrait) {
+    .dialog {
+        width: 100%;
+    }
+    
     .no_history_message {
         padding: 7rem 0.5rem 1rem;
     }
 
-    .history {
-        width: 75%;
+    .ul_container li {
+        &::-webkit-scrollbar {
+            height: 4px;  
+        }
     }
 }
 
