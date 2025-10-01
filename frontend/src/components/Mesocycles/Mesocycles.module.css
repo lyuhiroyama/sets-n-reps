@@ -12,6 +12,7 @@
     min-height: 50%;
     height: auto;
     width: 60%;
+    max-width: 850px;
     background-color: #404040;
     color: white;
 }
