@@ -121,7 +121,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    height: 3.5rem;
+    height: auto;
     list-style: none;
     font-size: 1.1rem;
     padding: 1rem 0;
@@ -136,17 +136,28 @@
     background-color: grey;
 }
 
+.history {
+    width: 88%;
+}
+
 .week_number {
     display: flex;
     align-items: flex-end;
-    height: 150%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     font-size: 0.8rem;
+    white-space: nowrap;
     padding: 0 1rem;
 }
 
 @media (max-width: 480px) and (orientation: portrait) {
     .no_history_message {
         padding: 7rem 0.5rem 1rem;
+    }
+
+    .history {
+        width: 75%;
     }
 }
 

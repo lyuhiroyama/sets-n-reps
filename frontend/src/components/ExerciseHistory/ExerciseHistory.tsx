@@ -203,7 +203,7 @@ export default function ExerciseHistory({
 
                                             return (
                                                 <li key={workout.id}>
-                                                    <span>
+                                                    <div className={styles.history}>
                                                         {Object.entries(exercise_setsByWeight).map(([weight, exercise_sets]) => {
                                                             const displayReps = exercise_sets
                                                             .sort((a, b) => a.set_number - b.set_number)
@@ -217,8 +217,8 @@ export default function ExerciseHistory({
 
                                                             return `${formattedWeight} ᵏᵍ × ${displayReps}`;
                                                         }).join(' / ')}
-                                                    </span>
-                                                    <span className={styles.week_number}>Week {workout.week_number}</span>
+                                                    </div>
+                                                    <div className={styles.week_number}>Week {workout.week_number}</div>
                                                 </li>
                                             )
                                         })
