@@ -1,0 +1,17 @@
+{
+    "auth": {
+      "signIn": "ログイン",
+      "signUp": "新規登録",
+      "createAccount": "アカウントを作成",
+      "signInToAccount": "アカウントにログイン",
+      "signUpWithEmail": "メールアドレスで登録",
+      "email": "メールアドレス",
+      "password": "パスワード"
+    },
+    "errors": {
+      "signInFailed": "ログインに失敗しました。メールアドレスとパスワードをご確認ください",
+      "signUpFailed": "登録に失敗しました。メールアドレスとパスワードをご確認ください",
+      "signUpsDisabled": "新規登録は現在ご利用できません"
+    },
+    "appName": "Sets-n-Reps"
+  }
