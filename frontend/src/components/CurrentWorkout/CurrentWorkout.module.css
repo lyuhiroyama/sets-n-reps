@@ -16,10 +16,17 @@
     font-weight: bold;
     background-color: red;
     padding: 1rem;
+    box-shadow: 0 4px 8px black;
 }
 
 .component button:hover {
     filter: hue-rotate(20deg);
+}
+
+@media (max-width: 480px) and (orientation: portrait) {
+    .component h2 {
+        font-size: 1.3rem;
+    }
 }
 
 /* Loading page spinning circle: */

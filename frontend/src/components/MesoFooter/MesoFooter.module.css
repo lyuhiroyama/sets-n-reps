@@ -20,6 +20,7 @@
     color: white;
     background-color: red;
     transition: 0.1s ease;
+    box-shadow: 0 4px 6px black;
 }
 .finish_button:hover {
     filter: hue-rotate(20deg);
