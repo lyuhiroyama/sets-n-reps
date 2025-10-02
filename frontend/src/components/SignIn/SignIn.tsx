@@ -82,7 +82,7 @@ export default function SignIn() {
                             className={styles.showPasswordBtn}
                             onClick={() => setShowPassword(!showPassword)}
                         >
-                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                            <FontAwesomeIcon icon={ showPassword ? faEye : faEyeSlash } />
                         </button>
                     </div>
                     <button type="submit" className={styles.sign_in_button}>
