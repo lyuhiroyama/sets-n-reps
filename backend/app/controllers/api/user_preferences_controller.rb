@@ -15,6 +15,6 @@ class API::UserPreferencesController < ApplicationController
   private
 
   def user_preferences_params
-    params.expect(user_preferences: [:active_meso_id])
+    params.expect(user_preferences: [:active_meso_id, :weight_auto_fill])
   end
 end

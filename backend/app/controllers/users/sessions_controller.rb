@@ -23,7 +23,7 @@ class Users::SessionsController < Devise::SessionsController
     if current_user
       render json: {
          isAuthenticated: true, 
-         user: current_user.slice(:id, :email, :created_at, :active_meso_id)
+         user: current_user.slice(:id, :email, :created_at, :active_meso_id, :weight_auto_fill)
       }
     else
       render json: { isAuthenticated: false }
