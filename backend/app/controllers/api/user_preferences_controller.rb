@@ -6,7 +6,7 @@ class API::UserPreferencesController < ApplicationController
 
   def update
     if current_user.update(user_preferences_params)
-      head :ok
+      render json: { weight_auto_fill: current_user.weight_auto_fill }
     else
       render json: { errors: current_user.errors.full_messages }, status: :unprocessable_content
     end
