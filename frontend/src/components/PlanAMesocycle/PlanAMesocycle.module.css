@@ -298,6 +298,9 @@
         left: 0;
         width: 100%;
     }
+    .top_container h2 {
+        font-size: 1.4rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -309,15 +312,16 @@
         border-bottom: 0.5px solid grey;
     }
     .top_container h2 {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
     .top_container button {
-        width: 150px;
+        width: 140px;
         height: 30px;
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         /* To fix mobile browser quirk: slightly offsets button text to bottom */
         display: flex;
         align-items: center;
+        justify-content: center;
     }
     .mesoname_div label, .numweeks_div label {
         font-size: 0.8rem;
