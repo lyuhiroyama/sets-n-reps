@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import styles from "./Mesocycles.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +24,7 @@ export default function Mesocycles() {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [deleteRender, setDeleteRender] = useState(false);
     const [mesoToDelete, setMesoToDelete] = useState<Mesocycle | null>(null);
+    const { t } = useTranslation();
 
     // Fetch mesos
     useEffect(() => {
@@ -167,7 +169,7 @@ export default function Mesocycles() {
         <div className={styles.component}>
             <div className={styles.container}>
                 <div className={styles.header_container}>
-                    <h2>Mesocycles</h2>
+                    <h2>{t("mesocycles.mesocycles")}</h2>
                     <button onClick={handleNewClick}>+ New</button>
                 </div>
                 <ul>
@@ -180,10 +182,10 @@ export default function Mesocycles() {
                             <div>
                                 <div>{mesoObj.name}</div>
                                 <div className={styles.li_duration}>
-                                    {mesoObj.duration_weeks} weeks
+                                    {mesoObj.duration_weeks}{t("mesocycles.weeks")}
                                 </div>
                                 <div className={styles.li_created}>
-                                    Created{" "}
+                                    {t("mesocycles.created")}
                                     {new Date(
                                         mesoObj.created_at
                                     ).toLocaleString("en-US", {

@@ -1,17 +1,102 @@
 {
-    "auth": {
-      "signIn": "Sign in",
-      "signUp": "Sign up",
-      "createAccount": "Create account",
-      "signInToAccount": "Sign in to your account",
-      "signUpWithEmail": "Sign up with email",
-      "email": "Email",
-      "password": "Password"
+    "signIn": {
+        "signIn": "Sign in",
+        "createAccount": "Create account",
+        "signInToAccount": "Sign in to your account",
+        "signUpWithEmail": "Sign up with email",
+        "signInFailed": "Sign-in failed. Please check your email and password",
+        "signUpFailed": "Sign-up failed. Please check your email and password",
+        "signUpsDisabled": "Sign-ups are disabled",
+        "signUpsDisabledMessage": "Developer has chosen to disable sign-ups. If you would like to demo this app, please feel free to reach out!",
+        "placeHolderEmail": "Email",
+        "placeHolderPW": "Password"
     },
-    "errors": {
-      "signInFailed": "Sign-in failed. Please check your email and password",
-      "signUpFailed": "Sign-up failed. Please check your email and password",
-      "signUpsDisabled": "Sign-ups are disabled"
+    "leftPanel": {
+        "currentWorkout": {
+            "long": "Current workout",
+            "short": "Current"
+        },
+        "mesocycles": {
+            "long": "Mesocycles",
+            "short": "Mesos"
+        },
+        "planAMesocycle": {
+            "long": "Plan a mesocycle",
+            "short": "Plan meso"
+        },
+        "profileAndSettings": {
+            "long": "Profile & Settings",
+            "short": "Prof./Sett."
+        },
+        "signOut": "Sign out",
+        "dialogHeader": "Sign out?",
+        "dialogCancel": "Cancel",
+        "dialogConfirm": "Sign out"
     },
-    "appName": "Sets-n-Reps"
-  }
+    "currentWorkout": {
+        "goToCurrent": "Go to current workout",
+        "currentWorkout": "Current Workout",
+        "noWorkoutText": "You have no workouts yet",
+        "planAMeso": "+ Plan a mesocycle"
+    },
+    "mesocycles": {
+        "mesocycles": "Mesocycles",
+        "noMesoMessage": "No mesocycles created",
+        "weeks": " weeks",
+        "created": "Created "
+    },
+    "planAMeso": {
+        "newMesoPlan": "New Mesocycle Plan",
+        "dayOfWeek": "Day of week",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        "addADay": "+ Add a day",
+        "addExercise": "+ Add exercise",
+        "exercise": "Exercise",
+        "insertExercise": "Insert exercise",
+        "createMesocycle": "+ Create mesocycle",
+        "dialogHeader": "Create mesocycle",
+        "mesocycleName": "Mesocycle name",
+        "mesoNameTitle": "",
+        "howManyWeeksQuestion": "How many weeks will you train (including deload) ?",
+        "dialogCancel": "Cancel",
+        "dialogCreate": "Create"
+    },
+    "profile": {
+        "userProfile": "User Profile",
+        "email": "Email",
+        "accountCreated": "Account created",
+        "settings": "Settings",
+        "language": "Language",
+        "autoFill": "Weight auto-fill",
+        "on": "On",
+        "off": "off"
+    },
+    "mesoWorkouts": {
+        "weight": "Weight",
+        "reps": "Reps",
+        "log": "Log"
+    },
+    "mesoFooter": {
+        "finishWorkout": "Finish Workout",
+        "dialogHeader": "Finish this workout?",
+        "dialogCancel": "Cancel",
+        "dialogComplete": "Finish"
+    },
+    "exerciseHistory": {
+        "exerciseHistory": "Exercise history",
+        "noHistoryMessage": {
+            "part1": "Looks like you haven't recorded any completed sets for this exercise yet.",
+            "part2": "Mark the sets you finished with the ",
+            "part3": "checkbox",
+            "part4": "and select '",
+            "part5": "Finish Workout",
+            "part6": "'."
+        }
+    }    
+}

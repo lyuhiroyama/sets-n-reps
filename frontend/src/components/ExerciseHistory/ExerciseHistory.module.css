@@ -84,6 +84,7 @@
     flex-direction: column;
     gap: 2rem;
     text-align: center;
+    font-size: 0.9rem;
     padding: 7rem 1rem 1rem;
 }
 

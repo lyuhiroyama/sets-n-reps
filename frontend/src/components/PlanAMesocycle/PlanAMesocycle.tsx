@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import styles from "./PlanAMesocycle.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons"
@@ -15,6 +16,7 @@ export default function PlanAMesocycle() {
     const [daysOfWeek, setDaysOfWeek] = useState<string[]>(Array(days.length).fill(""));
     const navigate = useNavigate();
     const [render, setRender] = useState(showDialog);
+    const { t } = useTranslation();
     
 
     const addDay = () => {
@@ -150,8 +152,8 @@ export default function PlanAMesocycle() {
     return (
         <div className={styles.component}>
             <div className={styles.top_container}>
-                <h2>New meso plan</h2>
-                <button onClick={handleOpenDialog}>+ Create mesocycle</button>
+                <h2>{t("planAMeso.newMesoPlan")}</h2>
+                <button onClick={handleOpenDialog}>{t("planAMeso.createMesocycle")}</button>
             </div>
             <div className={styles.main_container}>
                 {days.map((_, index) => (
@@ -163,14 +165,14 @@ export default function PlanAMesocycle() {
                                     value={daysOfWeek[index] || ""}
                                     onChange={(e) => handleDayOfWeekChange(index, e.target.value)}
                                 >
-                                    <option value="" disabled selected>Day of week</option>
-                                    <option value="Monday">Monday</option>
-                                    <option value="Tuesday">Tuesday</option>
-                                    <option value="Wednesday">Wednesday</option>
-                                    <option value="Thursday">Thursday</option>
-                                    <option value="Friday">Friday</option>
-                                    <option value="Saturday">Saturday</option>
-                                    <option value="Sunday">Sunday</option>
+                                    <option value="" disabled selected>{t("planAMeso.dayOfWeek")}</option>
+                                    <option value="Monday">{t("planAMeso.monday")}</option>
+                                    <option value="Tuesday">{t("planAMeso.tuesday")}</option>
+                                    <option value="Wednesday">{t("planAMeso.wednesday")}</option>
+                                    <option value="Thursday">{t("planAMeso.thursday")}</option>
+                                    <option value="Friday">{t("planAMeso.friday")}</option>
+                                    <option value="Saturday">{t("planAMeso.saturday")}</option>
+                                    <option value="Sunday">{t("planAMeso.sunday")}</option>
                                 </select>
                                 <div className={styles.faAngleDown_container}>
                                     <FontAwesomeIcon icon={faAngleDown}/>
@@ -186,7 +188,7 @@ export default function PlanAMesocycle() {
                         {exercises[index].map((_, i) => (
                                 <div key={`${index}-${i}`} className={styles.exercise_div}>
                                     <div className={styles.exercise_toprow}>
-                                        <label>Exercise {i + 1}</label>
+                                        <label>{t("planAMeso.exercise")}{i + 1}</label>
                                         <button onClick={() => handleDeleteExercise(index, i)} className={styles.delete_btn}>
                                             <FontAwesomeIcon icon={faTrash} className={styles.faTrash_icon} />
                                         </button>
@@ -194,7 +196,7 @@ export default function PlanAMesocycle() {
                                     <input
                                         value={exercises[index][i]}
                                         onChange={(e) => handleExerciseChange(index, i, e.target.value)}
-                                        placeholder="Insert exercise"
+                                        placeholder={t("planAMeso.insertExercise")}
                                         className={styles.exercise_input}
                                         required
                                     />
@@ -205,7 +207,7 @@ export default function PlanAMesocycle() {
                             onClick={() => addExercise(index)}
                             className={styles.add_exercise_btn}
                             >
-                                + Add exercise
+                                {t("planAMeso.addExercise")}
                             </button>
                         )}
                     </div>
@@ -214,7 +216,7 @@ export default function PlanAMesocycle() {
                     <button
                     onClick={addDay}
                     className={styles.addDay_button}
-                    >+ Add a day</button>
+                    >{t("planAMeso.addADay")}</button>
                 )}
                 
             </div>
@@ -241,17 +243,18 @@ export default function PlanAMesocycle() {
                         >
                             <FontAwesomeIcon icon={faXmark} />
                         </button>
-                        <h2>Create mesocycle</h2>
+                        <h2>{t("planAMeso.dialogHeader")}</h2>
                         <div className={styles.mesoname_div}>
-                            <label>Mesocycle name</label>
+                            <label>{t("planAMeso.mesocycleName")}</label>
                             <input
                                 value={mesoName}
                                 onChange={(e) => setMesoName(e.target.value)}
+                                placeholder={t("planAMeso.mesoNameTitle")}
                                 required
                             />
                         </div>
                         <div className={styles.numweeks_div}>
-                            <label>How many weeks will you train (including deload) ?</label>
+                            <label>{t("planAMeso.howManyWeeksQuestion")}</label>
                             <div className={styles.numweeks_btn_div}>
                                 {[4,5,6,7,8].map(w => (
                                     <button
@@ -267,8 +270,8 @@ export default function PlanAMesocycle() {
                         </div>
                         <hr className={styles.modal_hr}/>
                         <div className={styles.dialog_bottom_div}>
-                            <button onClick={handleCloseDialog} className={styles.cancel_btn}>Cancel</button>
-                            <button onClick={handleCreateMeso} className={styles.create_btn}>Create</button>
+                            <button onClick={handleCloseDialog} className={styles.cancel_btn}>{t("planAMeso.dialogCancel")}</button>
+                            <button onClick={handleCreateMeso} className={styles.create_btn}>{t("planAMeso.dialogCreate")}</button>
                         </div>
                     </div>
                 </div>

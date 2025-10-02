@@ -30,7 +30,7 @@
 }
 
 .error {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: red;
 }
 
@@ -43,13 +43,27 @@
 }
 
 .auth_form input {
-    width: 100%;
+    width: 300px;
     font-size: 1rem;
     padding: 0.5rem 1rem;
 }
 
 .auth_form input::placeholder {
     font-size: 1rem;
+}
+
+.pwInput_showPwBtn_container {
+    position: relative;
+    display: flex;
+}
+
+.showPasswordBtn {
+    position: absolute;
+    right: 0.75rem;
+    background: none;
+    font-size: 1rem;
+    height: 100%;
+    border: none;
 }
 
 .auth_form .sign_in_button { 

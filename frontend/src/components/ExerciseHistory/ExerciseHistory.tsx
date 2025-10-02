@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import styles from "./ExerciseHistory.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -41,6 +42,7 @@ export default function ExerciseHistory({
 }) {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     // Store fetched mesos:
     const [mesos, setMesos] = useState<Mesocycle[] | undefined>(undefined);
@@ -142,15 +144,15 @@ export default function ExerciseHistory({
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
                 <div className={styles.header_section}>
-                    <div>Exercise history</div>
+                    <div>{t("exerciseHistory.exerciseHistory")}</div>
                     <h3>{exerciseName}</h3>
                 </div>
                 <div className={styles.mesos_container}>
                     {!hasExerciseHistory(mesos, exerciseName) 
                     ? (
                         <div className={styles.no_history_message}>
-                            <p>Looks like you haven't recorded any completed sets for this exercise yet. </p>
-                            <p>Mark the sets you finished with the <span className={styles.span1}>checkbox</span> <br/>and select '<span className={styles.span2}>Finish Workout</span>'.</p>
+                            <p>{t("exerciseHistory.noHistoryMessage.part1")}</p>
+                            <p>{t("exerciseHistory.noHistoryMessage.part2")}<span className={styles.span1}>{t("exerciseHistory.noHistoryMessage.part3")}</span> <br/>{t("exerciseHistory.noHistoryMessage.part4")}<span className={styles.span2}>{t("exerciseHistory.noHistoryMessage.part5")}</span>{t("exerciseHistory.noHistoryMessage.part6")}</p>
                         </div>
                     ) : (
                         mesos?.map((mesoObj) => {

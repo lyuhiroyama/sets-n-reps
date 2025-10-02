@@ -9,6 +9,7 @@ import MesoDetail from "./components/MesoDetail/MesoDetail"
 import PlanAMesocycle from "./components/PlanAMesocycle/PlanAMesocycle"
 import Profile from "./components/Profile/Profile"
 import Landing from "./components/Landing/Landing";
+import "./i18n";
 
 export default function App() {
     return (

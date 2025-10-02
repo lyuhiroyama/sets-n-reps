@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import ExerciseHistory from "../ExerciseHistory/ExerciseHistory";
+import { useTranslation } from "react-i18next";
 import styles from "./MesoWorkouts.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
@@ -36,6 +37,8 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
     // To pass to ExerciseHistory.tsx
     const [exerciseName, setExerciseName] = useState<string>("");
+
+    const { t } = useTranslation();
 
 
     // Load existing workout data
@@ -171,9 +174,9 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
                         <table className={styles.sets_table}>
                             <thead>
                                 <tr>
-                                    <th className={styles.th_input}>Weight</th>
-                                    <th className={styles.th_input}>Reps</th>
-                                    <th className={styles.th_checkbox}>Log</th>
+                                    <th className={styles.th_input}>{t("mesoWorkouts.weight")}</th>
+                                    <th className={styles.th_input}>{t("mesoWorkouts.reps")}</th>
+                                    <th className={styles.th_checkbox}>{t("mesoWorkouts.log")}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext";
+import { useTranslation } from 'react-i18next';
 import styles from "./LeftPanel.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faFolder, faUser } from "@fortawesome/free-regular-svg-icons";
@@ -11,6 +12,7 @@ export default function LeftPanel() {
     const { setIsAuthenticated } = useAuth();
     const [showSignOutDialog, setShowSignOutDialog] = useState(false);
     const [render, setRender] = useState(false);
+    const { t } = useTranslation();
     
     useEffect(() => {
         if (showSignOutDialog) { setRender(true); return; }
@@ -54,8 +56,8 @@ export default function LeftPanel() {
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faCalendar} /> 
-                        <div className={styles.text_desktop}>Current workout</div>
-                        <div className={styles.text_mobile}>Current</div>
+                        <div className={styles.text_desktop}>{t("leftPanel.currentWorkout.long")}</div>
+                        <div className={styles.text_mobile}>{t("leftPanel.currentWorkout.short")}</div>
                     </NavLink>
                 </li>
                 <li>
@@ -64,8 +66,8 @@ export default function LeftPanel() {
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faFolder} /> 
-                        <div className={styles.text_desktop}>Mesocycles</div>
-                        <div className={styles.text_mobile}>Mesos</div>
+                        <div className={styles.text_desktop}>{t("leftPanel.mesocycles.long")}</div>
+                        <div className={styles.text_mobile}>{t("leftPanel.mesocycles.short")}</div>
                     </NavLink>
                 </li>
                 <li>
@@ -74,8 +76,8 @@ export default function LeftPanel() {
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faPlus} /> 
-                        <div className={styles.text_desktop}>Plan a mesocycle</div>
-                        <div className={styles.text_mobile}>Plan meso</div>
+                        <div className={styles.text_desktop}>{t("leftPanel.planAMesocycle.long")}</div>
+                        <div className={styles.text_mobile}>{t("leftPanel.planAMesocycle.short")}</div>
                     </NavLink>
                 </li>
                 <li>
@@ -83,13 +85,15 @@ export default function LeftPanel() {
                         to="/dashboard/profile"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
-                        <FontAwesomeIcon icon={faUser} /> <div>Profile</div>
+                        <FontAwesomeIcon icon={faUser} />
+                        <div className={styles.text_desktop}>{t("leftPanel.profileAndSettings.long")}</div>
+                        <div className={styles.text_mobile}>{t("leftPanel.profileAndSettings.short")}</div>
                     </NavLink>
                 </li>
                 <li>
                     <button onClick={() => setShowSignOutDialog(true)}>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} /> 
-                        <div>Sign out</div>
+                        <div>{t("leftPanel.signOut")}</div>
                     </button>
                 </li>
             </ul>
@@ -115,10 +119,20 @@ export default function LeftPanel() {
                         >
                             <FontAwesomeIcon icon={faXmark} />
                         </button>
-                        <h2>Sign out?</h2>
+                        <h3>{t("leftPanel.dialogHeader")}</h3>
                         <div className={styles.signout_buttons_container}>
-                            <button className={styles.dialog_cancel_btn} onClick={() => setShowSignOutDialog(false)}>Cancel</button>
-                            <button className={styles.dialog_signout_btn} onClick={handleSignOut}>Sign out</button>
+                            <button 
+                                className={styles.dialog_cancel_btn} 
+                                onClick={() => setShowSignOutDialog(false)}
+                            >
+                                {t("leftPanel.dialogCancel")}
+                            </button>
+                            <button 
+                                className={styles.dialog_signout_btn} 
+                                onClick={handleSignOut}
+                            >
+                                {t("leftPanel.dialogConfirm")}
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -1,17 +1,102 @@
 {
-    "auth": {
-      "signIn": "ログイン",
-      "signUp": "新規登録",
-      "createAccount": "アカウントを作成",
-      "signInToAccount": "アカウントにログイン",
-      "signUpWithEmail": "メールアドレスで登録",
-      "email": "メールアドレス",
-      "password": "パスワード"
+    "signIn": {
+        "signIn": "ログイン",
+        "createAccount": "アカウントを作成",
+        "signInToAccount": "アカウントにログイン",
+        "signUpWithEmail": "メールアドレスで登録",
+        "signInFailed": "ログインに失敗しました。メールアドレスとパスワードをご確認ください",
+        "signUpFailed": "登録に失敗しました。メールアドレスとパスワードをご確認ください",
+        "signUpsDisabled": "新規登録は現在ご利用できません",
+        "signUpsDisabledMessage": "開発者の判断により新規登録は無効化されています。アプリをデモ体験されたい方は、お気軽にお問い合わせください！",
+        "placeHolderEmail": "メールアドレス",
+        "placeHolderPW": "パスワード"
     },
-    "errors": {
-      "signInFailed": "ログインに失敗しました。メールアドレスとパスワードをご確認ください",
-      "signUpFailed": "登録に失敗しました。メールアドレスとパスワードをご確認ください",
-      "signUpsDisabled": "新規登録は現在ご利用できません"
+    "leftPanel": {
+        "currentWorkout": {
+            "long": "現在のワークアウト",
+            "short": "現在"
+        },
+        "mesocycles": {
+            "long": "メソサイクル",
+            "short": "サイクル"
+        },
+        "planAMesocycle": {
+            "long": "メソサイクルを作成",
+            "short": "作成"
+        },
+        "profileAndSettings": {
+            "long": "プロフィール・設定",
+            "short": "設定"
+        },
+        "signOut": "ログアウト",
+        "dialogHeader": "ログアウトしますか？",
+        "dialogCancel": "戻る",
+        "dialogConfirm": "はい"
     },
-    "appName": "Sets-n-Reps"
-  }
+    "currentWorkout": {
+        "goToCurrent": "現在のワークアウトへはこちら：",
+        "currentWorkout": "現在のワークアウト",
+        "noWorkoutText": "まだワークアウトがありません",
+        "planAMeso": "+ メソサイクルを作成"
+    },
+    "mesocycles": {
+        "mesocycles": "メソサイクル",
+        "noMesoMessage": "メソサイクルが作成されていません",
+        "weeks": "週間",
+        "created": "作成日 "
+    },
+    "planAMeso": {
+        "newMesoPlan": "新しいメソサイクルを作成",
+        "dayOfWeek": "曜日を選択",
+        "monday": "月",
+        "tuesday": "火",
+        "wednesday": "水",
+        "thursday": "木",
+        "friday": "金",
+        "saturday": "土",
+        "sunday": "日",
+        "addADay": "+ 1日を追加",
+        "addExercise": "+ エクササイズを追加",
+        "exercise": "エクササイズ  ",
+        "insertExercise": "例: ベンチプレス",
+        "createMesocycle": "+ メソサイクルを作成",
+        "dialogHeader": "メソサイクルを作成",
+        "mesocycleName": "メソサイクルのタイトル",
+        "mesoNameTitle": "例:  4週間筋力アップ",
+        "howManyWeeksQuestion": "何週間トレーニングしますか？（デロード週を含む）",
+        "dialogCancel": "戻る",
+        "dialogCreate": "作成"
+    },
+    "profile": {
+        "userProfile": "プロフィール",
+        "email": "メールアドレス",
+        "accountCreated": "アカウント作成日",
+        "settings": "設定",
+        "language": "言語",
+        "autoFill": "重量の自動入力",
+        "on": "あり",
+        "off": "なし"
+    },
+    "mesoWorkouts": {
+        "weight": "重量",
+        "reps": "回数",
+        "log": "ログ"
+    },
+    "mesoFooter": {
+        "finishWorkout": "ワークアウト完了",
+        "dialogHeader": "ワークアウトを完了しましたか？",
+        "dialogCancel": "戻る",
+        "dialogComplete": "はい"
+    },
+    "exerciseHistory": {
+        "exerciseHistory": "エクササイズ履歴",
+        "noHistoryMessage": {
+            "part1": "このエクササイズでは、まだ完了したセットが記録されていません。",
+            "part2": "完了したセットに",
+            "part3": "チェックボックス",
+            "part4": "を入れて、「",
+            "part5": "ワークアウト完了",
+            "part6": "」を選択してください。"
+        }
+    }    
+}

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import styles from "./CurrentWorkout.module.css";
 
 export default function CurrentWorkout() {
     const navigate = useNavigate();
     const [activeMesoId, setActiveMesoId] = useState<number | null | undefined>(undefined);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -80,13 +82,13 @@ export default function CurrentWorkout() {
 
     return activeMesoId ? (
         <div className={styles.component}>
-            <h2>Go to current workout</h2>
-            <button onClick={goToCurrent}>Current Workout</button>
+            <h2>{t("currentWorkout.goToCurrent")}</h2>
+            <button onClick={goToCurrent}>{t("currentWorkout.currentWorkout")}</button>
         </div>
     ) : (
         <div className={styles.component}>
-            <h2>You have no workouts yet</h2>
-            <button onClick={handlePlanMesoClick}>+ Plan a mesocycle</button>
+            <h2>{t("currentWorkout.noWorkoutText")}</h2>
+            <button onClick={handlePlanMesoClick}>{t("currentWorkout.planAMeso")}</button>
         </div>
     );
 }

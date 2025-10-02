@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./MesoFooter.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +12,7 @@ type WorkoutLite = {
 export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
     const [showConfirm, setShowConfirm] = useState(false);
     const [render, setRender] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (showConfirm) { setRender(true); return; }
@@ -59,7 +61,7 @@ export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
                 onClick={openConfirm}
                 disabled={!!workout?.performed_on || !workout}
             >
-                Finish Workout
+                {t("mesoFooter.finishWorkout")}
             </button>
 
             {render && (
@@ -83,19 +85,19 @@ export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
                         >
                             <FontAwesomeIcon icon={faXmark} />
                         </button>
-                        <h2>Finish this workout?</h2>
+                        <h4>{t("mesoFooter.dialogHeader")}</h4>
                         <div className={styles.dialog_buttons_container}>
                             <button 
                                 onClick={() => setShowConfirm(false)} 
                                 className={styles.dialog_cancel_btn}
                             >
-                                Cancel
+                                {t("mesoFooter.dialogCancel")}
                             </button>
                             <button 
                                 onClick={handleFinish} 
                                 className={styles.dialog_confirm_btn}
                             >
-                                Finish
+                                {t("mesoFooter.dialogComplete")}
                             </button>
                         </div>
                     </div>

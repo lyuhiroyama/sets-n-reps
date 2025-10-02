@@ -55,19 +55,19 @@ export default function Profile() {
 
     return (
         <div className={styles.component}>
-            <h2>User Profile</h2>
+            <h2>{t("profile.userProfile")}</h2>
             <div className={styles.profile_container}>
                 <dl className={styles.profile_dl}>
                     <div className={styles.profile_set}>
-                        <dt>Email</dt>
+                        <dt>{t("profile.email")}</dt>
                         <dd>{user?.email}</dd>
                     </div>
                     <div className={styles.profile_set}>
-                        <dt>Account created</dt>
+                        <dt>{t("profile.accountCreated")}</dt>
                         <dd>
                             {user?.created_at
                                 ? new Date(user.created_at).toLocaleDateString(
-                                      "en-US",
+                                    i18n.language === 'en' ? "en-US" : "ja-JP",
                                       {
                                           timeZone: "Asia/Tokyo",
                                           year: "numeric",
@@ -80,10 +80,10 @@ export default function Profile() {
                     </div>
                 </dl>
             </div>
-            <h2>Settings</h2>
+            <h2>{t("profile.settings")}</h2>
             <div className={styles.settings_container}>
                 <div className={styles.content_row}>
-                    <div>Language</div>
+                    <div>{t("profile.language")}</div>
                     <div className={styles.dropdown_container}>
                         <select
                             value={i18n.language}
@@ -99,13 +99,13 @@ export default function Profile() {
                     </div>
                 </div>
                 <div className={styles.content_row}>
-                    <div>Weight auto-fill</div>
+                    <div>{t("profile.autoFill")}</div>
                     <div className={styles.dropdown_container}>
                         <select
                             className={styles.select}
                         >
-                            <option>On</option>
-                            <option>Off</option>
+                            <option>{t("profile.on")}</option>
+                            <option>{t("profile.off")}</option>
                         </select>
                         <div className={styles.faAngleDown_container}>
                             <FontAwesomeIcon icon={faAngleDown} />
