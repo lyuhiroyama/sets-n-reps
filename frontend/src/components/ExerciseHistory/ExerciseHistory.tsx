@@ -151,8 +151,19 @@ export default function ExerciseHistory({
                     {!hasExerciseHistory(mesos, exerciseName) 
                     ? (
                         <div className={styles.no_history_message}>
-                            <p>{t("exerciseHistory.noHistoryMessage.part1")}</p>
-                            <p>{t("exerciseHistory.noHistoryMessage.part2")}<span className={styles.span1}>{t("exerciseHistory.noHistoryMessage.part3")}</span> <br/>{t("exerciseHistory.noHistoryMessage.part4")}<span className={styles.span2}>{t("exerciseHistory.noHistoryMessage.part5")}</span>{t("exerciseHistory.noHistoryMessage.part6")}</p>
+                            <p>
+                                {t("exerciseHistory.noHistoryMessage.part1")}
+                                <br/>{t("exerciseHistory.noHistoryMessage.part2")}
+                            </p>
+                            <p>
+                                {t("exerciseHistory.noHistoryMessage.part3")}
+                                <span className={styles.span1}>{t("exerciseHistory.noHistoryMessage.part4")}</span> 
+                                {t("exerciseHistory.noHistoryMessage.part5")}
+                                <br/>{t("exerciseHistory.noHistoryMessage.part6")}
+                                {t("exerciseHistory.noHistoryMessage.part7")}
+                                <span className={styles.span2}>{t("exerciseHistory.noHistoryMessage.part8")}</span>
+                                {t("exerciseHistory.noHistoryMessage.part9")}
+                            </p>
                         </div>
                     ) : (
                         mesos?.map((mesoObj) => {

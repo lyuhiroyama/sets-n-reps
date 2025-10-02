@@ -91,12 +91,15 @@
     "exerciseHistory": {
         "exerciseHistory": "Exercise history",
         "noHistoryMessage": {
-            "part1": "Looks like you haven't recorded any completed sets for this exercise yet.",
-            "part2": "Mark the sets you finished with the ",
-            "part3": "checkbox",
-            "part4": "and select '",
-            "part5": "Finish Workout",
-            "part6": "'."
+            "part1": "",
+            "part2": "Looks like you haven't recorded any completed sets for this exercise yet.",
+            "part3": "Mark the sets you finished with the ",
+            "part4": "checkbox",
+            "part5": "",
+            "part6": "and select '",
+            "part7": "",
+            "part8": "Finish Workout",
+            "part9": "'."
         }
     }    
 }
