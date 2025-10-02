@@ -27,7 +27,10 @@ type ExerciseSet = {
     completed: boolean;
 };
 
-export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
+export default function MesoWorkouts({ workout, weight_auto_fill }: {
+    workout?: WorkoutLite;
+    weight_auto_fill: boolean;
+}) {
     const [exerciseSets, setExerciseSets] = useState<Record<string, ExerciseSet>>({});
     // -> (e.g.) {"1-1": { weight: 50, rep_count: 10 }}
 
@@ -114,7 +117,7 @@ export default function MesoWorkouts({ workout }: { workout?: WorkoutLite }) {
         value: number | boolean | null
     ) => {
         // For weight updates (Overwrite subsequent sets' numbers):
-        if (field === "weight" && value != null) {
+        if (field === "weight" && value != null && weight_auto_fill) {
             const subsequentSets = Array.from({ length: 5 - setNumber + 1},(_, i) => setNumber + i);
 
             subsequentSets.forEach(subsequentSetNum => {

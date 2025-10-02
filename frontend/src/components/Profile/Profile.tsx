@@ -7,6 +7,7 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 type UserType = {
     email: string;
     created_at: string;
+    weight_auto_fill: boolean;
 };
 
 export default function Profile() {
@@ -16,6 +17,31 @@ export default function Profile() {
     // Language toggle helper
     const toggleLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
         i18n.changeLanguage(event.target.value);
+    };
+
+    // Weight auto-fill toggle helper
+    const toggleWeightAutoFill = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const newValue = event.target.value === "on";
+        try {
+            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const response = await fetch(`${baseUrl}/api/user_preferences`, {
+                method: "PATCH",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_preferences: {
+                        weight_auto_fill: newValue
+                    }
+                })
+            });
+            if (response.ok && user) {
+                setUser({...user as UserType, weight_auto_fill: newValue});
+            }
+        } catch (error) {
+            console.error("Error updating weight auto-fill preference: ", error)
+        }
     };
 
     // Fetch user data
@@ -103,9 +129,11 @@ export default function Profile() {
                     <div className={styles.dropdown_container}>
                         <select
                             className={styles.select}
+                            value={user?.weight_auto_fill ? "on" : "off"}
+                            onChange={toggleWeightAutoFill}
                         >
-                            <option>{t("profile.on")}</option>
-                            <option>{t("profile.off")}</option>
+                            <option value="on">{t("profile.on")}</option>
+                            <option value="off">{t("profile.off")}</option>
                         </select>
                         <div className={styles.faAngleDown_container}>
                             <FontAwesomeIcon icon={faAngleDown} />

@@ -42,6 +42,9 @@ export default function MesoDetail() {
     const initial = (location.state as Mesocycle | undefined) ?? null;
     const [mesocycle, setMesocycle] = useState<Mesocycle | null>(initial);
 
+    // 'weight_auth_fill' value of 'users' table
+    const [weightAutoFill, setWeightAutoFill] = useState<boolean>(true);
+
     const { id } = useParams();
 
     // To read query parameters, for when users select a specific workout of a meso:
@@ -54,6 +57,7 @@ export default function MesoDetail() {
 
     const navigate = useNavigate();
 
+    // Fetch Mesocycle data
     useEffect(() => {
         if (!id) return;
         const fetchMeso = async () => {
@@ -72,6 +76,24 @@ export default function MesoDetail() {
         };
         fetchMeso();
     }, [id, location.search, navigate]);
+
+    // Fetch user's weight_auto_fill preference boolean:
+    useEffect(() => {
+         const fetchPreference = async () => {
+            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const response = await fetch(`${baseUrl}/users/check-auth`, {
+                credentials: "include",
+                headers: { Accept: "application/json" },
+             });
+            if (response.ok) {
+                const data = await response.json();
+                if (data.isAuthenticated) {
+                    setWeightAutoFill(data.user.weight_auto_fill);
+                }
+            }
+         };
+         fetchPreference();
+    }, [])
 
     // Anytime a mesocycle is opened, active_meso_id gets set (This is for 'Current workout' page)
     useEffect(() => {
@@ -107,7 +129,7 @@ export default function MesoDetail() {
                 selectedWorkout={selectedWorkout}
             />
             {/* Pass the selected workout (or default to first)  */}
-            <MesoWorkouts workout={selectedWorkout} />
+            <MesoWorkouts workout={selectedWorkout} weight_auto_fill={weightAutoFill} />
             <MesoFooter workout={selectedWorkout}/>
         </div>
     );
