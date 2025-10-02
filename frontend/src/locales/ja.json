@@ -43,7 +43,8 @@
         "mesocycles": "メソサイクル",
         "noMesoMessage": "メソサイクルが作成されていません",
         "weeks": "週間",
-        "created": "作成日 "
+        "created": "作成日 ",
+        "noMesoCreated": "メソサイクルはまだ作成されていません"
     },
     "planAMeso": {
         "newMesoPlan": "新しいメソサイクルを作成",

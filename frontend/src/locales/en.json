@@ -43,7 +43,8 @@
         "mesocycles": "Mesocycles",
         "noMesoMessage": "No mesocycles created",
         "weeks": " weeks",
-        "created": "Created "
+        "created": "Created ",
+        "noMesoCreated": "No mesocycles created"
     },
     "planAMeso": {
         "newMesoPlan": "New Mesocycle Plan",

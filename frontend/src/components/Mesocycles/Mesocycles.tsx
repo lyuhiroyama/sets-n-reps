@@ -215,7 +215,7 @@ export default function Mesocycles() {
                     ))}
                     {items.length === 0 && (
                         <li className={styles.meso_li_na}>
-                            No mesocycles created
+                            {t("mesocycles.noMesoCreated")}
                         </li>
                     )}
                 </ul>
