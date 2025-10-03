@@ -4,10 +4,11 @@
 
 ## Technologies
 
-- Ruby on Rails for the back-end
-- React & TypeScript for the front-end
-- PostgreSQL for the DB
-- VPS for hosting
+- [Ruby](https://www.ruby-lang.org/en/) & [Ruby on Rails](https://rubyonrails.org/) for the back-end
+- [TypeScript](https://www.typescriptlang.org/) & [React](https://react.dev/) for the front-end
+- [CSS Modules](https://github.com/css-modules/css-modules) for styles
+- [PostgreSQL](https://www.postgresql.org/) for the DB
+- [Vultr VPS](https://www.vultr.com/) for hosting
 
 ## Tables
 
