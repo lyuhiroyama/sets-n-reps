@@ -1,4 +1,4 @@
-# Sets-n-Reps
+# [Sets-n-Reps](https://sets-n-reps.com)
 
 - A workout tracker web app.
 
