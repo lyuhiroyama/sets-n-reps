@@ -97,6 +97,41 @@
     filter: brightness(1.2);
 }
 
+/* For custom drop-down design for language dropdown */
+.dropdown_container {
+    width: fit-content;
+    position: relative;
+    display: flex;
+    background-color: #1e1e1e;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 0.5rem 0;
+    padding: 0 0.3rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.dropdown_container .select {
+    width: 100%;
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0.3rem 2rem 0.3rem 1rem;
+    cursor: pointer;
+    appearance: none; /* To delete default (poorly positioned) down arrow */
+}
+.dropdown_container .faAngleDown_container {
+    /* faAngleDown to replace default with */
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 2rem;
+    top: 0;
+    right: 0;
+    color: white;
+    pointer-events: none; /* Needed for custom down arrow replacement */
+}
+
 
 /* For mobile, because differnt styles get applied to buttons on mobile: */
 @media (max-width: 480px) {

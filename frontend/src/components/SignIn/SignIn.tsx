@@ -3,7 +3,7 @@ import { useAuth } from "../AuthContext/AuthContext";
 import { useTranslation } from 'react-i18next';
 import styles from "./SignIn.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");
@@ -12,7 +12,7 @@ export default function SignIn() {
     const [isSignIn, setIsSignIn] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
     const { setIsAuthenticated } = useAuth();
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const allowSignups = process.env.REACT_APP_ALLOW_SIGNUPS === "true";
 
@@ -97,6 +97,19 @@ export default function SignIn() {
                 >
                     {isSignIn ? t("signIn.createAccount") : t("signIn.signIn") }
                 </button>
+                <div className={styles.dropdown_container}>
+                    <select
+                        value={i18n.language}
+                        onChange={(e) => i18n.changeLanguage(e.target.value)}
+                        className={styles.select}
+                    >
+                        <option value="en">English</option>
+                        <option value="ja">日本語</option>
+                    </select>
+                    <div className={styles.faAngleDown_container}>
+                        <FontAwesomeIcon icon={faAngleDown} />
+                    </div>
+                </div>
             </div>
         </div>
     );
