@@ -1,6 +1,10 @@
-# [Sets-n-Reps](https://sets-n-reps.com)
+# [Sets-n-Reps](https://sets-n-reps.com)                                                                                                                                                                                                                                                                                                                    
 
-- A workout tracker web app.
+Sets-n-Reps is a browser-based workout tracker designed for both desktop and mobile.
+It essentially offers three key features:
+- Mesocycle creation: Build mesocycles of your choice (between 4-8 weeks), with each week automatically reflecting its target RIRs (Reps in Reserve).
+- Workout tracking: Choose a workout from the drop-down menu and log your data (weight, reps, and checkbox).
+- Exercise history look-back: Quickly review past performance for any exercise across previous workouts or mesocycles.
 
 ## Technologies
 
