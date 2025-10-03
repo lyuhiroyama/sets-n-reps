@@ -176,21 +176,23 @@ export default function ExerciseHistory({
                         : styles.dialog_close_animation,
                 ].join(" ")}
                 onClick={(e) => e.stopPropagation()}
-                // For slide-to-close feature:
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
             >
-                <div className={styles.swipe_container}>
-                    <div className={styles.swipe_bar}></div>
-                </div>
                 <button
                     className={styles.close_dialog_btn}
                     onClick={onHistoryClose}
                 >
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
-                <div className={styles.header_section}>
+                <div 
+                    className={styles.header_section}
+                    // For slide-to-close feature:
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
+                >
+                    <div className={styles.swipe_container}>
+                        <div className={styles.swipe_bar}></div>
+                    </div>
                     <div>{t("exerciseHistory.exerciseHistory")}</div>
                     <h3>{exerciseName}</h3>
                 </div>
