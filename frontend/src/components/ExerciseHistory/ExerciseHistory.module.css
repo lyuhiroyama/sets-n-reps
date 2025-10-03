@@ -164,13 +164,10 @@
     padding: 0 1rem;
 }
 
+/* Mobile portrait only */
 @media (max-width: 480px) and (orientation: portrait) {
     .dialog {
         width: 100%;
-    }
-    
-    .no_history_message {
-        padding: 7rem 0.5rem 1rem;
     }
 
     .ul_container li {
@@ -180,7 +177,29 @@
     }
 }
 
-/* Animations */
+/* Both orientation for mobile */
+@media (max-width: 480px), (max-height: 480px) {
+    .swipe_container {
+        position: absolute;
+        top: 5px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .swipe_bar {
+        width: 40px;
+        height: 4px;
+        background-color: #666;
+        border-radius: 2px;
+    }
+
+    .no_history_message {
+        padding: 1rem 0.5rem 1rem;
+    }
+}
+
+/* Dialog animations */
 
 .background_darkHue_animation, .dialog_open_animation {
     animation: dialog-open 150ms ease-out forwards;
