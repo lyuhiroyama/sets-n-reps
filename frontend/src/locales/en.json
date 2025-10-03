@@ -77,7 +77,7 @@
         "autoFill": "Weight auto-fill",
         "on": "On",
         "off": "off",
-        "tooltip": "When you enter a weight for an exercise, that weight will be automatically filled in for subsequent sets of the same exercise in your current workout"
+        "tooltip": "Entering a weight will automatically fill subsequent sets with the same value"
     },
     "mesoWorkouts": {
         "weight": "Weight",
