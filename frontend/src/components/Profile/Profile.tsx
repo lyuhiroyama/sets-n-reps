@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Profile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 type UserType = {
     email: string;
@@ -20,7 +20,9 @@ export default function Profile() {
     };
 
     // Weight auto-fill toggle helper
-    const toggleWeightAutoFill = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const toggleWeightAutoFill = async (
+        event: React.ChangeEvent<HTMLSelectElement>
+    ) => {
         const newValue = event.target.value === "on";
         try {
             const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -28,19 +30,22 @@ export default function Profile() {
                 method: "PATCH",
                 credentials: "include",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     user_preferences: {
-                        weight_auto_fill: newValue
-                    }
-                })
+                        weight_auto_fill: newValue,
+                    },
+                }),
             });
             if (response.ok && user) {
-                setUser({...user as UserType, weight_auto_fill: newValue});
+                setUser({ ...(user as UserType), weight_auto_fill: newValue });
             }
         } catch (error) {
-            console.error("Error updating weight auto-fill preference: ", error)
+            console.error(
+                "Error updating weight auto-fill preference: ",
+                error
+            );
         }
     };
 
@@ -93,7 +98,9 @@ export default function Profile() {
                         <dd>
                             {user?.created_at
                                 ? new Date(user.created_at).toLocaleDateString(
-                                    i18n.language === 'en' ? "en-US" : "ja-JP",
+                                      i18n.language === "en"
+                                          ? "en-US"
+                                          : "ja-JP",
                                       {
                                           timeZone: "Asia/Tokyo",
                                           year: "numeric",
@@ -125,7 +132,15 @@ export default function Profile() {
                     </div>
                 </div>
                 <div className={styles.content_row}>
-                    <div>{t("profile.autoFill")}</div>
+                    <div className={styles.auto_fill_header}>
+                        {t("profile.autoFill")}
+                        <div className={styles.tooltip_wrapper}>
+                            <FontAwesomeIcon icon={faCircleInfo} className={styles.info_fa_icon} />
+                            <div className={styles.tooltip}>
+                                {t("profile.tooltip")}
+                            </div>
+                        </div>
+                    </div>
                     <div className={styles.dropdown_container}>
                         <select
                             className={styles.select}

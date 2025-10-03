@@ -61,6 +61,9 @@
     width: 50%;
 }
 
+.auto_fill_header {
+    display: flex;
+}
 
 /* For custom drop-down design */
 .dropdown_container {
@@ -83,7 +86,8 @@
     cursor: pointer;
     appearance: none; /* To delete default (poorly positioned) down arrow */
 }
-.dropdown_container .faAngleDown_container { /* faAngleDown to replace default with */
+.dropdown_container .faAngleDown_container {
+    /* faAngleDown to replace default with */
     position: absolute;
     display: flex;
     justify-content: center;
@@ -96,6 +100,47 @@
     pointer-events: none; /* Needed for custom down arrow replacement */
 }
 
+.tooltip_wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    cursor: help;
+}
+
+.info_fa_icon {
+    color: #aeaeae;
+    font-size: 0.8rem;
+}
+
+.tooltip {
+    visibility: hidden;
+    z-index: 1;
+    position: absolute;
+    bottom: 125%;
+    left: -5px;
+    width: max-content;
+    max-width: 280px;
+    font-size: 0.8rem;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;  /* Position at bottom of tooltip */
+    left: 13px;
+    transform: translateX(-50%);  /* Center the pointer */
+    border-width: 5px;
+    border-style: solid;
+    border-color: #1e1e1e transparent transparent transparent;  /* Creates triangle shape */
+}
+.tooltip_wrapper:hover .tooltip {
+    visibility: visible;
+}
+
+
 @media (max-width: 850px) {
     .component h2 {
         width: 90%;
@@ -103,6 +148,18 @@
 
     .profile_container, .settings_container {
         width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .tooltip {
+        max-width: 180px;
+        background-color: #343434;
+    }
+}
+@media (max-height: 480px) {
+    .tooltip {
+        background-color: #343434;
     }
 }
 
