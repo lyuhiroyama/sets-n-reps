@@ -102,7 +102,7 @@ First, ensure you have these installed:
 - [PostgreSQL](https://www.postgresql.org/) (`brew install postgresql@14`)
 - [Yarn](https://yarnpkg.com/) (`npm install -g yarn`)
 
-#### Setup
+#### Then:
 1. Clone the repository
    ```bash
    git clone https://github.com/lyuhiroyama/sets-n-reps.git
@@ -142,7 +142,7 @@ First, ensure you have these installed:
    nvm install 22.19.0
    ```
 
-#### Backend
+#### In frotend directory:
 ```bash
 cd backend
 # Install ruby gems
@@ -165,7 +165,7 @@ rails db:setup
 rails s
 ```
 
-#### Frontend
+#### In frontend directory:
 ```bash
 cd frontend
 yarn install   # Install dependencies defined in package.json & yarn.lock
