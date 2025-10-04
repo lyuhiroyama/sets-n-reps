@@ -8,5 +8,5 @@ class User < ApplicationRecord
   has_many :workouts, dependent: :destroy
 
   # Memo: “There is a column in the users table that stores the id of a Mesocycle record.”
-  belongs_to :active_meso, class_name: "Mesocycle", optional: true
+  belongs_to :active_meso, class_name: "Mesocycle", foreign_key: "active_meso_id", optional: true
 end
