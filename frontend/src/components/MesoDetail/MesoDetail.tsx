@@ -80,7 +80,7 @@ export default function MesoDetail() {
     // Fetch user's weight_auto_fill preference boolean:
     useEffect(() => {
          const fetchPreference = async () => {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const response = await fetch(`${baseUrl}/users/check-auth`, {
                 credentials: "include",
                 headers: { Accept: "application/json" },
@@ -98,7 +98,7 @@ export default function MesoDetail() {
     // Anytime a mesocycle is opened, active_meso_id gets set (This is for 'Current workout' page)
     useEffect(() => {
         if (!mesocycle?.id) return;
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         fetch(`${baseUrl}/api/user_preferences`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
