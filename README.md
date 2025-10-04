@@ -102,6 +102,7 @@ First, ensure you have these installed:
 - [PostgreSQL](https://www.postgresql.org/) (`brew install postgresql@14`)
 - [Node.js](https://nodejs.org/) (`brew install node`)
 - [Yarn](https://yarnpkg.com/) (`npm install -g yarn`)
+- [Rails](https://rubyonrails.org) (`gem install rails`)
 
 #### Setup
 1. Clone the repository
