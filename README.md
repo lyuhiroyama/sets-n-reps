@@ -100,7 +100,8 @@ First, ensure you have these installed:
 - [Homebrew](https://brew.sh/)
 - [rbenv](https://github.com/rbenv/rbenv) for Ruby version management
 - [PostgreSQL](https://www.postgresql.org/) (`brew install postgresql@14`)
-- [Node.js](https://nodejs.org/) (`brew install node`)
+<!-- - [Node.js](https://nodejs.org/) (`brew install node`) -->
+- [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) (`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`)
 - [Yarn](https://yarnpkg.com/) (`npm install -g yarn`)
 - [Rails](https://rubyonrails.org) (`gem install rails`)
 
@@ -135,3 +136,5 @@ yarn start     # Starts app at http://localhost:3001
 ## Improvements to be made
 
 ## License
+
+
