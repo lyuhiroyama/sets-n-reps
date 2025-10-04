@@ -100,8 +100,13 @@ First, ensure you have these installed:
 - [Homebrew](https://brew.sh/)
 - [rbenv](https://github.com/rbenv/rbenv) for Ruby version management
 - [PostgreSQL](https://www.postgresql.org/) (`brew install postgresql@14`)
-<!-- - [Node.js](https://nodejs.org/) (`brew install node`) -->
 - [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) (`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`)
+- Reload shell configuration
+  - (for bash) `source ~/.bashrc`
+  - (for zsh) `source ~/.zshrc`
+ - `nvm install 22.19.0`
+ - `yarn install`
+ - `yarn start`
 - [Yarn](https://yarnpkg.com/) (`npm install -g yarn`)
 - [Rails](https://rubyonrails.org) (`gem install rails`)
 
