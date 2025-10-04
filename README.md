@@ -100,15 +100,7 @@ First, ensure you have these installed:
 - [Homebrew](https://brew.sh/)
 - [rbenv](https://github.com/rbenv/rbenv) for Ruby version management
 - [PostgreSQL](https://www.postgresql.org/) (`brew install postgresql@14`)
-- [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) (`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash`)
-- Reload shell configuration
-  - (for bash) `source ~/.bashrc`
-  - (for zsh) `source ~/.zshrc`
- - `nvm install 22.19.0`
- - `yarn install`
- - `yarn start`
 - [Yarn](https://yarnpkg.com/) (`npm install -g yarn`)
-- [Rails](https://rubyonrails.org) (`gem install rails`)
 
 #### Setup
 1. Clone the repository
@@ -121,6 +113,22 @@ First, ensure you have these installed:
    ```bash
    rbenv install 3.4.2
    rbenv local 3.4.2
+   ```
+3. Install Rails
+   ```bash
+   gem install rails
+   ```
+4. Install [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) & node
+   ```bash
+   # nvm
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+   # Reload shell configuration
+   # (for bash):
+   source ~/.bashrc
+   # (for zsh):
+   source ~/.zsh
+   # Node v22.19.0
+   nvm install 22.19.0
    ```
 
 #### Backend
