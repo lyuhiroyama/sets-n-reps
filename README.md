@@ -113,6 +113,17 @@ First, ensure you have these installed:
    ```bash
    rbenv install 3.4.2
    rbenv local 3.4.2
+   # If 'ruby' command still points to another ruby version, do:
+   # (for bash):
+   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+   echo 'eval "$(rbenv init - bash)"' >> ~/.bashrc
+   source ~/.bashrc
+   # (for zsh):
+   echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
+   echo 'eval "$(rbenv init - zsh)"' >> ~/.zshrc
+   source ~/.zshrc
+   # Confirm ruby version is 3.4.2:
+   ruby --version
    ```
 3. Install Rails
    ```bash
@@ -133,15 +144,30 @@ First, ensure you have these installed:
 
 #### Backend
 ```bash
+# Install ruby gems
 bundle install
-rails db:setup  # Creates, migrates, and seeds the database
-rails s         # Starts server at http://localhost:3000
+rbenv rehash
+
+# Start PostgreSQL 
+brew services start postgresql@14
+
+# If you don't yet a PostgreSQL username created:
+psql -U postgres -d postgres
+CREATE ROLE your_user_name WITH LOGIN CREATEDB PASSWORD 'your_password';
+# Export credentials temporarily (lasts duration of terminal session)
+export DATABASE_USERNAME=your_user_name
+export DATABASE_PASSWORD=your_password
+
+# Creates, migrates, and seeds the database
+rails db:setup
+# Starts server at http://localhost:3000
+rails s
 ```
 
 #### Frontend
 ```bash
 cd frontend
-yarn install
+yarn install   # Install dependencies defined in package.json & yarn.lock
 yarn start     # Starts app at http://localhost:3001
 ```
 ## Challenges & Learning Points
