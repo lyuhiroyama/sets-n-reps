@@ -13,7 +13,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     useEffect(() => {
         // Fetch once on startup
         const checkAuthentication = async () => {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const response = await fetch(`${baseUrl}/users/check-auth`, { 
                 credentials: "include",
                 headers: { "Accept": "application/json" }

@@ -56,7 +56,7 @@ export default function ExerciseHistory({
 
     // Fetch user's mesos
     useEffect(() => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         const fetchMesos = async () => {
             const response = await fetch(
                 `${baseUrl}/api/mesocycles?exercise=${encodeURIComponent(

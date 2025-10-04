@@ -24,7 +24,7 @@ export default function LeftPanel() {
 
     const handleSignOut = async () => {
         try {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const response = await fetch(`${baseUrl}/users/sign_out`, { // Endpoint calls: devise/sessions#destroy
                 method: "DELETE",
                 credentials: "include"

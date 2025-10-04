@@ -9,7 +9,7 @@ export default function CurrentWorkout() {
     const { t } = useTranslation();
 
     useEffect(() => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         // 'user/check-auth' -> verifies session & returns 'active_meso_id' if verified.
             // If user is signed in: 
             // { "isAuthenticated": true, "user": { "id": 1, "email": "x@y.com", "active_meso_id": 12, "...": "..." } }
@@ -34,7 +34,7 @@ export default function CurrentWorkout() {
     // Memo: useCallback doesn't run on component render:
     const goToCurrent = async () => {
         if (!activeMesoId) return;
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         const mesoRes = await fetch(`${baseUrl}/api/mesocycles/${activeMesoId}`, {
             credentials: "include",
             headers: { Accept: "application/json" }

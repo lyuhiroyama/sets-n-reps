@@ -72,7 +72,7 @@ export default function MesoWorkouts({ workout, weight_auto_fill }: {
                 const spinnerStart = Date.now();
 
                 try {
-                    const baseUrl = process.env.REACT_APP_API_BASE_URL;
+                    const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
                     const response = await fetch(
                     `${baseUrl}/api/mesocycles/${workout?.mesocycle_id}/workouts/${workout?.id}/exercises/${exerciseId}/exercise_sets/${setNumber}`
                     , {

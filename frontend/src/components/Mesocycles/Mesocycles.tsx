@@ -29,7 +29,7 @@ export default function Mesocycles() {
     // Fetch mesos
     useEffect(() => {
         const fetchMesocycles = async () => {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const response = await fetch(`${baseUrl}/api/mesocycles`, {
                 credentials: "include",
                 headers: { Accept: "application/json" },
@@ -67,7 +67,7 @@ export default function Mesocycles() {
     };
 
     const handleMesoClick = async (mesoObj: Mesocycle) => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         const mesoRes = await fetch(`${baseUrl}/api/mesocycles/${mesoObj.id}`, {
             credentials: "include",
             headers: { Accept: "application/json" },
@@ -137,7 +137,7 @@ export default function Mesocycles() {
     const handleConfirmDelete = async () => {
         if (!mesoToDelete) return;
 
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         const response = await fetch(
             `${baseUrl}/api/mesocycles/${mesoToDelete.id}`,
             {

@@ -25,7 +25,7 @@ export default function Profile() {
     ) => {
         const newValue = event.target.value === "on";
         try {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const response = await fetch(`${baseUrl}/api/user_preferences`, {
                 method: "PATCH",
                 credentials: "include",
@@ -53,7 +53,7 @@ export default function Profile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const baseUrl = process.env.REACT_APP_API_BASE_URL;
+                const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
                 const response = await fetch(`${baseUrl}/users/check-auth`, {
                     credentials: "include",
                     headers: {

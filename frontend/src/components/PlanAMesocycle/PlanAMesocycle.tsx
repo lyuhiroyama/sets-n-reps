@@ -120,7 +120,7 @@ export default function PlanAMesocycle() {
                 ).flat()
             }
         };
-        const baseUrl = process.env.REACT_APP_API_BASE_URL;
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         const response = await fetch(`${baseUrl}/api/mesocycles`, {
             method: "POST",
             headers: {"Content-Type": "application/json", "Accept": "application/json"},

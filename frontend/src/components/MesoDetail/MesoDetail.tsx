@@ -61,7 +61,7 @@ export default function MesoDetail() {
     useEffect(() => {
         if (!id) return;
         const fetchMeso = async () => {
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const res = await fetch(`${baseUrl}/api/mesocycles/${id}`, {
                 credentials: "include",
                 headers: { Accept: "application/json" },

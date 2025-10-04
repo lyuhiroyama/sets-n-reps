@@ -26,7 +26,7 @@ export default function SignIn() {
                 return;
             }
 
-            const baseUrl = process.env.REACT_APP_API_BASE_URL
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
 
             // Send sign-in request with credentials & CSRF token
             const url = `${baseUrl}${isSignIn ? "/users/sign_in" : "/users"}` 

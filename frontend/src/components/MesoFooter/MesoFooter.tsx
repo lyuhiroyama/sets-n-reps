@@ -37,7 +37,7 @@ export default function MesoFooter({ workout } : { workout?: WorkoutLite } ) {
             const dd = String(today.getDate()).padStart(2, "0");
             const performedOn = `${yyyy}-${mm}-${dd}`;
 
-            const baseUrl = process.env.REACT_APP_API_BASE_URL;
+            const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
             const res = await fetch(`${baseUrl}/api/workouts/${workout.id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
