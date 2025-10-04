@@ -142,7 +142,7 @@ First, ensure you have these installed:
    nvm install 22.19.0
    ```
 
-#### In frotend directory:
+#### In backend directory:
 ```bash
 cd backend
 # Install ruby gems
