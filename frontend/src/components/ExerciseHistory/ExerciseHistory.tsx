@@ -125,7 +125,6 @@ export default function ExerciseHistory({
         setTouchEnd(null);
     };
 
-
     // Handle dialog mount/unmount timing for animations
     useEffect(() => {
         if (isHistoryOpen) {
@@ -183,7 +182,7 @@ export default function ExerciseHistory({
                 >
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
-                <div 
+                <div
                     className={styles.header_section}
                     // For slide-to-close feature:
                     onTouchStart={onTouchStart}
@@ -350,23 +349,22 @@ export default function ExerciseHistory({
                                                                                 ", "
                                                                             );
 
-                                                                    const formattedWeight =
-                                                                        (() => {
-                                                                            const num =
-                                                                                parseFloat(
-                                                                                    weight
-                                                                                );
-                                                                            return num %
-                                                                                1 ===
-                                                                                0
-                                                                                ? Math.floor(
-                                                                                      num
-                                                                                  )
-                                                                                : num.toFixed(
-                                                                                      1
-                                                                                  );
+                                                                    const formattedWeight = (() => { 
+                                                                        const num = parseFloat(weight);
+                                                                        
+                                                                        // If it's a whole number, return it without decimals
+                                                                        if (num % 1 === 0) {
+                                                                            return Math.floor(num);
+                                                                        }
+                                                                        
+                                                                        // If it has exactly one decimal place (like 27.5)
+                                                                        if ((num * 10) % 1 === 0) {
+                                                                            return num.toFixed(1);
+                                                                        }
+                                                                        
+                                                                        // If it has hundredths, show 2 decimal places
+                                                                        return num.toFixed(2);
                                                                         })();
-
                                                                     return `${formattedWeight} ᵏᵍ × ${displayReps}`;
                                                                 }
                                                             )
