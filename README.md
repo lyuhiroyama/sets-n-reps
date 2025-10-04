@@ -144,6 +144,7 @@ First, ensure you have these installed:
 
 #### Backend
 ```bash
+cd backend
 # Install ruby gems
 bundle install
 rbenv rehash
