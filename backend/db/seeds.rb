@@ -1,13 +1,13 @@
 # Test user
 user = User.create!(
-  email: "lyu@gmail.com",
-  password: "gohornets"
+  email: "seeded_account@example.com",
+  password: "example"
 )
 
 # Create a meso
 mesocycle = user.mesocycles.create!(
-  name: "Actual Workout",
-  duration_weeks: 4
+  name: "Example Workout",
+  duration_weeks: 8
 )
 
 # Days we train each week
