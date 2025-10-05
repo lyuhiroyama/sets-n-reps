@@ -71,12 +71,21 @@ It offers three key features:
 - React for component-based architecture
 - RESTful requests (GET, POST, PATCH, DELETE) from the front-end
 - Sends httpOnly cookies along with requests by setting `credentials: "include"`
-    - Prevents JavaScript from reading the cookie, reducing risk from XSS attacks
+    - Prevents JavaScript from reading the cookie, XSS attack risks
+- Hooks (built-in):
+  - `useState` for component state
+  - `useEffect` for data fetching & side effects
+  - `useNavigate` for navigation
+  - `useTranslation` for internationalization
+  - `useContext` for global state
+- Hooks (custom):
+  - `useAuth` for authentication state management
 - Scoped styling with CSS modules
 - Responsive design for mobile devices
 - Internationalization with i18n library
 - .env file for environment variables
 - Icons with Font Awesome icons
+
 #### Backend architecture
 - Ruby on Rails API backend
 - RESTful API design with namespaced endpoints using `/api/`
@@ -85,8 +94,9 @@ It offers three key features:
   - `users → mesocycles → workouts → exercises → exercise_sets`
   - *Some relationships are not strictly linear:
     - `users -> workouts`
-    - `users → mesocycles` via `active_meso_id` (custom foreign key for tracking the active mesocycle)
+    - `users → mesocycles` via `active_meso_id` (custom foreign key in 'users' table, for tracking a user's 'active' mesocycle)
 - Nested attributes for updating multiple table records at once
+
 #### Authentication & Security
 - Devise for user authentication
 - dotenv-rails for environment variables
@@ -103,10 +113,10 @@ It offers three key features:
 ## Why build this?
 
 Primarily for two reasons (in no specific order):
-- I was looking to build something with this tech stack (TypeScript, React, Ruby on Rails)
-- I was paying for a workout tracking web app already called the [Renaissance Periodization Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt). It's an amazing app but I don't use all of its features and I didn't want to keep paying for it.
+- I was looking to build something with this tech stack to showcase my skills with (TypeScript, React, Ruby on Rails, PostgreSQL).
+- I was paying for a workout tracking web app already called the [Renaissance Periodization Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt). It's an amazing app but I don't use all of its features and I didn't want to keep paying for it (and I nolonger do thanks to Sets-n-Reps!).
 
-[In the link](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) you will notice that the functionality and the design is very similar. And it is. I essentially took from it the parts I liked about the app, and made my own. It's for this reason that I decided to go with the MIT license, and I have no plans on putting a subscriptions page on it.
+[In the link](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) you will notice that the functionality and the design is very similar. And it is. I essentially picked from it the parts I liked about the app, left the parts that I had no use for, and made my own. It's for this reason that I decided to go with the MIT license, and I have no plans on putting a subscriptions page on it.
 
 
 ## Installation
@@ -167,6 +177,7 @@ First, ensure you have these installed:
 cd backend
 # Install ruby gems
 bundle install
+# Update rbenv shims to recognize newly installed executables
 rbenv rehash
 
 # Start PostgreSQL 
@@ -189,78 +200,90 @@ rails s
 #### In frontend directory:
 ```bash
 cd frontend
-yarn install   # Install dependencies defined in package.json & yarn.lock
-yarn start     # Starts app at http://localhost:3001
+
+# Install dependencies defined in package.json & yarn.lock
+yarn install
+# Starts app at http://localhost:3001
+yarn start
 ```
 
 ## Challenges
 
-This was my first time configuring user authentication. Although I used Devise (supposedly the "easier approach"), it's one of the features of the app that I spent the most time working on. Frontend was challenging as well. Attempting to replicate a seamless UI/UX of the [RP Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) turned out to be way more challenging (and time consuming) then anticipated. 
+This was my first time configuring user authentication. Although I used Devise (supposedly the "easier approach"), it's one of the features of the app that I spent the most time on. Frontend was challenging as well. Attempting to replicate a seamless UI/UX of the [RP Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) turned out to be way more challenging (and time consuming) than anticipated. 
 
 Passing data through multiple different components and updating the database with those nested values felt difficult at first, but Ruby on Rails' associations and nested attributes made it easier to follow through. 
 
-With typescript particularly, I felt that I was learning more 'as I go' than I did by sifting through documentation. Configuring type safety especially in within components where I defined convoluted helper functions took a lot of trial and error.
+With Typescript particularly (unlike with Ruby & Ruby on Rails), I felt that I was learning more 'as I go', as opposed to spending a lot of time in tutorials and documentations beforehand. Configuring type safety especially within components where I defined convoluted helper functions took a lot of trial and error.
 
-As a whole, it still feels like there's a lot that I don't know, that I don't know about (insert meme)
+I had also set out a rough deadline to complete this project by the end of September, and completed at the very beginning of October, staying slightly close to schedule (Total build time: 6.5 weeks).
 
 ## Accomplishments
 
 #### Frontend
 - Intuitive interfaces for:
-  - Mesocycle creation (*excluding on mobile)
+  - Mesocycle creation (*desktop only - mobile version needs improvement)
   - Workout tracking
   - Exercise history lookbacks
 - Auto-save feature for weights, sets, and logs
-- Language switching & weight auto-fill feature (both configurable)
+- Language switching & weight auto-fill feature (users can toggle on/off)
 - Responsive layouts for both desktop & mobile
 - Transitions & dialog animations
 - Protected routes & persistent session management
 
 #### Backend
-- RESTful API implementations with namespaced routes
+- RESTful (namespaced) API endpoints for:
+  - CRUD operations for mesocycles and its nested resources (workouts, exercises, exercise_sets)
+  - Authentication & user preferences
 - Functional database associations with nested relationships
-- Environment specific configurations (development & production)
-  - disabling of sign-ups in production
-- Cascading deletion for data integrity
-
-#### Authentication & Security
 - Implementation of Devise for authentication with httpOnly cookies
+- Cascading deletion configured in models for data integrity with `dependent: :destroy`
 - Rate-limiting protection with rack-attack
 
 
 ## Improvements Needed
+Including but not limited to:
+
+#### Both (frontend & backend)
+- Refactor code for readability & maintainability
+- Enhance code documentation (especially backend)
+- Implement testing
 
 #### Frontend
 - Implement shared interfaces/types (as opposed to defining types in each component)
+- Create a centralized API layer in `frontend/src/api/` 
+and group API calls operations
+  - Example: 
+     - Authentication related API calls -> `auth.ts`
+     - Mesocycle related API calls -> `mesocycles.ts`
+  - Would reduce duplicate api calls within codebase, and improve readability
+- Breaking component sizes into smaller ones for maintainability
 
 #### Backend
 - Implement further model validations
 - Strengthen error handling in controllers
-
-#### Authentication & Security
 - Implement password strength requirements (minimum length, numbers & special character requirements)
-- Implemement password recovery functionality
-
-#### Both frontend & backend
-- Implement testing
-- Enhance code documentation (especially backend)
-- Refactor code for readability & maintainability
-
-#### Other areas
-- Installation guide in README is too long
+- Implement password recovery functionality
 
 
 ## What's next for Sets-n-Reps
 
 #### Features to add:
 
-- Adding/removing exercises and sets to already-built mesocycles
-- Appending notes to exercises
-- mesocycle creation page isnt intuitive on mobile
-- add another step for mesocycle deletion - prevent accidental deletions
+- Allow modification of existing mesocycles:
+  - Add/remove exercises
+  - Add/remove sets
+  - Update mesocycle/exercise names
+- Allow attaching of custom notes to each exercises
+- Add a second confirmation dialog for mesocycle deletion (to further prevent accident deletion)
+- Improve mobile UI/UX for mesocycle creation
+
 
 #### Finishing notes
 
-I'm certain that I'll be continuing to refine this project, as I use this app myself on a near-daily basis. Please feel free to open any issues, contributing, or cloning.
+- The app is functional and achieves its daily use with a smooth frontend experience.
+- Codebase could definitely (and greatly) be refined.
+- Building this for personal use as the sole developer gave me the freedom to move quickly. 
+- In a professional setting however, I approach my work with much more caution, gauging the balance between quality and time sensitivity.
 
-I would have approached with more caution in a professional team environment
+
+I'm certain that I'll be continuing to refine this project, as I use this app myself on a near-daily basis. Please feel free to open any issues, contribute, or clone the repository!
