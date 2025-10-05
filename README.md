@@ -16,18 +16,21 @@ It offers three key features:
 
 ## Table of Contents
 
-- [Technologies](#technologies)
-- [Full Demo](#full-demo)
-- [Features](#features)
-- [Technical Overview](#technical-overview)
-- [Installation](#installation)
-- [Challenges & Learning Points](#challenges--learning-points)
-- [License](#license)
+- [(1) Technologies](#technologies)
+- [(2) Full demo](#full-demo)
+- [(3) Features](#features)
+- [(4) Technical overview](#technical-overview)
+- [(5) Why build this?](#why-build-this)
+- [(6) Installation](#installation)
+- [(7) Challenges](#challenges)
+- [(8) Accomplishments](#accomplishments)
+- [(9) Improvements needed](#improvements-needed)
+- [(10) What's next for Sets-n-Reps](#whats-next-for-sets-n-reps)
 
 ## Technologies
 
-- [TypeScript](https://www.typescriptlang.org/) & [React](https://react.dev/) for the front-end
-- [Ruby](https://www.ruby-lang.org/en/) & [Ruby on Rails](https://rubyonrails.org/) for the back-end
+- [TypeScript](https://www.typescriptlang.org/) & [React](https://react.dev/) for the frontend
+- [Ruby](https://www.ruby-lang.org/en/) & [Ruby on Rails](https://rubyonrails.org/) for the backend
 - [CSS Modules](https://github.com/css-modules/css-modules) for styles
 - [PostgreSQL](https://www.postgresql.org/) for the DB
 - [Vultr VPS](https://www.vultr.com/) for hosting
@@ -96,6 +99,15 @@ It offers three key features:
   - Allow frontend to access API
   - Block requests from unauthorized domains
   - Enable sending of httpOnly cookies from the front-end with `credentails: true`
+
+## Why build this?
+
+Primarily for two reasons (in no specific order):
+- I was looking to build something with this tech stack (TypeScript, React, Ruby on Rails)
+- I was paying for a workout tracking web app already called the [Renaissance Periodization Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt). It's an amazing app but I don't use all of its features and I didn't want to keep paying for it.
+
+[In the link](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) you will notice that the functionality and the design is very similar. And it is. I essentially took from it the parts I liked about the app, and made my own. It's for this reason that I decided to go with the MIT license, and I have no plans on putting a subscriptions page on it.
+
 
 ## Installation
 First, ensure you have these installed:
@@ -180,12 +192,75 @@ cd frontend
 yarn install   # Install dependencies defined in package.json & yarn.lock
 yarn start     # Starts app at http://localhost:3001
 ```
-## Why
 
-## Challenges & Learning Points
+## Challenges
 
-## Improvements to be made
+This was my first time configuring user authentication. Although I used Devise (supposedly the "easier approach"), it's one of the features of the app that I spent the most time working on. Frontend was challenging as well. Attempting to replicate a seamless UI/UX of the [RP Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) turned out to be way more challenging (and time consuming) then anticipated. 
 
-## License
+Passing data through multiple different components and updating the database with those nested values felt difficult at first, but Ruby on Rails' associations and nested attributes made it easier to follow through. 
+
+With typescript particularly, I felt that I was learning more 'as I go' than I did by sifting through documentation. Configuring type safety especially in within components where I defined convoluted helper functions took a lot of trial and error.
+
+As a whole, it still feels like there's a lot that I don't know, that I don't know about (insert meme)
+
+## Accomplishments
+
+#### Frontend
+- Intuitive interfaces for:
+  - Mesocycle creation (*excluding on mobile)
+  - Workout tracking
+  - Exercise history lookbacks
+- Auto-save feature for weights, sets, and logs
+- Language switching & weight auto-fill feature (both configurable)
+- Responsive layouts for both desktop & mobile
+- Transitions & dialog animations
+- Protected routes & persistent session management
+
+#### Backend
+- RESTful API implementations with namespaced routes
+- Functional database associations with nested relationships
+- Environment specific configurations (development & production)
+  - disabling of sign-ups in production
+- Cascading deletion for data integrity
+
+#### Authentication & Security
+- Implementation of Devise for authentication with httpOnly cookies
+- Rate-limiting protection with rack-attack
 
 
+## Improvements Needed
+
+#### Frontend
+- Implement shared interfaces/types (as opposed to defining types in each component)
+
+#### Backend
+- Implement further model validations
+- Strengthen error handling in controllers
+
+#### Authentication & Security
+- Implement password strength requirements (minimum length, numbers & special character requirements)
+- Implemement password recovery functionality
+
+#### Both frontend & backend
+- Implement testing
+- Enhance code documentation (especially backend)
+- Refactor code for readability & maintainability
+
+#### Other areas
+- Installation guide in README is too long
+
+
+## What's next for Sets-n-Reps
+
+#### Features to add:
+
+- Adding/removing exercises and sets to already-built mesocycles
+- Appending notes to exercises
+- mesocycle creation page isnt intuitive on mobile
+- add another step for mesocycle deletion - prevent accidental deletions
+
+#### Finishing notes
+
+I'm certain that I'll be continuing to refine this project, as I use this app myself on a near-daily basis. Please feel free to open any issues, contributing, or cloning.
+
+I would have approached with more caution in a professional team environment
