@@ -72,6 +72,7 @@ It offers three key features:
 - Scoped styling with CSS modules
 - Responsive design for mobile devices
 - Internationalization with i18n library
+- .env file for environment variables
 - Icons with Font Awesome icons
 #### Backend architecture
 - Ruby on Rails API backend
@@ -85,6 +86,7 @@ It offers three key features:
 - Nested attributes for updating multiple table records at once
 #### Authentication & Security
 - Devise for user authentication
+- dotenv-rails for environment variables
 - Rate limiting with rack-attack gem's `throttle()`:
   - 10 sign-in attempts per 20 seconds
   - 5 sign-up attempts per 60 seconds
@@ -111,8 +113,10 @@ First, ensure you have these installed:
 
 2. Install Ruby 3.4.2
    ```bash
+   # Install Ruby
    rbenv install 3.4.2
    rbenv local 3.4.2
+
    # If 'ruby' command still points to another ruby version, do:
    # (for bash):
    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -122,6 +126,7 @@ First, ensure you have these installed:
    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
    echo 'eval "$(rbenv init - zsh)"' >> ~/.zshrc
    source ~/.zshrc
+
    # Confirm ruby version is 3.4.2:
    ruby --version
    ```
@@ -131,14 +136,17 @@ First, ensure you have these installed:
    ```
 4. Install [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) & node
    ```bash
-   # nvm
+   # Install nvm
    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
    # Reload shell configuration
    # (for bash):
    source ~/.bashrc
    # (for zsh):
-   source ~/.zsh
+   source ~/.zshrc
    # Node v22.19.0
+
+   # Install node
    nvm install 22.19.0
    ```
 
@@ -155,6 +163,7 @@ brew services start postgresql@14
 # If you don't yet a PostgreSQL username created:
 psql -U postgres -d postgres
 CREATE ROLE your_user_name WITH LOGIN CREATEDB PASSWORD 'your_password';
+
 # Export credentials temporarily (lasts duration of terminal session)
 export DATABASE_USERNAME=your_user_name
 export DATABASE_PASSWORD=your_password
@@ -171,6 +180,8 @@ cd frontend
 yarn install   # Install dependencies defined in package.json & yarn.lock
 yarn start     # Starts app at http://localhost:3001
 ```
+## Why
+
 ## Challenges & Learning Points
 
 ## Improvements to be made
