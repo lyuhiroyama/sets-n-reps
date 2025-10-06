@@ -1,12 +1,7 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Disable sign-ups in production environment:
-  if Rails.env.production?
-    devise_for :users, controllers: { sessions: "users/sessions" }, skip: [:registrations]
-  else
-    devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
-  end
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
 
   devise_scope :user do 
     get "users/check-auth", to: "users/sessions#check_auth"
