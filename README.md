@@ -25,7 +25,7 @@ It offers three key features:
 - [(7) Challenges](#challenges)
 - [(8) Accomplishments](#accomplishments)
 - [(9) Improvements needed](#improvements-needed)
-- [(10) What's next for Sets-n-Reps](#whats-next-for-sets-n-reps)
+- [(10) Finishing notes](#finishing-notes)
 
 ## Technologies
 
@@ -241,7 +241,6 @@ I had also set out a rough deadline to complete this project by the end of Septe
 
 
 ## Improvements Needed
-Including but not limited to:
 
 #### Both (frontend & backend)
 - Refactor code for readability & maintainability
@@ -256,29 +255,27 @@ and group API calls operations
      - Authentication related API calls -> `auth.ts`
      - Mesocycle related API calls -> `mesocycles.ts`
   - Would reduce duplicate api calls within codebase, and improve readability
-- Breaking component sizes into smaller ones for maintainability
 
 #### Backend
 - Implement further model validations
 - Strengthen error handling in controllers
-- Implement password strength requirements (minimum length, numbers & special character requirements)
-- Implement password recovery functionality
 
-
-## What's next for Sets-n-Reps
-
-#### Features to add:
-
+#### Features needed
+- On passwords:
+  - Add confirmation field during sign-up
+  - Implement strength requirements (minimum length, numbers & special character requirements)
+  - Implement password recovery functionality
+- Implement email confirmation for new users
 - Allow modification of existing mesocycles:
   - Add/remove exercises
   - Add/remove sets
   - Update mesocycle/exercise names
 - Allow attaching of custom notes to each exercises
-- Add a second confirmation dialog for mesocycle deletion (to further prevent accident deletion)
+- Add a second confirmation dialog for mesocycle deletion (one is not enough)
 - Improve mobile UI/UX for mesocycle creation
 
 
-#### Finishing notes
+## Finishing notes
 
 - The app is functional and achieves its daily use with a smooth frontend experience.
 - Codebase could definitely (and greatly) be refined.
