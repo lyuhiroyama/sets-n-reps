@@ -165,7 +165,7 @@ export default function PlanAMesocycle() {
                                     value={daysOfWeek[index] || ""}
                                     onChange={(e) => handleDayOfWeekChange(index, e.target.value)}
                                 >
-                                    <option value="" disabled selected>{t("planAMeso.dayOfWeek")}</option>
+                                    <option value="" disabled>{t("planAMeso.dayOfWeek")}</option>
                                     <option value="Monday">{t("planAMeso.monday")}</option>
                                     <option value="Tuesday">{t("planAMeso.tuesday")}</option>
                                     <option value="Wednesday">{t("planAMeso.wednesday")}</option>
