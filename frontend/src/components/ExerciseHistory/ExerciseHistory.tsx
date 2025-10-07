@@ -316,38 +316,15 @@ export default function ExerciseHistory({
 
                                             return (
                                                 <li key={workout.id}>
-                                                    <div
-                                                        className={
-                                                            styles.history
-                                                        }
-                                                    >
-                                                        {Object.entries(
-                                                            exercise_setsByWeight
-                                                        )
-                                                            .map(
-                                                                ([
-                                                                    weight,
-                                                                    exercise_sets,
-                                                                ]) => {
-                                                                    const displayReps =
-                                                                        exercise_sets
-                                                                            .sort(
-                                                                                (
-                                                                                    a,
-                                                                                    b
-                                                                                ) =>
-                                                                                    a.set_number -
-                                                                                    b.set_number
-                                                                            )
-                                                                            .map(
-                                                                                (
-                                                                                    exercise_set
-                                                                                ) =>
-                                                                                    exercise_set.rep_count
-                                                                            )
-                                                                            .join(
-                                                                                ", "
-                                                                            );
+                                                    <div className={styles.history}>
+                                                        {Object.entries(exercise_setsByWeight)
+                                                            // Ensure sets get displayed sequentially:
+                                                            .sort(([_, setsA], [__, setsB]) => setsA[0].set_number - setsB[0].set_number)
+                                                            .map(([weight, exercise_sets,]) => {
+                                                                    const displayReps = exercise_sets
+                                                                            .sort((a, b) => a.set_number - b.set_number)
+                                                                            .map((exercise_set) => exercise_set.rep_count)
+                                                                            .join(", ");
 
                                                                     const formattedWeight = (() => { 
                                                                         const num = parseFloat(weight);
