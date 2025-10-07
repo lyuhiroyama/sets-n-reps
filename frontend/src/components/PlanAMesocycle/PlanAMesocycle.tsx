@@ -128,9 +128,11 @@ export default function PlanAMesocycle() {
             body: JSON.stringify(payload)
         });
         if (response.ok) {
-            const created = await response.json();
             setShowDialog(false);
-            navigate(`/dashboard/mesocycles/${created.id}`, { state: created })
+            navigate("/dashboard/mesocycles")
+            // If you want to redirect users to first workout of the created mesocycle, replace above navigate() with:
+            // const created = await response.json();
+            // navigate(`/dashboard/mesocycles/${created.id}`, { state: created })
         } else {
             const err = await response.json().catch(() => ({}));
             console.error(err);
