@@ -10,8 +10,15 @@ import PlanAMesocycle from "./components/PlanAMesocycle/PlanAMesocycle"
 import Profile from "./components/Profile/Profile"
 import Landing from "./components/Landing/Landing";
 import "./i18n";
+import ReactGA from "react-ga4";
+import usePageTracking from "./hooks/usePageTracking";
+
+if (process.env.NODE_ENV === "production") {
+    ReactGA.initialize("G-34NF6VJYND"); 
+}
 
 export default function App() {
+    usePageTracking();
     return (
         <Router>
             <AuthProvider>
