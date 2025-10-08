@@ -4,14 +4,14 @@
 
 It offers three key features:
 
-**(1) Mesocycle Creation ([demo]())**
+**(1) Mesocycle Creation ([demo](https://www.youtube.com/watch?v=a8TEfTkuYi0&t=32s))**
 - Build [mesocycles](https://youtu.be/DVYcnQF0PJg?t=21) of your choice (between 4-8 weeks), <br/>with each week automatically reflecting its target RIRs ([Reps in Reserve](https://rpstrength.com/blogs/video-guides/how-to-estimate-reps-in-reserve-for-muscle-growth?srsltid=AfmBOopJY6eLMhTDjRUhlJBqIOhVTBMk8ebFSj5RpzcKdDZINWDI-gFl#:~:text=Getting%20stronger%20isn%E2%80%99t%20just%20about%20moving%20more%20weight%E2%80%94it%E2%80%99s%20about%20knowing%20when%20to%20stop.%20One%20of%20the%20most%20effective%20strategies%20for%20growth%20without%20burning%20out%20is%20using%20Reps%20In%20Reserve%20(RIR).
 )).
 
-**(2) Workout tracking ([demo]())**
+**(2) Workout tracking ([demo](https://www.youtube.com/watch?v=a8TEfTkuYi0&t=4m11s))**
 - Choose a workout from the drop-down menu and log your data (weight, reps, and checkbox).
 
-**(3) Exercise history look-back ([demo]())**
+**(3) Exercise history look-back ([demo](https://www.youtube.com/watch?v=a8TEfTkuYi0&t=5m32s))**
 - Quickly review past performance for any exercise across previous workouts or mesocycles.
 
 ## Table of Contents
@@ -36,6 +36,11 @@ It offers three key features:
 - [Vultr VPS](https://www.vultr.com/) for hosting
 
 ## Full Demo
+[▶ Watch the full demo on YouTube](https://www.youtube.com/watch?v=a8TEfTkuYi0)
+
+[![Watch the demo](https://img.youtube.com/vi/a8TEfTkuYi0/0.jpg)](https://www.youtube.com/watch?v=a8TEfTkuYi0)
+
+
 
 ## Features
 
