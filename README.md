@@ -3,8 +3,12 @@
 [Sets-n-Reps](https://sets-n-reps.com) is a browser-based workout tracker designed for both desktop and mobile.
 
 <p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-  <img src="README-assets/mobile-screenshot.jpg" height="400px" />
-  <img src="README-assets/web-screenshot.png" height="400px" />
+  <a href="https://sets-n-reps.com">
+    <img src="README-assets/web-screenshot.png" height="400px" width="70%" />
+  </a>
+  <a href="https://sets-n-reps.com">
+    <img src="README-assets/mobile-screenshot.jpg" height="400px" width="20%" />
+  </a>
 </p>
 
 It offers three key features:
