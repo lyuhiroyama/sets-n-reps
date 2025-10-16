@@ -130,7 +130,7 @@ Primarily for two reasons (in no specific order):
 - I was looking to build something with this tech stack to showcase my skills with (TypeScript, React, Ruby on Rails, PostgreSQL).
 - I was paying for a workout tracking web app already called the [Renaissance Periodization Hypertrophy App](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt). It's an amazing app but I don't use all of its features and I didn't want to keep paying for it (and I nolonger do thanks to Sets-n-Reps!).
 
-[In the link](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) you will notice that the functionality and the design is very similar. And it is. I essentially picked from it the parts I liked, left the parts that I had no use for, and made my own. It's for this reason that I decided to go with the MIT license, and I have no plans on putting a subscriptions page on it.
+[In the link](https://rpstrength.com/pages/hypertrophy-app?srsltid=AfmBOooWVKvGu1J6YMuF_yhh4uo00Z_EgGPeXhZcRtGT-SJs-Kp4eMIt) you might notice that the functionality and the design are very similar. And they are. I essentially picked from it the parts I liked, left the parts that I had no use for, and made my own. It's for this reason that I decided to go with the MIT license, and I have no plans on putting a subscriptions page on it.
 
 
 ## Installation
