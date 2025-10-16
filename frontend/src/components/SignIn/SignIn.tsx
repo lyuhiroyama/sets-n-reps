@@ -90,6 +90,9 @@ export default function SignIn() {
                     </button>
                 </form>
                 <hr className={styles.signin_divider} />
+                <p className={styles.tryItOut_text}>
+                    {isSignIn ? t("signIn.tryItOut") : "" }
+                </p>
                 <button 
                     type="button" 
                     className={styles.toggle_form_button}

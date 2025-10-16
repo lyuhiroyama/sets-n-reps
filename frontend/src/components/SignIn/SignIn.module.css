@@ -24,7 +24,7 @@
     color: green;
 }
 
-.sub_header {
+.sub_header, .tryItOut_text{
     font-size: 1rem;
     color: white;
 }

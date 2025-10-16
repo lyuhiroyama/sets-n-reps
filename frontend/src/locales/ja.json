@@ -9,7 +9,8 @@
         "signUpsDisabled": "新規登録は現在ご利用できません",
         "signUpsDisabledMessage": "開発者の判断により新規登録は無効化されています。アプリをデモ体験されたい方は、お気軽にお問い合わせください！",
         "placeHolderEmail": "メールアドレス",
-        "placeHolderPW": "パスワード"
+        "placeHolderPW": "パスワード",
+        "tryItOut": "登録してすぐに体験！"
     },
     "leftPanel": {
         "currentWorkout": {

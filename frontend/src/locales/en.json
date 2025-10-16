@@ -9,7 +9,8 @@
         "signUpsDisabled": "Sign-ups are disabled",
         "signUpsDisabledMessage": "Developer has chosen to disable sign-ups. If you would like to demo this app, please feel free to reach out!",
         "placeHolderEmail": "Email",
-        "placeHolderPW": "Password"
+        "placeHolderPW": "Password",
+        "tryItOut": "Sign up & try it out!"
     },
     "leftPanel": {
         "currentWorkout": {
