@@ -31,24 +31,14 @@ type ExerciseSet = {
     completed: boolean;
 };
 
-export default function ExerciseHistory({
-    isHistoryOpen,
-    onHistoryClose,
-    exerciseName,
-}: {
-    isHistoryOpen: boolean;
-    onHistoryClose: () => void;
-    exerciseName: string;
-}) {
+export default function ExerciseHistory({ isHistoryOpen, onHistoryClose, exerciseName }: { isHistoryOpen: boolean; onHistoryClose: () => void; exerciseName: string }) {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
     const { t } = useTranslation();
-
     // Store fetched mesos:
     const [mesos, setMesos] = useState<Mesocycle[] | undefined>(undefined);
     // Mainly for closing animation: apply closing class and delay DOM unmount so animation can run
     const [render, setRender] = useState(isHistoryOpen);
-
     // For slide-to-close feature
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -59,9 +49,7 @@ export default function ExerciseHistory({
         const baseUrl = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000";
         const fetchMesos = async () => {
             const response = await fetch(
-                `${baseUrl}/api/mesocycles?exercise=${encodeURIComponent(
-                    exerciseName
-                )}`,
+                `${baseUrl}/api/mesocycles?exercise=${encodeURIComponent(exerciseName)}`,
                 {
                     credentials: "include",
                     headers: { Accept: "application/json" },
@@ -80,14 +68,9 @@ export default function ExerciseHistory({
     }, [navigate, exerciseName]);
 
     // Check if user has any exercise history to display
-    const hasExerciseHistory = (
-        mesos: Mesocycle[] | undefined,
-        exerciseName: string
-    ): boolean => {
+    const hasExerciseHistory = ( mesos: Mesocycle[] | undefined, exerciseName: string ): boolean => {
         if (!mesos) return false;
-
-        return mesos.some((meso) =>
-            meso.workouts
+        return mesos.some((meso) => meso.workouts
                 .filter((workout) => workout.performed_on !== null)
                 .some((workout) => {
                     const validExercise = workout.exercises.find(
@@ -159,29 +142,17 @@ export default function ExerciseHistory({
 
     return (
         <div
-            className={[
-                styles.dialog_background,
-                isHistoryOpen
-                    ? styles.background_darkHue_animation
-                    : styles.background_noHue_animation,
-            ].join(" ")}
+            className={[styles.dialog_background, isHistoryOpen ? styles.background_darkHue_animation : styles.background_noHue_animation].join(" ")}
             onClick={onHistoryClose}
         >
             <div
-                className={[
-                    styles.dialog,
-                    isHistoryOpen
-                        ? styles.dialog_open_animation
-                        : styles.dialog_close_animation,
-                ].join(" ")}
+                className={[styles.dialog, isHistoryOpen ? styles.dialog_open_animation : styles.dialog_close_animation].join(" ")}
                 onClick={(e) => e.stopPropagation()}
             >
-                <button
-                    className={styles.close_dialog_btn}
-                    onClick={onHistoryClose}
-                >
+                <button className={styles.close_dialog_btn} onClick={onHistoryClose}>
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
+
                 <div
                     className={styles.header_section}
                     // For slide-to-close feature:
@@ -195,14 +166,20 @@ export default function ExerciseHistory({
                     <div>{t("exerciseHistory.exerciseHistory")}</div>
                     <h3>{exerciseName}</h3>
                 </div>
+
                 <div className={styles.mesos_container}>
-                    {!hasExerciseHistory(mesos, exerciseName) ? (
+                    {!hasExerciseHistory(mesos, exerciseName) ? ( // No exercise history to display, hence display message: 'no sets to display'
+
                         <div className={styles.no_history_message}>
+                            
+                            {/* Message part 1 */}
                             <p>
                                 {t("exerciseHistory.noHistoryMessage.part1")}
                                 <br />
                                 {t("exerciseHistory.noHistoryMessage.part2")}
                             </p>
+
+                            {/* Message part 2 */}
                             <p>
                                 {t("exerciseHistory.noHistoryMessage.part3")}
                                 <span className={styles.span1}>
@@ -222,20 +199,17 @@ export default function ExerciseHistory({
                                 {t("exerciseHistory.noHistoryMessage.part9")}
                             </p>
                         </div>
-                    ) : (
+                    ) : ( // Display available Exercise Historydata:
                         mesos?.map((mesoObj) => {
                             // Check if iterator meso has any data to display. Skip otherwise.
                             const hasValidData = mesoObj.workouts
-                                .filter(
-                                    (workout) => workout.performed_on !== null
-                                )
+                                .filter((workout) => workout.performed_on !== null)
                                 .some((workout) => {
                                     const validExercise =
                                         workout.exercises.find(
                                             (e) => e.name === exerciseName
                                         );
-                                    if (!validExercise?.exercise_sets?.length)
-                                        return false;
+                                    if (!validExercise?.exercise_sets?.length) return false;
                                     return validExercise.exercise_sets.some(
                                         (set) =>
                                             set.weight !== null &&
@@ -246,42 +220,21 @@ export default function ExerciseHistory({
                             if (!hasValidData) return null;
 
                             return (
-                                <div
-                                    key={mesoObj.id}
-                                    className={styles.ul_container}
-                                >
+                                <div className={styles.ul_container} key={mesoObj.id}>
                                     <ul>{mesoObj.name}</ul>
                                     {mesoObj.workouts
-                                        .filter(
-                                            (workout) =>
-                                                workout.performed_on !== null
-                                        )
-                                        .sort(
-                                            (a, b) =>
-                                                b.week_number - a.week_number
-                                        )
+                                        .filter((workout) => workout.performed_on !== null)
+                                        .sort((a, b) => b.week_number - a.week_number)
                                         .map((workout) => {
                                             // Find target exercise within workout
-                                            const validExercise =
-                                                workout.exercises.find(
-                                                    (e) =>
-                                                        e.name === exerciseName
-                                                );
-                                            if (
-                                                !validExercise?.exercise_sets
-                                                    ?.length
-                                            )
-                                                return null;
-
+                                            const validExercise = workout.exercises.find((e) => e.name === exerciseName);
+                                            if (!validExercise?.exercise_sets?.length) return null;
                                             // Filter Exercises with invalid sets
-                                            const validSets =
-                                                validExercise.exercise_sets.filter(
-                                                    (set) =>
-                                                        set.weight !== null &&
-                                                        set.rep_count !==
-                                                            null &&
-                                                        set.completed === true
-                                                );
+                                            const validSets = validExercise.exercise_sets.filter((set) =>
+                                                set.weight !== null &&
+                                                set.rep_count !== null &&
+                                                set.completed === true
+                                            );
                                             if (!validSets.length) return null;
 
                                             /* Group sets by weight: 
@@ -290,27 +243,14 @@ export default function ExerciseHistory({
                                                 "25" : [exercise_set, exercise_set]
                                             }
                                             */
-                                            const exercise_setsByWeight: Record<
-                                                string,
-                                                ExerciseSet[]
-                                            > = {};
-                                            validSets.forEach(
-                                                (exercise_set) => {
-                                                    const weight =
-                                                        exercise_set.weight?.toString() ||
-                                                        "null";
-                                                    if (
-                                                        !exercise_setsByWeight[
-                                                            weight
-                                                        ]
-                                                    ) {
-                                                        exercise_setsByWeight[
-                                                            weight
-                                                        ] = [];
+
+                                            const exercise_setsByWeight: Record<string, ExerciseSet[]> = {};
+                                            validSets.forEach((exercise_set) => {
+                                                    const weight = exercise_set.weight?.toString() || "null";
+                                                    if (!exercise_setsByWeight[weight]) {
+                                                        exercise_setsByWeight[weight] = [];
                                                     }
-                                                    exercise_setsByWeight[
-                                                        weight
-                                                    ].push(exercise_set);
+                                                    exercise_setsByWeight[weight].push(exercise_set);
                                                 }
                                             );
 
@@ -328,32 +268,23 @@ export default function ExerciseHistory({
 
                                                                     const formattedWeight = (() => { 
                                                                         const num = parseFloat(weight);
-                                                                        
                                                                         // If it's a whole number, return it without decimals
                                                                         if (num % 1 === 0) {
                                                                             return Math.floor(num);
                                                                         }
-                                                                        
                                                                         // If it has exactly one decimal place (like 27.5)
                                                                         if ((num * 10) % 1 === 0) {
                                                                             return num.toFixed(1);
                                                                         }
-                                                                        
                                                                         // If it has hundredths, show 2 decimal places
                                                                         return num.toFixed(2);
                                                                         })();
                                                                     return `${formattedWeight} ᵏᵍ × ${displayReps}`;
                                                                 }
-                                                            )
-                                                            .join(" / ")}
+                                                            ).join(" / ")}
                                                     </div>
-                                                    <div
-                                                        className={
-                                                            styles.week_number
-                                                        }
-                                                    >
-                                                        Week{" "}
-                                                        {workout.week_number}
+                                                    <div className={styles.week_number}>
+                                                        Week{" "} {workout.week_number}
                                                     </div>
                                                 </li>
                                             );
@@ -363,6 +294,7 @@ export default function ExerciseHistory({
                         })
                     )}
                 </div>
+
             </div>
         </div>
     );
