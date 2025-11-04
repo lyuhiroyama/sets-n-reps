@@ -1,4 +1,31 @@
-# [Sets-n-Reps](https://sets-n-reps.com)                                                                      
+# [Sets-n-Reps](https://sets-n-reps.com) (日本語)
+
+[Sets-n-Reps](https://sets-n-reps.com)は、デスクトップとモバイルの両方に対応したブラウザベースのトレーニング記録アプリです。
+
+<p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+  <a href="https://sets-n-reps.com">
+    <img src="README-assets/web-screenshot.png" height="400px" width="70%" />
+  </a>
+  <a href="https://sets-n-reps.com">
+    <img src="README-assets/mobile-screenshot.jpg" height="400px" width="20%" />
+  </a>
+</p>
+
+このアプリには3つの主な機能があります：
+
+**(1) メゾサイクルの作成
+- お好みのメゾサイクルを作成（4〜8週間）。各週は自動的に目標RIR（Reps in Reserve）を反映します。
+  - メゾサイクル：数週間から数か月単位でトレーニングの計画を組み立てる周期のこと。
+  - RIR (Reps in Reserve)：「予備の反復回数」を意味し、「あと何回できるか？」を基準にトレーニング強度を調整する指標。
+
+**(2) ワークアウトの記録
+- ドロップダウンメニューからワークアウトを選択し、データ（重量、レップ数、完了ステータス）を記録します。
+
+**(3) 過去パフォーマンスの振り返り
+- 過去のワークアウトやメゾサイクルにおける各エクササイズのパフォーマンスを素早く確認できます。
+<br/><br/>
+
+# [Sets-n-Reps](https://sets-n-reps.com) (English)                                                                
 
 [Sets-n-Reps](https://sets-n-reps.com) is a browser-based workout tracker designed for both desktop and mobile.
 
@@ -18,7 +45,7 @@ It offers three key features:
 )).
 
 **(2) Workout tracking ([demo](https://www.youtube.com/watch?v=a8TEfTkuYi0&t=4m11s))**
-- Choose a workout from the drop-down menu and log your data (weight, reps, and checkbox).
+- Choose a workout from the drop-down menu and log your data (weight, reps, and completion status).
 
 **(3) Exercise history look-back ([demo](https://www.youtube.com/watch?v=a8TEfTkuYi0&t=5m32s))**
 - Quickly review past performance for any exercise across previous workouts or mesocycles.
