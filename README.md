@@ -1,14 +1,10 @@
 # [Sets-n-Reps](https://sets-n-reps.com) (日本語)
 
-[Sets-n-Reps](https://sets-n-reps.com)は、デスクトップとモバイルの両方に対応したブラウザベースのトレーニング記録アプリです。
+Sets-n-Repsは、デスクトップとモバイルの両方に対応したブラウザベースのトレーニング記録アプリです。
 
-<p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-  <a href="https://sets-n-reps.com">
+<p style="display: flex; justify-content: center; align-items: center; gap: 10px;">  
     <img src="README-assets/web-screenshot-ja.png" height="400px" width="70%" />
-  </a>
-  <a href="https://sets-n-reps.com">
     <img src="README-assets/mobile-screenshot-ja.png" height="400px" width="20%" />
-  </a>
 </p>
 
 このアプリには3つの主な機能があります：
@@ -27,15 +23,11 @@
 
 # [Sets-n-Reps](https://sets-n-reps.com) (English)                                                                
 
-[Sets-n-Reps](https://sets-n-reps.com) is a browser-based workout tracker designed for both desktop and mobile.
+Sets-n-Reps is a browser-based workout tracker designed for both desktop and mobile.
 
 <p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-  <a href="https://sets-n-reps.com">
     <img src="README-assets/web-screenshot.png" height="400px" width="70%" />
-  </a>
-  <a href="https://sets-n-reps.com">
     <img src="README-assets/mobile-screenshot.jpg" height="400px" width="20%" />
-  </a>
 </p>
 
 It offers three key features:
