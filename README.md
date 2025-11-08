@@ -1,6 +1,6 @@
 [日本語](#sets-n-reps-日本語) | [English](#sets-n-reps-english)
 
-# [Sets-n-Reps](https://sets-n-reps.com) (日本語版README、作成中)
+# [Sets-n-Reps](https://sets-n-reps.com) (日本語)
 
 Sets-n-Repsは、デスクトップとモバイルの両方に対応したブラウザベースのトレーニング記録アプリです。
 
