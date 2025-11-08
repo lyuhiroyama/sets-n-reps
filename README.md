@@ -1,4 +1,6 @@
-# [Sets-n-Reps](https://sets-n-reps.com) (日本語)
+[日本語](#sets-n-reps-日本語) | [English](#sets-n-reps-english)
+
+# [Sets-n-Reps](https://sets-n-reps.com) (日本語版README、作成中)
 
 Sets-n-Repsは、デスクトップとモバイルの両方に対応したブラウザベースのトレーニング記録アプリです。
 
@@ -19,19 +21,112 @@ Sets-n-Repsは、デスクトップとモバイルの両方に対応したブラ
 - 過去のワークアウトやメゾサイクルにおける各エクササイズのパフォーマンスを素早く確認できます。<br><br/>
 <p align="center">・・・</p>
 
-※メゾサイクル：
+📌 メゾサイクル
 - 数週間から数か月単位でトレーニングの計画を組み立てる周期のこと。
 
-※RIR：
+📌 RIR
 - 「Repetitions in Reserve」の略。
 - 「予備の反復回数」を意味し、「あと何回できるか？」を基準にトレーニング強度を調整する指標。
 <br><br/>
+
+## 目次
+
+- [(1) 使用技術](#使用技術)
+- [(2) 機能概要](#機能概要)
+<!--
+- [(3) 技術概要](#技術概要)
+- [(4) 開発の理由](#why-build-this)
+- [(5) 開発上の課題](#challenges)
+- [(6) 成果](#accomplishments)
+- [(7) 改善点](#improvements-needed)
+- [(8) 最後に](#finishing-notes)
+-->
+
+## 使用技術
+
+- **フロントエンド:** [TypeScript](https://www.typescriptlang.org/) ・ [React](https://react.dev/)
+- **バックエンド:** [Ruby](https://www.ruby-lang.org/en/) ・ [Ruby on Rails](https://rubyonrails.org/)
+- **スタイリング:** [CSS Modules](https://github.com/css-modules/css-modules)
+- **データベース:** [PostgreSQL](https://www.postgresql.org/)
+- **ホスティング:** [Vultr VPS](https://www.vultr.com/)
+
+## 機能概要
+
+#### (1) メゾサイクル（トレーニングプログラム）の作成
+- お好みのトレーニング部位を入力し、4〜8週間の期間を設定してメゾサイクルを作成：
+  <!-- - ※ 各トレーニング部位には、デフォルトで５セット割り当てられる。-->
+  <img src="README-assets/feat-1.1-ja.png" height="400px" width="90%" style="margin-top: 1rem;"/>
+  <img src="README-assets/feat-1.2-ja.png" height="400px" width="90%" style="margin-bottom: 1rem;"/>
+- メゾサイクル（トレーニングプログラム）作成完了後：
+
+  <img src="README-assets/feat-1.3-ja.png" height="600px" width="90%" style="margin-top: 1rem;"/>
+
+#### (2) ワークアウト（1日分のトレーニングセッション）の記録
+- ドロップダウンメニューからワークアウトを選択。メニュー内のボタン色で完了ステータスの確認が可能：
+  - 完了済みワークアウト（🟢）
+  - 進行中のワークアウト（🔴）
+  - 未完了のワークアウト（色なし）
+- RIRの自動割当:
+  - ４週間メゾサイクルの場合：
+    - Week 1 → RIR 2
+    - Week 2 → RIR 1
+    - Week 3 → RIR 0
+    - Week 4 → 最後の週は休養週
+  - ６週間メゾサイクルの場合：
+    - Week 1 → RIR 4
+    - Week 2 → RIR 3
+    - Week 3 → RIR 2
+    - Week 4 → RIR 1
+    - Week 5 → RIR 0
+    - Week 6 → 最後の週は休養週
+    
+- ドロップダウンメニュー：
+
+  <img src="README-assets/feat-2.1-ja.png" height="400px" width="90%" style="margin: 1rem 0;"/>
+
+- トレーニングが進行するにつれて次のように表示：
+
+  <img src="README-assets/feat-2.2-ja.png" height="400px" width="90%" style="margin-top: 1rem;"/>
+
+- トレーニングデータの記録：
+  - 重量（例：40kg）
+  - 反復回数（例：10回）
+  - 反復セットの完了状況（例：✅）
+- 重量自動入力機能
+    - 重量を入力すると、残りのセットにも同じ値を自動入力
+    - 設定ページにて無効化可能
+
+- トレーニングデータの記録（ジムでのモバイル使用例）：
+  <p style="display: flex; gap: 5px; justify-content: center;">
+    <img src="README-assets/feat-2.5-ja.png" width="30%" style="margin: 1rem 0;"/>
+    <img src="README-assets/feat-2.6-ja.png" width="30%" style="margin: 1rem 0;"/>
+    <img src="README-assets/feat-2.7-ja.png" width="30%" style="margin: 1rem 0;"/>
+  </p>
+
+- トレーニング完了後は、ステータスを更新：
+
+  <p style="display: flex; gap: 5px;">
+    <img src="README-assets/feat-2.8-ja.png" width="30%" style="margin: 1rem 0;"/>
+    <img src="README-assets/feat-2.9-ja.png" width="30%" style="margin: 1rem 0;"/>
+  </p>
+
+#### (3) 過去パフォーマンスの振り返り
+- 「ⓘ」アイコンを押すと表示されるダイアログで、過去のパフォーマンスデータを比較・確認
+  - 使用した重量
+  - 実施した反復回数
+  - その他詳細（メゾサイクル名・週番号）
+
+- 使用例（３週目だとして）：
+  <p style="display: flex; gap: 5px;">
+    <img src="README-assets/feat-3.1-ja.jpg" width="30%" style="margin: 1rem 0;"/>
+    <img src="README-assets/feat-3.2-ja.png" width="30%" style="margin: 1rem 0;"/>
+  </p>
 
 # [Sets-n-Reps](https://sets-n-reps.com) (English)                                                                
 
 Sets-n-Reps is a browser-based workout tracker designed for both desktop and mobile.
 
-<p style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+<p style="display: flex;">
     <img src="README-assets/web-screenshot.png" height="400px" width="70%" />
     <img src="README-assets/mobile-screenshot.jpg" height="400px" width="20%" />
 </p>
