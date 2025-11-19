@@ -27,7 +27,7 @@
         },
         "profileAndSettings": {
             "long": "Profile & Settings",
-            "short": "Prof./Sett."
+            "short": "Settings"
         },
         "signOut": "Sign out",
         "dialogHeader": "Sign out?",
