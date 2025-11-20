@@ -140,6 +140,26 @@
     visibility: visible;
 }
 
+.content_row .switchModeBtnLabelText {
+    white-space: nowrap;
+}
+.content_row .switchModeBtn {
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+.content_row .switchModeBtn:hover {
+    filter: brightness(1.2);
+}
+
 
 @media (max-width: 850px) {
     .component h2 {

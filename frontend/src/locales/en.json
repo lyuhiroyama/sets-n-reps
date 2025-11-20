@@ -78,7 +78,9 @@
         "autoFill": "Weight auto-fill",
         "on": "On",
         "off": "off",
-        "tooltip": "Entering a weight will automatically fill subsequent sets with the same value"
+        "tooltip": "Entering a weight will automatically fill subsequent sets with the same value",
+        "switchMode": "Switch to nutrition mode",
+        "switchModeBtnText": "Switch"
     },
     "mesoWorkouts": {
         "weight": "Weight",

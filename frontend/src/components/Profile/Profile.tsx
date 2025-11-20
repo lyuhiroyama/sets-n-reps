@@ -155,6 +155,10 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
+                <div className={styles.content_row}>
+                    <div className={styles.switchModeBtnLabelText}>{t("profile.switchMode")}</div>
+                    <button className={styles.switchModeBtn}>{t("profile.switchModeBtnText")}</button>
+                </div>
             </div>
         </div>
     );
