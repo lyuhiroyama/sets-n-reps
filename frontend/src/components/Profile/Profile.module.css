@@ -139,9 +139,8 @@
 .tooltip_wrapper:hover .tooltip {
     visibility: visible;
 }
-
-.content_row .switchModeBtnLabelText {
-    white-space: nowrap;
+.content_row .switchModeBtnLabel {
+    display: flex;
 }
 .content_row .switchModeBtn {
     display: flex;

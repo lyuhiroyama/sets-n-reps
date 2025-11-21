@@ -78,9 +78,10 @@
         "autoFill": "Weight auto-fill",
         "on": "On",
         "off": "off",
-        "tooltip": "Entering a weight will automatically fill subsequent sets with the same value",
+        "tooltip1": "Entering a weight will automatically fill subsequent sets with the same value",
         "switchMode": "Switch to nutrition mode",
-        "switchModeBtnText": "Switch"
+        "switchModeBtnText": "Switch",
+        "tooltip2": "Switch between Workout and Nutrition modes to track your exercises or log your macros"
     },
     "mesoWorkouts": {
         "weight": "Weight",

@@ -137,7 +137,7 @@ export default function Profile() {
                         <div className={styles.tooltip_wrapper}>
                             <FontAwesomeIcon icon={faCircleInfo} className={styles.info_fa_icon} />
                             <div className={styles.tooltip}>
-                                {t("profile.tooltip")}
+                                {t("profile.tooltip1")}
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,15 @@ export default function Profile() {
                     </div>
                 </div>
                 <div className={styles.content_row}>
-                    <div className={styles.switchModeBtnLabelText}>{t("profile.switchMode")}</div>
+                    <div className={styles.switchModeBtnLabel}>
+                        <div className={styles.switchModeBtnLabelText}>{t("profile.switchMode")}</div>
+                        <div className={styles.tooltip_wrapper}>
+                            <FontAwesomeIcon icon={faCircleInfo} className={styles.info_fa_icon} />
+                            <div className={styles.tooltip}>
+                                {t("profile.tooltip2")}
+                            </div>
+                        </div>
+                    </div>
                     <button className={styles.switchModeBtn}>{t("profile.switchModeBtnText")}</button>
                 </div>
             </div>
