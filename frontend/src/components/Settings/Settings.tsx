@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./Profile.module.css";
+import styles from "./Settings.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,7 +10,7 @@ type UserType = {
     weight_auto_fill: boolean;
 };
 
-export default function Profile() {
+export default function Settings() {
     const [user, setUser] = useState<UserType | null | undefined>(undefined);
     const { t, i18n } = useTranslation();
 

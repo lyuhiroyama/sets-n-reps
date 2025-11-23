@@ -7,7 +7,7 @@ import CurrentWorkout from "./components/CurrentWorkout/CurrentWorkout"
 import Mesocycles from "./components/Mesocycles/Mesocycles"
 import MesoDetail from "./components/MesoDetail/MesoDetail"
 import PlanAMesocycle from "./components/PlanAMesocycle/PlanAMesocycle"
-import Profile from "./components/Profile/Profile"
+import Settings from "./components/Settings/Settings"
 import Landing from "./components/Landing/Landing";
 import { GA4PageTracker } from "./hooks/usePageTracking";
 import "./i18n";
@@ -31,7 +31,7 @@ export default function App() {
                         <Route path="mesocycles" element={<Mesocycles />} />
                         <Route path="mesocycles/:id" element={<MesoDetail />} />
                         <Route path="plan-a-mesocycle" element={<PlanAMesocycle />}/>
-                        <Route path="profile" element={<Profile />} />
+                        <Route path="settings" element={<Settings />} />
                     </Route>
                 </Routes>
             </AuthProvider>

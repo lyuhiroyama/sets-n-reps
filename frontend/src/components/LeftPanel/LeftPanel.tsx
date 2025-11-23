@@ -82,7 +82,7 @@ export default function LeftPanel() {
                 </li>
                 <li>
                     <NavLink 
-                        to="/dashboard/profile"
+                        to="/dashboard/settings"
                         className={({ isActive }: { isActive: boolean }) => isActive ? styles.active : ""}
                     >
                         <FontAwesomeIcon icon={faUser} />
